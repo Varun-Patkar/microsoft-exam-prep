@@ -128,6 +128,7 @@ Every session follows this exact sequence. Do NOT skip steps.
   - Time Spent: ~X hrs
   ```
 - Update the overall stats at the top of progress.md
+- **Mark completed in plan.md**: Change all `- [ ]` checkboxes for today's session to `- [x]` in `plan.md`
 - Preview tomorrow's topic to set expectations
 - Encourage the user: acknowledge their progress
 

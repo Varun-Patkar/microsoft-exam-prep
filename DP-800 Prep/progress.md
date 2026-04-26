@@ -1,7 +1,7 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 1 / 8
+- **Sessions Completed:** 2 / 8
 - **Questions Answered:** 19 / 88
 - **Accuracy:** 100% (19/19)
 - **MS Learn Course:** Completed

@@ -20,21 +20,21 @@
 ### Day 1 — Sunday, Apr 26 (4 hrs) — Domain 1: Core SQL Refresh
 
 **Session 1 (2 hrs): Database Objects + Programmability**
-- [ ] Study: 1.1 — Tables, data types, indexes, columnstore indexes
-- [ ] Study: 1.1 — Specialized tables: in-memory, temporal, external, ledger, graph
-- [ ] Study: 1.1 — JSON columns/indexes, constraints (PK, FK, UNIQUE, CHECK, DEFAULT), SEQUENCES, partitioning
-- [ ] Study: 1.2 — Views (standard + indexed), scalar functions (inline vs traditional), table-valued functions
-- [ ] Study: 1.2 — Stored procedures (TVPs, error handling), triggers (AFTER vs INSTEAD OF, DML vs DDL)
-- [ ] Practice: 10 questions (q001–q005 from 1.1, q006–q008 from 1.2, q056–q057 bonus)
+- [x] Study: 1.1 — Tables, data types, indexes, columnstore indexes
+- [x] Study: 1.1 — Specialized tables: in-memory, temporal, external, ledger, graph
+- [x] Study: 1.1 — JSON columns/indexes, constraints (PK, FK, UNIQUE, CHECK, DEFAULT), SEQUENCES, partitioning
+- [x] Study: 1.2 — Views (standard + indexed), scalar functions (inline vs traditional), table-valued functions
+- [x] Study: 1.2 — Stored procedures (TVPs, error handling), triggers (AFTER vs INSTEAD OF, DML vs DDL)
+- [x] Practice: 10 questions (q001–q005 from 1.1, q006–q008 from 1.2, q056–q057 bonus)
 - Estimated time: 2 hrs
 
 **Session 2 (2 hrs): Advanced T-SQL**
-- [ ] Study: 1.3 — CTEs (recursive + non-recursive), window functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, SUM OVER)
-- [ ] Study: 1.3 — JSON functions: JSON_OBJECT, JSON_ARRAY, JSON_ARRAYAGG, JSON_CONTAINS, OPENJSON, JSON_VALUE
-- [ ] Study: 1.3 — Regular expressions: REGEXP_LIKE, REGEXP_REPLACE, REGEXP_SUBSTR, REGEXP_INSTR, REGEXP_COUNT
-- [ ] Study: 1.3 — Fuzzy matching: EDIT_DISTANCE, EDIT_DISTANCE_SIMILARITY, JARO_WINKLER_DISTANCE
-- [ ] Study: 1.3 — Graph queries with MATCH, correlated subqueries, error handling (TRY/CATCH, THROW, XACT_STATE)
-- [ ] Practice: 10 questions (q009–q014, q060–q064, q066–q067)
+- [x] Study: 1.3 — CTEs (recursive + non-recursive), window functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, SUM OVER)
+- [x] Study: 1.3 — JSON functions: JSON_OBJECT, JSON_ARRAY, JSON_ARRAYAGG, JSON_CONTAINS, OPENJSON, JSON_VALUE
+- [x] Study: 1.3 — Regular expressions: REGEXP_LIKE, REGEXP_REPLACE, REGEXP_SUBSTR, REGEXP_INSTR, REGEXP_COUNT
+- [x] Study: 1.3 — Fuzzy matching: EDIT_DISTANCE, EDIT_DISTANCE_SIMILARITY, JARO_WINKLER_DISTANCE
+- [x] Study: 1.3 — Graph queries with MATCH, correlated subqueries, error handling (TRY/CATCH, THROW, XACT_STATE)
+- [x] Practice: 10 questions (q009–q014, q060–q064, q066–q067)
 - Estimated time: 2 hrs
 
 ---
@@ -139,7 +139,7 @@
 
 | Day | Questions | Count |
 |-----|-----------|-------|
-| Sun (D1) | q001–q008, q051–q067 (Domain 1) | ~20 |
+| Sun (D1) | q001–q014, q056–q057, q060–q064, q066–q067 (Domain 1) | ~23 |
 | Mon (D2) | q019–q023, q071–q075 (Security) | ~10 |
 | Tue (D3) | q024–q027, q076–q080 (Performance) | ~9 |
 | Wed (D4) | q028–q031, q036, q081–q085 (CI/CD) | ~10 |
