@@ -1,0 +1,2319 @@
+{
+  "examCode": "DP-800",
+  "examName": "Developing AI-Enabled Database Solutions",
+  "totalQuestions": 88,
+  "sources": [
+    "Company-provided practice exam materials",
+    "Company-provided text-based practice questions"
+  ],
+  "note": "Questions sourced from company-provided practice materials for DP-800 exam preparation. Includes multiple question types: mc (multiple choice), multi (select multiple), yesno (yes/no per statement), dropdown (fill-in dropdowns).",
+  "domains": [
+    {
+      "domainId": "1",
+      "domainName": "Design and Develop Database Solutions",
+      "questions": [
+        {
+          "id": "q001",
+          "originalId": "Q34",
+          "type": "dropdown",
+          "question": "You have an Azure SQL managed instance for a gaming leaderboard API.\n\nYou need to reduce write latency during peak events. The solution must support point lookups. The leaderboard does NOT need to persist after a restart.\n\nWhich table type and index type should you configure?",
+          "explanation": "SCHEMA_ONLY in-memory (data lost on restart, which is acceptable). HASH index is optimal for point lookups on in-memory tables.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Table type:",
+              "options": [
+                "Rowstore disk-based",
+                "SCHEMA_AND_DATA in-memory",
+                "SCHEMA_ONLY in-memory"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "SCHEMA_ONLY in-memory"
+            },
+            {
+              "label": "Index type:",
+              "options": [
+                "HASH",
+                "Nonclustered",
+                "Nonclustered columnstore"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "HASH"
+            }
+          ]
+        },
+        {
+          "id": "q002",
+          "originalId": "Q35",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database that stores sales data and contains tables named Sales and Products. Sales contains three columns: SalesDate, ProductKey, and TotalSale.\n\nSales is 10 TB and loaded nightly by a batch process. Most reporting queries scan large portions of Sales, filter on SalesDate or ProductKey, and use SUM() to aggregate TotalSale.\n\nProducts is relatively small and is used primarily for point lookups and joins to Sales.\n\nYou need to recommend which indexes to create to optimize the reporting queries. The solution must minimize storage.\n\nWhich index type for each table?",
+          "explanation": "Clustered columnstore for Sales (large data, batch loads, aggregate scans). Clustered rowstore for Products (small, point lookups).",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Sales:",
+              "options": [
+                "A clustered columnstore index",
+                "A clustered rowstore index",
+                "A nonclustered columnstore index",
+                "A nonclustered rowstore index"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "A clustered columnstore index"
+            },
+            {
+              "label": "Products:",
+              "options": [
+                "A clustered columnstore index",
+                "A clustered rowstore index",
+                "A nonclustered columnstore index",
+                "A nonclustered rowstore index"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "A clustered rowstore index"
+            }
+          ]
+        },
+        {
+          "id": "q003",
+          "originalId": "Q36",
+          "type": "dropdown",
+          "question": "You have SalesDB with dbo.Orders (clustered index on OrderId). dbo.Orders receives continuous OLTP inserts/updates.\n\nYour analytics team runs hourly aggregate queries.\n\nYou need to improve analytics performance without significantly affecting OLTP throughput.\n\nRequirements:\n- Support NRT analytics\n- Reduce read time for analytical data\n- Support indexing only rows that match a predicate (e.g., Active = 1)",
+          "explanation": "Nonclustered columnstore on an existing rowstore table provides NRT analytics with OLTP compatibility. Filtered nonclustered index supports predicate-based indexing.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Support NRT analytics:",
+              "options": [
+                "A clustered columnstore index",
+                "A clustered rowstore index ordered by key columns",
+                "A filtered nonclustered index with a WHERE predicate",
+                "A nonclustered columnstore index on an existing rowstore table"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "A nonclustered columnstore index on an existing rowstore table"
+            },
+            {
+              "label": "Reduce read time for analytical data:",
+              "options": [
+                "A clustered columnstore index",
+                "A clustered rowstore index ordered by key columns",
+                "A filtered nonclustered index with a WHERE predicate",
+                "A nonclustered columnstore index on an existing rowstore table"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "A nonclustered columnstore index on an existing rowstore table"
+            },
+            {
+              "label": "Index only rows that match a predicate:",
+              "options": [
+                "A clustered columnstore index",
+                "A clustered rowstore index ordered by key columns",
+                "A filtered nonclustered index with a WHERE predicate",
+                "A nonclustered columnstore index on an existing rowstore table"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "A filtered nonclustered index with a WHERE predicate"
+            }
+          ]
+        },
+        {
+          "id": "q004",
+          "originalId": "Q38",
+          "type": "dropdown",
+          "question": "You have a table named Table1 with 25,000,000 rows and a datetime2 column named DateKey spanning 2020-2021.\n\nYou need to partition the data by year, minimizing rebuild/reindex time.\n\nHow should you complete the partition function?",
+          "explanation": "RANGE RIGHT with boundaries '2020-01-01' and '2021-01-01' creates partitions: <2020, 2020, 2021, >=2022.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Range type:",
+              "options": [
+                "PARTITION",
+                "RANGE LEFT",
+                "RANGE RIGHT"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "RANGE RIGHT"
+            },
+            {
+              "label": "Boundary values:",
+              "options": [
+                "'2019-01-01', '2020-01-01', '2021-12-31 23:59:59'",
+                "'2019-12-31', '2020-12-31 23:59:59'",
+                "'2020-01-01', '2020-02-01', '2020-03-01'",
+                "'2020-01-01', '2021-01-01'"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "'2020-01-01', '2021-01-01'"
+            }
+          ]
+        },
+        {
+          "id": "q005",
+          "originalId": "Q41",
+          "type": "mc",
+          "question": "You discover that some records in the Rooms table contain NULL values for the Owner field.\n\nYou need to ensure that all future records have a value for the Owner field.\n\nWhat should you add?",
+          "explanation": "A check constraint (e.g., CHECK (Owner IS NOT NULL)) ensures all future records have a non-null Owner value.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. a unique constraint",
+            "B. a nonclustered index",
+            "C. a check constraint",
+            "D. a foreign key"
+          ],
+          "correctAnswer": "C"
+        },
+        {
+          "id": "q006",
+          "originalId": "Q43",
+          "type": "dropdown",
+          "question": "You have Sales.OnlineOrders and Sales.StoreOrders, both needing a unique InvoiceNumber from the same number series.\n\nYou need to standardize invoice numbering so that both tables draw values from the same series. You must be able to request the next number without inserting a row.\n\nComplete the code.",
+          "explanation": "CREATE SEQUENCE provides a shared number series across tables. NEXT VALUE FOR retrieves the next value without inserting a row.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Create the number series:",
+              "options": [
+                "CREATE SEQUENCE Sales.InvoiceNumber AS INT START WITH 1000 INCREMENT BY 1",
+                "DECLARE @NextInvoiceNumber INT = SELECT MAX(InvoiceNumber) + 1 FROM Sales.StoreOrders",
+                "SET IDENTITY_INSERT Sales.OnlineOrders ON"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "CREATE SEQUENCE Sales.InvoiceNumber AS INT START WITH 1000 INCREMENT BY 1"
+            },
+            {
+              "label": "Get the next value:",
+              "options": [
+                "NEXT VALUE FOR Sales.InvoiceNumber",
+                "SCOPE_IDENTITY()",
+                "SET IDENTITY_INSERT Sales.OnlineOrders ON"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "NEXT VALUE FOR Sales.InvoiceNumber"
+            }
+          ]
+        },
+        {
+          "id": "q007",
+          "originalId": "Q47",
+          "type": "mc",
+          "question": "You have a SQL database in Microsoft Fabric with dbo.Orders (clustered index, three years of data, partitioned by OrderDate by month).\n\nYou need to remove all the rows for the oldest month while minimizing impact on other queries.\n\nSolution: Run TRUNCATE TABLE dbo.Orders;\n\nDoes this meet the goal?",
+          "explanation": "TRUNCATE TABLE without specifying partitions removes ALL data from the table, not just the oldest month.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q008",
+          "originalId": "Q48",
+          "type": "mc",
+          "question": "(Same scenario as Q47)\n\nSolution: DELETE FROM dbo.Orders WHERE OrderDate < DATEADD(month, -36, SYSUTCDATETIME());\n\nDoes this meet the goal?",
+          "explanation": "DELETE is a logged operation that causes heavy locking, which does NOT minimize impact on other queries accessing dbo.Orders.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q009",
+          "originalId": "Q49",
+          "type": "mc",
+          "question": "(Same scenario as Q47)\n\nSolution: Identify the partition number for the oldest month, and then run:\nTRUNCATE TABLE dbo.Orders WITH (PARTITIONS (partition number));\n\nDoes this meet the goal?",
+          "explanation": "TRUNCATE TABLE WITH (PARTITIONS (...)) removes only the specified partition's data—fast, minimally logged, and minimal impact on other queries.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q010",
+          "originalId": "Q39",
+          "type": "dropdown",
+          "question": "You need to create an object that returns products priced above a caller-provided threshold.\n\nRequirements:\n- Support being used in a join\n- Accept one input parameter\n- Return a table result",
+          "explanation": "An inline TVF with RETURNS TABLE AS RETURN (SELECT ...) accepts parameters, returns a table, and supports joins.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Programmability object:",
+              "options": [
+                "A view that filters rows without input parameters",
+                "A stored procedure that outputs a selectable result set",
+                "An inline table-valued function (TVF) for reusable rowsets",
+                "A scalar user-defined function (UDF) that returns a decimal value"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "An inline table-valued function (TVF) for reusable rowsets"
+            },
+            {
+              "label": "Parameter and return:",
+              "options": [
+                "@listprice decimal(18,2) and return rows as a table",
+                "@listprice int and return a single decimal value",
+                "@name nvarchar(20) and return one concatenated string"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "@listprice decimal(18,2) and return rows as a table"
+            },
+            {
+              "label": "Object body pattern:",
+              "options": [
+                "CREATE VIEW with a WHERE clause that references a parameter",
+                "RETURNS @t TABLE, followed by INSERT, and then RETURN",
+                "RETURNS TABLE AS RETURN followed by a SELECT statement",
+                "USE AS BEGIN, followed by a compute variable, and then a RETURN scalar value"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "RETURNS TABLE AS RETURN followed by a SELECT statement"
+            }
+          ]
+        },
+        {
+          "id": "q011",
+          "originalId": "Q40",
+          "type": "dropdown",
+          "question": "You need to create a scalar UDF that returns the number of days between @OrderDate and the current date.\n\nComplete the code.",
+          "explanation": "RETURNS INT for a scalar UDF. DATEDIFF(day, @OrderDate, GETDATE()) calculates the number of days between the two dates.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Return type:",
+              "options": [
+                "AS RETURN",
+                "RETURNS INT",
+                "RETURNS TABLE",
+                "WITH SCHEMABINDING"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "RETURNS INT"
+            },
+            {
+              "label": "Calculation:",
+              "options": [
+                "DATEADD(day, @OrderDate, GETDATE())",
+                "DATEDIFF(day, @OrderDate, GETDATE())",
+                "AS RETURN",
+                "WITH SCHEMABINDING"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "DATEDIFF(day, @OrderDate, GETDATE())"
+            }
+          ]
+        },
+        {
+          "id": "q012",
+          "originalId": "Q61",
+          "type": "dropdown",
+          "question": "[Case Study - Fabrikam - Q9 of 9]\n\nYou need to create a solution that retrieves patient transaction data with a running total. The solution must allow database developers to join the resulting data to other tables.\n\nComplete the code.",
+          "explanation": "A FUNCTION (inline TVF) allows joining. PARTITION BY t.CustomerId creates a running total per customer. ORDER BY t.TransactionDate, t.TransactionId defines the running order.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "casestudy",
+          "dropdowns": [
+            {
+              "label": "Object type:",
+              "options": [
+                "FUNCTION",
+                "PROCEDURE",
+                "VIEW"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "FUNCTION"
+            },
+            {
+              "label": "SUM(t.Amount) OVER (...):",
+              "options": [
+                "GROUP BY t.CustomerId",
+                "GROUP BY t.TransactionDate",
+                "PARTITION BY t.CustomerId",
+                "PARTITION BY t.TransactionDate"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "PARTITION BY t.CustomerId"
+            },
+            {
+              "label": "ORDER BY clause in OVER:",
+              "options": [
+                "HAVING DATEDIFF(DAY, t.TransactionDate, GETDATE()) = 1",
+                "HAVING SUM (t.Amount) > 0",
+                "ORDER BY t.TransactionDate, t.TransactionId",
+                "ORDER BY t.TransactionId, t.CustomerId"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "ORDER BY t.TransactionDate, t.TransactionId"
+            }
+          ]
+        },
+        {
+          "id": "q013",
+          "originalId": "Q22",
+          "type": "dropdown",
+          "question": "You need to return one JSON document per order that includes the order header fields and an array of related order lines for an LLM.\n\nWhich Transact-SQL commands should you use?",
+          "explanation": "FOR JSON PATH serializes SQL rows to JSON. JSON_QUERY retrieves the nested JSON array (lines). JSON_VALUE extracts a scalar value.",
+          "topic": "1.3 Write Advanced T-SQL Code",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Serialize the order-level JSON:",
+              "options": [
+                "FOR JSON PATH",
+                "JSON_MODIFY",
+                "JSON_QUERY",
+                "JSON_VALUE",
+                "OPENJSON"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "FOR JSON PATH"
+            },
+            {
+              "label": "Generate a nested lines array:",
+              "options": [
+                "FOR JSON PATH",
+                "JSON_MODIFY",
+                "JSON_QUERY",
+                "JSON_VALUE",
+                "OPENJSON"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "JSON_QUERY"
+            },
+            {
+              "label": "Extract a single scalar value:",
+              "options": [
+                "FOR JSON PATH",
+                "JSON_MODIFY",
+                "JSON_QUERY",
+                "JSON_VALUE",
+                "OPENJSON"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "JSON_VALUE"
+            }
+          ]
+        },
+        {
+          "id": "q014",
+          "originalId": "Q30",
+          "type": "dropdown",
+          "question": "You need to generate a report for the last seven days from dbo.SupportTickets (with JSON column Payload and datetime column CreatedAt).\n\nRequirements:\n- Returns exactly one row per customer per day\n- For each customer and day, returns the earliest ticket\n- Includes the customer ID stored in Payload",
+          "explanation": "JSON_VALUE extracts the customer ID. ROW_NUMBER with PARTITION BY customer/day ORDER BY time gives rn=1 for the earliest ticket.",
+          "topic": "1.3 Write Advanced T-SQL Code",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Extract customer ID:",
+              "options": [
+                "DENSE_RANK",
+                "JSON_VALUE",
+                "OPENJSON",
+                "ROW_NUMBER"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "JSON_VALUE"
+            },
+            {
+              "label": "Windowing function:",
+              "options": [
+                "DENSE_RANK",
+                "JSON_VALUE",
+                "OPENJSON",
+                "ROW_NUMBER"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "ROW_NUMBER"
+            },
+            {
+              "label": "Filter value:",
+              "options": [
+                "1",
+                "7",
+                "DATEDIFF(day, -7, SYSUTCDATETIME())"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "1"
+            }
+          ]
+        },
+        {
+          "id": "q015",
+          "originalId": "Q37",
+          "type": "dropdown",
+          "question": "You have dbo.Customers with a JSON column ProfileJson. Phone numbers are in format +000 000-000-0000.\n\nYou need a query that returns one row per customer with a PhoneNumerals column containing only the digits.\n\nComplete the query.",
+          "explanation": "JSON_VALUE extracts the scalar phone string. REGEXP_REPLACE removes all non-digit characters.",
+          "topic": "1.3 Write Advanced T-SQL Code",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Extract phone from JSON:",
+              "options": [
+                "JSON_QUERY(c.ProfileJson, '$.contact.phone')",
+                "JSON_VALUE(c.ProfileJson, '$.contact.phone')",
+                "OPENJSON(c.ProfileJson, '$.contact.phone')"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "JSON_VALUE(c.ProfileJson, '$.contact.phone')"
+            },
+            {
+              "label": "Strip non-digits:",
+              "options": [
+                "REGEXP_LIKE(p.PhoneRaw, '[^0-9]', '')",
+                "REGEXP_REPLACE(p.PhoneRaw, '[^0-9]', '')",
+                "REGEXP_SUBSTR(p.PhoneRaw, '[0-9]+')"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "REGEXP_REPLACE(p.PhoneRaw, '[^0-9]', '')"
+            }
+          ]
+        },
+        {
+          "id": "q016",
+          "originalId": "Q58",
+          "type": "dropdown",
+          "question": "[Case Study - Fabrikam - Q6 of 9]\n\nYou need to create a solution to retrieve a list of names of patients who underwent medical procedures during the last 30 days.\n\nComplete the stored procedure dbo.GetActivePatients.",
+          "explanation": "WHERE EXISTS with a correlated subquery on PatientId retrieves patients who have matching procedure records in the last 30 days.",
+          "topic": "1.3 Write Advanced T-SQL Code",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "casestudy",
+          "dropdowns": [
+            {
+              "label": "Subquery type:",
+              "options": [
+                "WHERE EXISTS",
+                "WHERE NOT EXISTS",
+                "WHERE p.PatientId IN",
+                "WHERE p.PatientId NOT IN"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "WHERE EXISTS"
+            },
+            {
+              "label": "Correlation clause:",
+              "options": [
+                "WHERE p.PatientId = pr.PatientId",
+                "WHERE p.TransactionId = pr.TransactionId",
+                "HAVING p.PatientId = pr.PatientId",
+                "HAVING p.TransactionId = pr.TransactionId"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "WHERE p.PatientId = pr.PatientId"
+            }
+          ]
+        },
+        {
+          "id": "q017",
+          "originalId": "Q31",
+          "type": "mc",
+          "question": "Your team is developing an Azure SQL database solution from a locally cloned GitHub repository by using Microsoft Visual Studio Code and GitHub Copilot Chat.\n\nYou need to ensure that GitHub Copilot Chat uses the team's coding standards when generating Transact-SQL code in Visual Studio Code.\n\nWhat should you use?",
+          "explanation": ".github/copilot-instructions.md provides repository-level coding standards to GitHub Copilot Chat.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. .github/copilot-instructions.md",
+            "B. .vscode/settings.json",
+            "C. %APPDATA%\\Code\\User\\copilot-instructions.md",
+            "D. %APPDATA%\\Code\\User\\settings.json"
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q018",
+          "originalId": "Q32",
+          "type": "mc",
+          "question": "You need to disable the GitHub Copilot repository-level instructions for yourself without affecting other users.\n\nWhat should you do?",
+          "explanation": "Modifying your VS Code user settings to disable repository instructions only affects your personal configuration.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. From Visual Studio Code, modify your GitHub Copilot Chat user settings.",
+            "B. Delete .github/copilot-instructions.md.",
+            "C. Add a --debug flag when you start the GitHub Copilot Chat extension."
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q019",
+          "originalId": "Q33",
+          "type": "mc",
+          "question": "A mix of GitHub Copilot instructions is configured at different levels, including organization-wide, repository-wide, agent-specific, and personal.\n\nWhich instructions will take precedence over the others?",
+          "explanation": "Agent-specific instructions take the highest precedence in the GitHub Copilot instruction hierarchy.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. repository-wide",
+            "B. personal",
+            "C. organization-wide",
+            "D. agent-specific"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q020",
+          "originalId": "Q42",
+          "type": "mc",
+          "question": "You need to ensure that GitHub Copilot Chat can call the hosted GitHub MCP Server tools by using OAuth. The MCP server configuration must be scoped to the repository.\n\nWhat should you do in Visual Studio Code?",
+          "explanation": "Saving to workspace settings scopes the MCP configuration to the repository. Using the Command Palette with the Copilot MCP URL and OAuth is the correct approach.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. From the Command Palette, enter MCP: add server, select HTTP, enter https://api.githubcopilot.com/mcp/, and save to workspace settings.",
+            "B. Create a PAT with the repo scope and store it in .github\\mcp.json as the Authorization header.",
+            "C. From the Command Palette, enter MCP: add server, select HTTP, enter https://api.githubcopilot.com/mcp/, and save to user settings.",
+            "D. Create a PAT with the repo scope and store it in .vscode\\mcp.json as the Authorization header."
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q021",
+          "originalId": "Q45",
+          "type": "mc",
+          "question": "You are developing an Azure SQL solution by using Microsoft Visual Studio 2026. The solution uses a GitHub repository.\n\nYou plan to use GitHub Copilot Chat to access the GitHub repository tools by connecting to the GitHub MCP Server.\n\nYou need to configure Visual Studio to support the planned configuration. The solution must rely on OAuth to access the MCP server.\n\nWhat should you create?",
+          "explanation": "In Visual Studio, the .mcp.json file at the solution directory root with the Copilot MCP URL provides OAuth-based access to GitHub MCP Server.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. the <SOLUTIONDIR>\\.mcp.json file that contains a URL of https://api.githubcopilot.com/mcp/",
+            "B. the <SOLUTIONDIR>\\.vscode\\settings.json file that contains a URL of https://api.githubcopilot.com/mcp/",
+            "C. the <SOLUTIONDIR>\\.vs\\settings.json file that contains the personal access token (PAT) that has the repo scope",
+            "D. the <SOLUTIONDIR>\\.github\\mcp.json file that contains the personal access token (PAT) that has the repo scope"
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q022",
+          "originalId": "Q46",
+          "type": "mc",
+          "question": "Your team uses VS Code with the MSSQL extension and GitHub Copilot Chat. They connect to an Azure SQL database using individual database logins and use @mssql to generate queries.\n\nWhat is used to ensure that Copilot Chat-generated queries run in the context of the developer?",
+          "explanation": "SQL permissions govern query execution context—each developer's individual database login determines what they can access.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. shared MCP instruction files",
+            "B. Azure role-based access control (Azure RBAC) permissions",
+            "C. GitHub organization permissions",
+            "D. SQL permissions"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q062",
+          "type": "mc",
+          "originalId": "text-Q5",
+          "question": "You have an Azure SQL database that stores order data. A reporting query aggregates monthly revenue per customer and runs frequently.\n\nYou need to reduce how long it takes to retrieve the calculated values. The solution must NOT alter any underlying table structure.\n\nWhat should you do?",
+          "options": [
+            "A. Create a view by using ORDER BY without TOP, and then create a unique clustered index on the view.",
+            "B. Create a view without using WITH SCHEMABINDING, and then create a nonclustered index on the view.",
+            "C. Create a view by using GROUP BY, and then create a unique clustered index on the view.",
+            "D. Create a view by using WITH SCHEMABINDING, include COUNT_BIG(*), and then create a unique clustered index on the view."
+          ],
+          "correctAnswer": "D",
+          "explanation": "An indexed view requires WITH SCHEMABINDING, and if it uses GROUP BY, it must also include COUNT_BIG(*). The first index must be a unique clustered index. ORDER BY is not allowed in indexed views. A grouped indexed view without COUNT_BIG(*) is invalid.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q063",
+          "type": "dropdown",
+          "originalId": "text-Q8",
+          "question": "You have a SQL database in Microsoft Fabric that contains a table named WebSite.Logs. WebSite.Logs stores application telemetry data with an nvarchar(max) column named log that stores JSON documents. You have a daily report that filters by the $.severity JSON property and returns LogId, LogDateTime, and log.\n\nThe report frequently causes full table scans.\n\nYou need to modify WebSite.Logs to support efficient filtering by $.severity and avoid key lookups for the columns returned by the report.\n\nHow should you complete the Transact-SQL code?",
+          "dropdowns": [
+            {
+              "label": "Computed column definition:",
+              "options": [
+                "AS JSON_QUERY([log], '$.severity')",
+                "AS JSON_VALUE([log], '$.severity') PERSISTED"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "AS JSON_VALUE([log], '$.severity') PERSISTED"
+            },
+            {
+              "label": "Index INCLUDE clause:",
+              "options": [
+                "INCLUDE (log)",
+                "INCLUDE (LogId, LogDateTime, [log])"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "INCLUDE (LogId, LogDateTime, [log])"
+            }
+          ],
+          "explanation": "JSON_VALUE extracts a scalar value (not JSON_QUERY which is for objects/arrays). PERSISTED stores the computed value. The INCLUDE clause must cover all columns the report returns (LogId, LogDateTime, log) to avoid key lookups.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q064",
+          "type": "mc",
+          "originalId": "text-Q19",
+          "question": "You have a SQL database in Microsoft Fabric that contains a table named dbo.Orders. dbo.Orders has a clustered index, contains three years of data, and is partitioned by a column named OrderDate by month.\n\nYou need to remove all the rows for the oldest month. The solution must minimize the impact on other queries.\n\nSolution: Identify the partition scheme for the oldest month, and then run:\nALTER TABLE dbo.Orders DROP PARTITION SCHEME (partition_scheme_name);\n\nDoes this meet the goal?",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B",
+          "explanation": "DROP PARTITION SCHEME removes the partition scheme object itself, not the data. For removing only the oldest month's rows with minimal impact, use partition-level TRUNCATE TABLE ... WITH (PARTITIONS (...)).",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "easy",
+          "source": "company-provided"
+        },
+        {
+          "id": "q065",
+          "type": "mc",
+          "originalId": "text-Q20",
+          "question": "You need to recommend a solution to resolve a slow dashboard query issue. The query is:\n\nSELECT VehicleId, LastUpdatedUtc, EngineStatus, BatteryHealth\nFROM dbo.VehicleHealthSummary\nWHERE FleetId = @FleetId\nORDER BY LastUpdatedUtc DESC;\n\nThe execution plan shows a clustered index scan.\n\nWhat should you recommend?",
+          "options": [
+            "A. Create a clustered index on LastUpdatedUtc.",
+            "B. On FleetId, create a nonclustered index that includes LastUpdatedUtc, EngineStatus, and BatteryHealth.",
+            "C. On LastUpdatedUtc, create a nonclustered index that includes FleetId.",
+            "D. On FleetId, create a filtered index where LastUpdatedUtc > DATEADD(DAY, -7, SYSUTCDATETIME())."
+          ],
+          "correctAnswer": "B",
+          "explanation": "FleetId is the primary filter predicate, so it should be the key column for an index seek. Including the other returned columns (LastUpdatedUtc, EngineStatus, BatteryHealth) makes the index covering, avoiding key lookups.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q066",
+          "type": "mc",
+          "originalId": "text-Q25",
+          "question": "You have an Azure SQL database that contains SQL graph tables: a NODE table named dbo.Person and an EDGE table named dbo.Knows. Each Person row has PersonId (int) and DisplayName (nvarchar(100)).\n\nYou need to use a MATCH operator and exactly two directed Knows relationships to return the PersonId and DisplayName of people reachable from @StartPersonId.\n\nWhich Transact-SQL query should you use?",
+          "options": [
+            "A. SELECT p2.PersonId, p2.DisplayName FROM dbo.Person AS p1, dbo.Knows AS k1, dbo.Person AS p2 WHERE p1.DisplayName = p2.DisplayName AND MATCH(p3-(k1)->p2-(k2)->p3)",
+            "B. SELECT p3.PersonId, p3.DisplayName FROM dbo.Person AS p1 JOIN dbo.Knows AS k1 ON ... JOIN dbo.Knows AS k2 ON ... WHERE p1.PersonId = @StartPersonId AND MATCH(p3-(k2)->p2<-(k1)-p1)",
+            "C. SELECT p3.PersonId, p3.DisplayName FROM dbo.Person AS p1, dbo.Knows AS k1, dbo.Person AS p2, dbo.Knows AS k2, dbo.Person AS p3 WHERE p1.PersonId = @StartPersonId AND MATCH(p1-(k1)->p2) AND MATCH(p2-(k2)->p3)",
+            "D. SELECT p3.PersonId, p3.DisplayName FROM dbo.Person AS p1, dbo.Knows AS k1, dbo.Person AS p2, dbo.Knows AS k2, dbo.Person AS p3 WHERE p1.PersonId = @StartPersonId AND MATCH(p1-(k1)->p2-(k2)->p3)"
+          ],
+          "correctAnswer": "D",
+          "explanation": "MATCH(p1-(k1)->p2-(k2)->p3) chains two directed hops in a single MATCH pattern. It anchors with p1.PersonId = @StartPersonId and traverses p1->p2->p3. Option C uses separate MATCH predicates instead of a single chained pattern.",
+          "topic": "1.3 Write Advanced T-SQL Code",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q067",
+          "type": "mc",
+          "originalId": "text-Q27",
+          "question": "You have an Azure SQL database that contains database-level DDL triggers, including a trigger named ddl_Audit.\n\nYou need to prevent ddl_Audit from firing during the next deployment. The trigger object must remain in place.\n\nWhich Transact-SQL statement should you use?",
+          "options": [
+            "A. ALTER TRIGGER",
+            "B. ALTER DATABASE",
+            "C. ALTER SERVER AUDIT SPECIFICATION",
+            "D. DISABLE TRIGGER",
+            "E. ALTER DATABASE AUDIT SPECIFICATION"
+          ],
+          "correctAnswer": "D",
+          "explanation": "DISABLE TRIGGER temporarily prevents a trigger from firing without dropping it. For a database-scoped DDL trigger: DISABLE TRIGGER ddl_Audit ON DATABASE. ALTER TRIGGER changes the definition, not disables it.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "easy",
+          "source": "company-provided"
+        },
+        {
+          "id": "q068",
+          "type": "yesno",
+          "originalId": "text-Q28",
+          "question": "You have a multi-statement table-valued function (TVF) named Sales.mstvf_OrderStatus() and a scalar UDF named dbo.ufn_GetTaxMultiplier. Reporting queries frequently join the MSTVF to Sales.SalesOrderHeader and produce inconsistent execution plans.\n\nA developer discovers that EXEC @ret = ufn_GetTaxMultiplier @TaxAmt = 100.00, @StateCode = 'WA' produces an error.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "You can use GETDATE() in dbo.ufn_GetTaxMultiplier to produce nondeterministic results.",
+            "Rewriting Sales.mstvf_OrderStatus() as an inline table TVF will reduce the number of inconsistent execution plans.",
+            "Replacing ufn_GetTaxMultiplier with dbo.ufn_GetTaxMultiplier in the EXEC statement will resolve the error."
+          ],
+          "statementAnswers": [
+            "No",
+            "Yes",
+            "Yes"
+          ],
+          "explanation": "GETDATE() is nondeterministic and not supported in T-SQL UDFs for this purpose. MSTVFs cause weak cardinality estimates; inline TVFs give better optimizer visibility. Scalar functions require two-part naming (schema.function) when called with EXEC.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q069",
+          "type": "mc",
+          "originalId": "text-Q24",
+          "question": "You use GitHub Copilot Chat connected to a SQL database. A company policy prohibits sharing customer PII, secrets, and query result sets with any AI service.\n\nYou need to use Copilot Chat to write a stored procedure that joins Sales.Orders to Sales.Customers and returns customer names and email addresses. The solution must NOT share actual data.\n\nWhat should you do?",
+          "options": [
+            "A. Paste several rows including email addresses into chat so Copilot can infer edge cases.",
+            "B. Run a SELECT returning customer names and emails and provide the result set to Copilot.",
+            "C. Provide the database connection string to Copilot so it can validate the procedure.",
+            "D. Ask Copilot to generate the stored procedure by using schema details only."
+          ],
+          "correctAnswer": "D",
+          "explanation": "Using schema-only information (table names, column names, relationships) lets Copilot generate code without exposing PII. Options A and B share real data. Option C exposes connection secrets.",
+          "topic": "1.4 Design and Implement SQL Solutions by Using AI-Assisted Tools",
+          "difficulty": "easy",
+          "source": "company-provided"
+        },
+        {
+          "id": "q070",
+          "type": "dropdown",
+          "originalId": "text-Q36",
+          "question": "You need to create a trigger that updates LastModifiedUtc to the current time whenever a row in MaintenanceEvents changes. The solution must avoid recursive updates.\n\nComplete the trigger code:\n\nCREATE TRIGGER dbo.trgMaintenanceEvents_UpdateTimestamp\nON dbo.MaintenanceEvents\nAFTER UPDATE\nAS BEGIN\n  UPDATE m SET LastModifiedUtc = SYSUTCDATETIME()\n  FROM dbo.MaintenanceEvents m\n  INNER JOIN inserted i\n  ON [?]\n  WHERE [?]\nEND;",
+          "dropdowns": [
+            {
+              "label": "ON clause:",
+              "options": [
+                "i.MaintenanceId IS NOT NULL",
+                "m.LastModifiedUtc <> i.LastModifiedUtc",
+                "m.MaintenanceId = i.MaintenanceId",
+                "m.VehicleId = i.VehicleId"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "m.MaintenanceId = i.MaintenanceId"
+            },
+            {
+              "label": "WHERE clause:",
+              "options": [
+                "i.MaintenanceId IS NOT NULL",
+                "m.LastModifiedUtc <> i.LastModifiedUtc",
+                "m.MaintenanceId = i.MaintenanceId",
+                "m.VehicleId = i.VehicleId"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "m.LastModifiedUtc <> i.LastModifiedUtc"
+            }
+          ],
+          "explanation": "Join on the primary key (MaintenanceId) to match the correct row. The WHERE clause prevents recursive updates by only updating rows where the timestamp actually differs.",
+          "topic": "1.2 Implement Programmability Objects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q071",
+          "type": "yesno",
+          "originalId": "text-Q37",
+          "question": "You review a CREATE TABLE statement for dbo.VehicleTelemetry that includes system versioning, a clustered PK on TelemetryId (not partitioned), and a JSON index on LocationJson for '$.location.latitude', '$.location.longitude', '$.location.accuracy'.\n\nRequirements: telemetry must be partitioned, JSON properties must be filterable via index seek.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "The code meets the database performance requirements for partitioning.",
+            "The code meets the database performance requirements for JSON property querying.",
+            "Queries that filter on $.location.heading will use the JI_VehicleTelemetry_Location index."
+          ],
+          "statementAnswers": [
+            "No",
+            "Yes",
+            "No"
+          ],
+          "explanation": "No partition function/scheme is defined, so the table is not partitioned. The JSON index covers latitude, longitude, and accuracy — so those are seekable. $.location.heading is NOT in the index definition, so it won't use the JSON index.",
+          "topic": "1.1 Design and Implement Database Objects",
+          "difficulty": "hard",
+          "source": "company-provided"
+        }
+      ]
+    },
+    {
+      "domainId": "2",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "questions": [
+        {
+          "id": "q023",
+          "originalId": "Q2",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database that contains a table named Sales.Customer. Sales.Customer contains columns named CustomerId, FullName, Email, TaxID, and RegionId.\n\nYou have a database role named AppSupport that is used by a support application.\n\nYou need to implement a security solution for AppSupport that meets the following requirements:\n- AppSupport must be prevented from viewing TaxID.\n- AppSupport must be able to query Sales.Customer to troubleshoot issues.\n- AppSupport must be able to run a stored procedure named Sales.usp_GetCustomerByCustomerId.\n\nSelect the appropriate statements.",
+          "explanation": "GRANT EXECUTE for the stored proc, GRANT SELECT for querying, DENY SELECT on the specific column (TaxID) to prevent access.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "To run Sales.usp_GetCustomerByCustomerId:",
+              "options": [
+                "DENY SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport",
+                "GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "REVOKE SELECT ON OBJECT::Sales.Customer(TaxID) FROM AppSupport"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport"
+            },
+            {
+              "label": "To query Sales.Customer:",
+              "options": [
+                "DENY SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport",
+                "GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "REVOKE SELECT ON OBJECT::Sales.Customer(TaxID) FROM AppSupport"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport"
+            },
+            {
+              "label": "To prevent viewing TaxID:",
+              "options": [
+                "DENY SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport",
+                "GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport",
+                "GRANT SELECT ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport",
+                "REVOKE SELECT ON OBJECT::Sales.Customer(TaxID) FROM AppSupport"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport"
+            }
+          ]
+        },
+        {
+          "id": "q024",
+          "originalId": "Q7",
+          "type": "mc",
+          "question": "You have an Azure SQL database with a table named Customer. Customer contains:\n- NationalIDNumber (unique per customer)\n- InvestigationNotes (free-form text)\n\nA stored procedure performs point lookups by NationalIDNumber and returns InvestigationNotes without filtering on it.\n\nYou need to encrypt both columns by using Always Encrypted and the highest security possible.\n\nWhich encryption types should you use?",
+          "explanation": "Deterministic encryption is needed for NationalIDNumber (point lookups require equality comparison). Randomized provides higher security for InvestigationNotes since it's only returned, not filtered.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. randomized for NationalIDNumber and randomized for InvestigationNotes",
+            "B. deterministic for NationalIDNumber and randomized for InvestigationNotes",
+            "C. deterministic for NationalIDNumber and deterministic for InvestigationNotes",
+            "D. randomized for NationalIDNumber and deterministic for InvestigationNotes"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q025",
+          "originalId": "Q8",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database named sqldb-ai-prod with a table named Tickets (TenantId, TicketId, CustomerEmail, CustomerPhone, Notes) for a multitenant SaaS app.\n\nYou need to configure security so that:\n- Support agents see only the rows of their own TenantId column.\n- Support agents see only the domain name portion of the CustomerEmail column.\n\nWhat should you do for each requirement?",
+          "explanation": "RLS predicates filter rows to the user's TenantId. Dynamic data masking obscures part of the email column (showing only the domain).",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "See only rows of their own TenantId:",
+              "options": [
+                "Configure dynamic data masking on selected columns",
+                "Enable Transparent Data Encryption (TDE) and customer-managed keys",
+                "Create a row-level security (RLS) predicate that uses the user context",
+                "Encrypt sensitive columns by using Always Encrypted with Azure Key Vault"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "Create a row-level security (RLS) predicate that uses the user context"
+            },
+            {
+              "label": "See only the domain name of CustomerEmail:",
+              "options": [
+                "Configure dynamic data masking on selected columns",
+                "Enable Transparent Data Encryption (TDE) and customer-managed keys",
+                "Create a row-level security (RLS) predicate that uses the user context",
+                "Encrypt sensitive columns by using Always Encrypted with Azure Key Vault"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "Configure dynamic data masking on selected columns"
+            }
+          ]
+        },
+        {
+          "id": "q026",
+          "originalId": "Q12",
+          "type": "mc",
+          "question": "You have an Azure SQL database named SalesDB and an Azure App Service app named sales-api. SalesDB contains dbo.Customers with columns CreditCardNumber and TenantId.\n\nCurrently sales-api connects to SalesDB with SQL authentication (stored username/password).\n\nYou need to recommend a solution that:\n- Provides a passwordless method for sales-api to access SalesDB\n- Ensures that credit card numbers are NOT stored as plain text\n\nWhat should you include?",
+          "explanation": "Managed identities provide passwordless auth. Always Encrypted ensures credit card numbers are not stored as plain text (encrypted at rest and in transit).",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. managed identities and dynamic data masking",
+            "B. managed identities and Always Encrypted",
+            "C. Transparent Data Encryption (TDE) and row-level security (RLS)",
+            "D. Azure Key Vault and Always Encrypted"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q027",
+          "originalId": "Q18",
+          "type": "mc",
+          "question": "You have a Microsoft SQL Server 2025 instance with a managed identity enabled.\n\nYou need to call an Azure OpenAI REST endpoint for chat completions. The solution must provide the highest level of security.\n\nWhat should you insert at line 02 of the CREATE DATABASE SCOPED CREDENTIAL statement?",
+          "explanation": "Managed Identity with resourceid provides the highest security—no API keys stored, authentication via the managed identity.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. WITH IDENTITY = 'HTTPEndpointHeaders', SECRET = N'{\"api-key\":\"<value>\"}'",
+            "B. WITH IDENTITY = 'HTTPEndpointQueryString', SECRET = N'{\"api-key\":\"<value>\"}'",
+            "C. WITH IDENTITY = 'AzureOpenAI', SECRET = N'{\"resourceid\":\"<value>\"}'",
+            "D. WITH IDENTITY = 'Managed Identity', SECRET = N'{\"resourceid\":\"<value>\"}'",
+            "E. WITH IDENTITY = 'Managed Identity', SECRET = N'{\"api-key\":\"<value>\"}'"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q028",
+          "originalId": "Q53",
+          "type": "dropdown",
+          "question": "[Case Study - Fabrikam - Q1 of 9]\n\nYou need to ensure that EmployeesEncrypted meets the security requirements (ledger, Always Encrypted on TaxId and Salary) and contains a copy of the data in the Employees table.\n\nWhich four actions should you perform in sequence?",
+          "explanation": "1) Create CEK for encryption. 2) Create the EmployeesEncrypted table with LEDGER enabled. 3) Copy data from Employees. 4) Alter the EmployeesEncrypted table to encrypt columns.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "casestudy",
+          "dropdowns": [
+            {
+              "label": "Step 1:",
+              "options": [
+                "Create a column encryption key (CEK)",
+                "Create the EmployeesEncrypted table with LEDGER enabled",
+                "Execute sys.sp_copy_data_in_batches",
+                "Alter EmployeesEncrypted to encrypt TaxId and Salary",
+                "Alter the Employees table to encrypt TaxId and Salary",
+                "Execute sys.sp_generate_database_ledger_digest"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "Create a column encryption key (CEK)"
+            },
+            {
+              "label": "Step 2:",
+              "options": [
+                "Create a column encryption key (CEK)",
+                "Create the EmployeesEncrypted table with LEDGER enabled",
+                "Execute sys.sp_copy_data_in_batches",
+                "Alter EmployeesEncrypted to encrypt TaxId and Salary",
+                "Alter the Employees table to encrypt TaxId and Salary",
+                "Execute sys.sp_generate_database_ledger_digest"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "Create the EmployeesEncrypted table with LEDGER enabled"
+            },
+            {
+              "label": "Step 3:",
+              "options": [
+                "Create a column encryption key (CEK)",
+                "Create the EmployeesEncrypted table with LEDGER enabled",
+                "Execute sys.sp_copy_data_in_batches",
+                "Alter EmployeesEncrypted to encrypt TaxId and Salary",
+                "Alter the Employees table to encrypt TaxId and Salary",
+                "Execute sys.sp_generate_database_ledger_digest"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "Execute sys.sp_copy_data_in_batches"
+            },
+            {
+              "label": "Step 4:",
+              "options": [
+                "Create a column encryption key (CEK)",
+                "Create the EmployeesEncrypted table with LEDGER enabled",
+                "Execute sys.sp_copy_data_in_batches",
+                "Alter EmployeesEncrypted to encrypt TaxId and Salary",
+                "Alter the Employees table to encrypt TaxId and Salary",
+                "Execute sys.sp_generate_database_ledger_digest"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "Alter EmployeesEncrypted to encrypt TaxId and Salary"
+            }
+          ]
+        },
+        {
+          "id": "q029",
+          "originalId": "Q56",
+          "type": "mc",
+          "question": "[Case Study - Fabrikam - Q4 of 9]\n\nTransactionProcessing uses a hard-coded username and password. The security requirements mandate a passwordless connection.\n\nYou need to recommend a solution for the TransactionProcessing application.\n\nWhat should you include?",
+          "explanation": "A user-assigned managed identity provides passwordless authentication and can be shared across multiple resources. For an on-premises app migrating to Azure, user-assigned is the best fit.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "casestudy",
+          "options": [
+            "A. a service principal",
+            "B. a system-assigned managed identity",
+            "C. a shared access key",
+            "D. a user-assigned managed identity"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q030",
+          "originalId": "Q5",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database that supports an AI-driven product search API.\n\nYou need to identify the top CPU-consuming queries from the last two hours by using Query Store data. The solution must aggregate CPU consumption across executions and return only the top 15 query hashes.\n\nHow should you complete the Transact-SQL code?",
+          "explanation": "Use rs.avg_cpu_time for aggregation, sys.query_store_runtime_stats_interval for the time interval join, and DATEADD(HOUR, -2, GETUTCDATE()) since Query Store uses UTC timestamps.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Aggregation metric:",
+              "options": [
+                "rs.avg_cpu_time",
+                "rs.last_cpu_time"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "rs.avg_cpu_time"
+            },
+            {
+              "label": "Join table:",
+              "options": [
+                "sys.dm_exec_query_stats",
+                "sys.query_store_runtime_stats_interval"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "sys.query_store_runtime_stats_interval"
+            },
+            {
+              "label": "Time filter:",
+              "options": [
+                "DATEADD(DAY, -2, GETDATE())",
+                "DATEADD(HOUR, -2, GETDATE())",
+                "DATEADD(HOUR, -2, GETUTCDATE())"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "DATEADD(HOUR, -2, GETUTCDATE())"
+            }
+          ]
+        },
+        {
+          "id": "q031",
+          "originalId": "Q9",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database named SalesDB with Query Store enabled. SalesDB supports an AI-driven product search API.\n\nUsers report that the latency of the API increased immediately after the API was deployed and remains high.\n\nYou need to identify whether the latency increase was caused by an execution plan regression and, if so, decide which corrective action will restore a previous plan. The solution must prevent any changes to the API code.\n\nWhat should you use?",
+          "explanation": "Query Performance Insight shows top resource consumers. The Query Store plan store stores multiple plans per query. Plan forcing locks a previous good plan without code changes.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "To identify long-running queries:",
+              "options": [
+                "Azure Monitor",
+                "Log Analytics",
+                "Query Performance Insight",
+                "The Query Store plan store",
+                "Plan forcing in Query Store",
+                "The Regressed Queries pane in Query Store"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "Query Performance Insight"
+            },
+            {
+              "label": "To verify that the query has multiple persisted plans over time:",
+              "options": [
+                "Azure Monitor",
+                "Log Analytics",
+                "Query Performance Insight",
+                "The Query Store plan store",
+                "Plan forcing in Query Store",
+                "The Regressed Queries pane in Query Store"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "The Query Store plan store"
+            },
+            {
+              "label": "To restore a previous plan without changing the code:",
+              "options": [
+                "Azure Monitor",
+                "Log Analytics",
+                "Query Performance Insight",
+                "The Query Store plan store",
+                "Plan forcing in Query Store",
+                "The Regressed Queries pane in Query Store"
+              ],
+              "correctIndex": 4,
+              "correctAnswer": "Plan forcing in Query Store"
+            }
+          ]
+        },
+        {
+          "id": "q032",
+          "originalId": "Q14",
+          "type": "yesno",
+          "question": "You have a SQL database in Microsoft Fabric (default settings) with a table named Sales.Orders.\n\nYou discover:\n- sys.dm_exec_requests shows multiple sessions suspended with wait_type = LCK_M_X, all waiting on Sales.Orders with the same blocking_session_id.\n- sys.dm_exec_input_buffer for the blocking session shows: BEGIN TRANSACTION UPDATE Sales.Orders\n- sys.dm_exec_sessions for the blocking session shows status = sleeping AND open_transaction_count = 1.\n\nFor each statement, select Yes if true:",
+          "explanation": "The sleeping session with open_transaction_count=1 holds uncommitted locks. Fabric SQL database uses RCSI by default, so SELECT won't be blocked by UPDATE. sys.dm_tran_locks joined with sys.dm_exec_requests reveals the blocking chain.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "statements": [
+            "The blocking is caused by an uncommitted explicit transaction in the blocking session that is holding locks.",
+            "While an UPDATE operation on Sales.Orders is occurring, SELECT statements will be blocked.",
+            "Joining sys.dm_tran_locks to sys.dm_exec_requests will show which session holds locks involved in the blocking chain."
+          ],
+          "statementAnswers": [
+            "Yes",
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "q033",
+          "originalId": "Q44",
+          "type": "mc",
+          "question": "You have an Azure SQL database that supports an AI-enabled product catalog API. The database contains a table named Sales.Orders. Sales.Orders contains 20 million rows and has a nonclustered index on a column named CreateDate.\n\nThe API passes a date parameter named @OrderDate. A stored procedure named get_latest_day_orders filters by:\n  WHERE CAST(CreateDate AS date) = @OrderDate\n\nA review reveals the query causes an index scan.\n\nYou need to modify the predicate to ensure Microsoft SQL Server can use an index seek on CreateDate for a single day.\n\nWhich WHERE clause should you use?",
+          "explanation": "A range predicate (>= and <) on the raw column allows SQL Server to use an index seek, unlike wrapping the column in a function.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. WHERE CONVERT(char(10), CreateDate, 121) = CONVERT(char(10), @OrderDate, 121)",
+            "B. WHERE LEFT(CONVERT(varchar(30), CreateDate, 121), 10) = CONVERT(char(10), @OrderDate, 121)",
+            "C. WHERE CreateDate >= @OrderDate AND CreateDate < DATEADD(day, 1, @OrderDate)",
+            "D. WHERE CreateDate LIKE CONVERT(char(10), @OrderDate, 121) + '%'"
+          ],
+          "correctAnswer": "C"
+        },
+        {
+          "id": "q034",
+          "originalId": "Q54",
+          "type": "mc",
+          "question": "[Case Study - Fabrikam - Q2 of 9]\n\nYou plan to implement changes to sp_UpdateProcedureForPatient. Records accessed by the stored procedure must NOT be changed by other transactions while it runs.\n\nYou change the stored procedure to run within a transaction.\n\nWhich transaction isolation level should you use?",
+          "explanation": "SERIALIZABLE prevents other transactions from modifying (or inserting) records that the stored procedure is accessing.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "casestudy",
+          "options": [
+            "A. SNAPSHOT",
+            "B. SERIALIZABLE",
+            "C. REPEATABLE READ",
+            "D. READ COMMITTED SNAPSHOT"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q035",
+          "originalId": "Q3",
+          "type": "yesno",
+          "question": "You have an SDK-style SQL database project named MyDatabaseProject.sqlproj stored in a private GitHub repository with a GitHub Actions workflow.\n\nThe workflow uses azure/sql-action@v2 with a connection string from secrets. The target Azure SQL database allows access to Azure services and supports mixed authentication.\n\nFor each of the following statements, select Yes if the statement is true.",
+          "explanation": "The workflow uses a connection string (not Entra workload identity). Changing to Release config changes the DACPAC output path which isn't updated in the publish step. The workflow_dispatch trigger allows manual execution.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "statements": [
+            "The workflow relies on a Microsoft Entra workload identity to access the target Azure SQL database.",
+            "Changing the Build SQL project step to 'run: dotnet build MyDatabaseProject.sqlproj -c Release' will result in a successful deployment.",
+            "The workflow can be triggered manually, without making changes to the repository."
+          ],
+          "statementAnswers": [
+            "No",
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "q036",
+          "originalId": "Q4",
+          "type": "mc",
+          "question": "You have a database that contains production data. The schema is stored in a Git repository as an SDK-style SQL database project, and contains reference data with the following table:\n\n| Name | Data type |\n| RefId | int identity |\n| Code | nvarchar(10) |\n| CreateDate | datetime2 |\n| Description | nvarchar(255) |\n\nA deployment pipeline can be rerun automatically when a transient failure occurs.\n\nYou need to deploy the reference data as part of the same CI/CD process. Rerunning the pipeline must produce the same outcome and must NOT create duplicate rows.\n\nWhat should you do?",
+          "explanation": "A post-deployment script with IF NOT EXISTS or MERGE logic ensures idempotent deployments without duplicate rows.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Store the reference values in GitHub repository secrets.",
+            "B. Add a post-deployment script that inserts reference rows by using IF NOT EXISTS or MERGE logic.",
+            "C. Restore a backup after each deployment."
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q037",
+          "originalId": "Q13",
+          "type": "mc",
+          "question": "You have a GitHub Actions workflow that builds and deploys an Azure SQL database. The schema is stored as an SDK-style SQL database project.\n\nFollowing a code review, you need to generate a report that shows whether the production schema has diverged from the model in source control.\n\nWhich action should you add to the pipeline?",
+          "explanation": "DriftReport generates a report showing schema differences (drift) between the deployed database and source control model.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. SqlPackage.exe /Action:DeployReport",
+            "B. SqlPackage.exe /Action:DriftReport",
+            "C. SqlPackage.exe /Action:Extract",
+            "D. SqlPackage.exe /Action:Script"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q038",
+          "originalId": "Q50",
+          "type": "mc",
+          "question": "You have an SDK-style SQL database project targeting Azure SQL Database. The CI build fails with unresolved reference errors when referencing system objects.\n\nSolution: Build the project by running dotnet build -bl -flp:vdiag.\n\nDoes this meet the goal?",
+          "explanation": "The -bl and -flp:vdiag flags only control logging verbosity—they don't resolve missing system object references.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q039",
+          "originalId": "Q51",
+          "type": "mc",
+          "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Azure.Master NuGet package to the project.\n\nDoes this meet the goal?",
+          "explanation": "The Azure.Master NuGet package provides the system database references needed for Azure SQL Database targets.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q040",
+          "originalId": "Q52",
+          "type": "mc",
+          "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Master NuGet package to the project.\n\nDoes this meet the goal?",
+          "explanation": "The Master package is for on-premises SQL Server, not Azure SQL Database. For Azure SQL Database, use Microsoft.SqlServer.Dacpacs.Azure.Master.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q041",
+          "originalId": "Q59",
+          "type": "dropdown",
+          "question": "[Case Study - Fabrikam - Q7 of 9]\n\nYou create an SDK-style SQL database project named Database.sqlproj and add it to a GitHub repository.\n\nYou need to configure a GitHub Actions workflow to support the planned changes for DB1 (validate every pull request before merging).",
+          "explanation": "pull_request trigger validates PRs before merge. dotnet build -c Release compiles the SQL project for validation.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "casestudy",
+          "dropdowns": [
+            {
+              "label": "Trigger:",
+              "options": [
+                "merge",
+                "pull_request",
+                "push"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "pull_request"
+            },
+            {
+              "label": "Build step:",
+              "options": [
+                "dotnet build Database.sqlproj -c Release",
+                "dotnet pack Database.sqlproj",
+                "dotnet publish Database.sqlproj -c Production",
+                "dotnet publish Database.sqlproj -c Release"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "dotnet build Database.sqlproj -c Release"
+            }
+          ]
+        },
+        {
+          "id": "q042",
+          "originalId": "Q1",
+          "type": "mc",
+          "question": "You have an Azure container app named app1-contoso-001 that hosts a Data API builder (DAB) container in front of an Azure SQL database.\n\nYou add an entity named Todo that uses a source named dbo.todos.\n\nWhich URL pattern should clients use to access the Todo REST endpoint?",
+          "explanation": "DAB REST endpoints follow the pattern: /data-api/api/{entity-name}.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. https://app1-contoso-001.azurestaticapps.net/data-api/Todo",
+            "B. https://app1-contoso-001.azurestaticapps.net/data-api/api/Todo",
+            "C. https://app1-contoso-001.azurestaticapps.net/data-api/graphql/Todo",
+            "D. https://app1-contoso-001.azurestaticapps.net/api/Todo"
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q043",
+          "originalId": "Q6",
+          "type": "mc",
+          "question": "You have an Azure SQL database named ProductsDB. You deploy Data API builder (DAB) to Azure Container Apps.\n\nThe /health endpoint returns healthy but all requests that query an entity named Products fail with a connection error. The SQL login and database are confirmed correct.\n\nYou need to ensure that the container app can connect to the Azure SQL logical server without changing the container app deployment settings or the DAB configuration file.\n\nWhat should you do on the Azure SQL logical server?",
+          "explanation": "A firewall rule with 0.0.0.0 to 0.0.0.0 allows Azure services to access the SQL logical server.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Create a firewall rule that allows a start and end IP address of 0.0.0.0.",
+            "B. Enable FORCE_LAST_GOOD_PLAN automatic tuning for ProductsDB.",
+            "C. Run DBCC CHECKDB on ProductsDB.",
+            "D. Create an auto-failover group for ProductsDB."
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q044",
+          "originalId": "Q10",
+          "type": "mc",
+          "question": "You have an Azure SQL database named ToDo that contains a table named dbo.ToDo.\n\nYour company plans to develop an Azure Functions app to run whenever the rows in dbo.ToDo change. The app will process INSERT, UPDATE, and DELETE events by using the Azure SQL trigger binding.\n\nYou need to configure ToDo to support the planned app.\n\nWhat should you do?",
+          "explanation": "Azure SQL trigger binding for Azure Functions relies on change tracking, not CDC or DML triggers.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. On dbo.ToDo, create a Data Definition Language (DDL) trigger that calls the Azure Functions HTTP endpoint.",
+            "B. Enable change tracking on ToDo and dbo.ToDo.",
+            "C. On dbo.ToDo, create a Data Manipulation Language (DML) trigger that calls the Azure Functions HTTP endpoint.",
+            "D. Enable change data capture (CDC) on ToDo and dbo.ToDo."
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q045",
+          "originalId": "Q11",
+          "type": "dropdown",
+          "question": "You have an Azure SQL database named ProductsDB deployed with DAB on Azure Container Apps.\n\nThe container app cannot connect to ProductsDB and is unreachable from the internet.\n\nYou need to:\n- Ensure that the Azure SQL logical server allows connections from Azure services.\n- Ensure that the Container Apps environment accepts inbound requests from the public internet.",
+          "explanation": "0.0.0.0 to 0.0.0.0 allows Azure services. External ingress on port 80 allows internet access.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Azure SQL firewall rule IP range:",
+              "options": [
+                "0.0.0.0 to 0.0.0.0",
+                "127.0.0.1 to 127.0.0.1",
+                "10.0.0.0 to 10.255.255.255"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "0.0.0.0 to 0.0.0.0"
+            },
+            {
+              "label": "Container Apps ingress:",
+              "options": [
+                "External on port 80",
+                "Internal on port 443",
+                "Disabled"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "External on port 80"
+            }
+          ]
+        },
+        {
+          "id": "q046",
+          "originalId": "Q55",
+          "type": "yesno",
+          "question": "[Case Study - Fabrikam - Q3 of 9]\n\nYou are evaluating the DAB configuration.\n\nFor each statement, select Yes if true:",
+          "explanation": "Procedures table allows anonymous read (correct). Transactions table allows 'read' and 'create' (not 'update'), so read+update is false. The stored procedure has execute permission for authenticated users.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "casestudy",
+          "statements": [
+            "Applications can read data in the Procedures table without authentication.",
+            "Applications can read and update data in the Transactions table once authenticated.",
+            "Applications can execute the sp_UpdateProcedurePatient stored procedure."
+          ],
+          "statementAnswers": [
+            "Yes",
+            "No",
+            "Yes"
+          ]
+        },
+        {
+          "id": "q072",
+          "type": "yesno",
+          "originalId": "text-Q6",
+          "question": "You have a DAB instance exposing an Order table entity (read permission for 'authenticated' role) and a FinalizeOrder stored procedure entity (execute permission for 'operations' role with a database policy). The client sends a Microsoft Entra token and x-MS-API-ROLE: operations.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "A REST GET request to the order entity with the access token and x-MS-API-ROLE: operations will return data.",
+            "When DAB runs the stored procedure, the database policy defined on the FinalizeOrder entity will be enforced.",
+            "If the client omits the x-MS-API-ROLE header but still sends the same access token, the order entity read request will run in the authenticated role context."
+          ],
+          "statementAnswers": [
+            "No",
+            "Yes",
+            "Yes"
+          ],
+          "explanation": "The order entity grants read only to 'authenticated', not 'operations', so the GET fails. The FinalizeOrder policy is enforced for the operations role. Without x-MS-API-ROLE, DAB defaults to the built-in 'authenticated' role.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q073",
+          "type": "mc",
+          "originalId": "text-Q9",
+          "question": "During a 10-minute incident window, you discover: Session 72 is sleeping with open_transaction_count = 1. Multiple sessions show blocking_session_id = 72. sys.dm_exec_input_buffer shows BEGIN TRANSACTION UPDATE Sales.Orders. Timeouts stop only after manually terminating session 72.\n\nWhat is a possible cause of the blocking?",
+          "options": [
+            "A. Session 72 caused a deadlock.",
+            "B. An explicit transaction was started but not committed or rolled back.",
+            "C. A lock escalation occurred.",
+            "D. A long-running SELECT statement is blocking writers."
+          ],
+          "correctAnswer": "B",
+          "explanation": "A sleeping session with open_transaction_count=1 holding locks is the classic pattern of an uncommitted explicit transaction. Deadlocks are auto-detected and resolved — they don't persist until manual termination.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q074",
+          "type": "mc",
+          "originalId": "text-Q15",
+          "question": "You have an Azure SQL database with 2 million articles with embeddings. Users report that semantic search results don't reflect updates until the following day.\n\nYou need to ensure embeddings are updated whenever articles change. The solution must minimize CPU usage on SalesDB.\n\nWhich embedding maintenance method should you implement?",
+          "options": [
+            "A. Modify the query to use VECTOR_DISTANCE instead of VECTOR_SEARCH.",
+            "B. Enable change data capture (CDC) on dbo.Articles and use an Azure Functions app to process CDC changes.",
+            "C. Run an hourly T-SQL job that regenerates embeddings for all rows.",
+            "D. Create a trigger that calls AI_GENERATE_EMBEDDINGS for each inserted or updated row."
+          ],
+          "correctAnswer": "B",
+          "explanation": "CDC identifies only changed rows, and embedding regeneration is offloaded to an external Azure Functions app — minimizing CPU on SalesDB. Hourly full-table regeneration is wasteful. A trigger pushes expensive AI work into the transactional path. Changing the search function doesn't address stale embeddings.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q075",
+          "type": "mc",
+          "originalId": "text-Q16",
+          "question": "You have a GitHub Actions workflow that builds an SDK-style SQL database project and produces a dacpac artifact.\n\nYou need to add a deployment step that publishes the dacpac to an Azure SQL database using secrets stored in GitHub repository secrets.\n\nWhich step should you add?",
+          "options": [
+            "A. A step using azure/sql-action@v2 with the connection string defined inline as an environment variable.",
+            "B. A step using azure/sql-action@v2 with action: extract and secrets.SQL_CONNECTION_STRING.",
+            "C. A step using azure/sql-action@v2 with action: publish, path to the dacpac, and connection-string: ${{ secrets.SQL_CONNECTION_STRING }}.",
+            "D. A step that runs dotnet build with /p:TargetConnectionString pointing to secrets."
+          ],
+          "correctAnswer": "C",
+          "explanation": "azure/sql-action@v2 with action: publish deploys a dacpac to the target database. Connection strings from GitHub Secrets keep credentials secure. Extract creates a dacpac FROM a database, not deploy one. dotnet build is for compilation, not deployment.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q076",
+          "type": "yesno",
+          "originalId": "text-Q21",
+          "question": "You have a Fabric workspace with a SQL database (SalesDB) and a GraphQL API (SalesApi). A Microsoft Entra group (SqlUsers) has the Viewer role and was granted 'View and Edit GraphQL item' permission on SalesApi — but NOT 'Run Queries and Mutations'. The connection uses SSO.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "The members of SqlUsers can modify the data in SalesDB via SalesApi.",
+            "The members of SqlUsers can view the data in SalesDB via SalesApi.",
+            "The members of SqlUsers can change the field mappings of SalesApi."
+          ],
+          "statementAnswers": [
+            "No",
+            "No",
+            "Yes"
+          ],
+          "explanation": "Without 'Run Queries and Mutations', users cannot query or mutate data through the API. 'View and Edit GraphQL item' allows editing the API definition itself, including field mappings.",
+          "topic": "2.4 Integrate SQL Solutions with Azure Services",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q077",
+          "type": "yesno",
+          "originalId": "text-Q26",
+          "question": "You create a CustomerProfiles table with Dynamic Data Masking on FullName, EmailAddress, and PhoneNumber. You also create an RLS filter predicate fn_FilterByRegion that checks SUSER_SNAME() against UserAccess. Support staff never has UNMASK permission.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "The schema meets the security requirements for PII data.",
+            "Administrators of the Azure SQL server can see all the rows in dbo.CustomerProfiles when they use an application.",
+            "The masking rules will apply even when row-level security (RLS) filters out rows."
+          ],
+          "statementAnswers": [
+            "Yes",
+            "No",
+            "No"
+          ],
+          "explanation": "DDM + RLS together properly protect PII. Admins have UNMASK but RLS still filters rows based on the predicate (they won't see all rows through the app). If RLS filters a row out entirely, masking has nothing to act on — the row isn't returned.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q078",
+          "type": "yesno",
+          "originalId": "text-Q29",
+          "question": "A stored procedure queries dbo.Orders (120M rows) filtering by CustomerId and ordering by OrderDate DESC with TOP 50. The existing index IX_Orders_OrderDate is on (OrderDate) with no included columns. The execution plan shows an index seek on IX_Orders_OrderDate followed by Key Lookup and an explicit Sort.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "To avoid the explicit sort, create a nonclustered index on (CustomerId, OrderDate DESC) that includes (Status, TotalAmount).",
+            "To eliminate the sort, add CustomerId as an included column to IX_Orders_OrderDate.",
+            "The plan indicates a bottleneck from a suboptimal query plan, rather than locking or blocking."
+          ],
+          "statementAnswers": [
+            "Yes",
+            "No",
+            "Yes"
+          ],
+          "explanation": "An index on (CustomerId, OrderDate DESC) supports both the equality seek and ordering. Included columns are NOT part of the navigational structure — adding CustomerId as INCLUDE doesn't help with seek/sort. The plan shape (seek + lookup + sort) indicates an index/plan problem, not locking.",
+          "topic": "2.2 Optimize Database Performance",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q079",
+          "type": "mc",
+          "originalId": "text-Q33",
+          "question": "You have an Azure SQL database with a column named Notes containing sensitive data.\n\nYou need to ensure that neither the stored values nor the query inputs reveal information about the actual data. The solution must prevent a user from inferring relationships or repetitions in the data based on the encrypted output.\n\nWhich should you use?",
+          "options": [
+            "A. Always Encrypted with secure enclaves",
+            "B. Always Encrypted with randomized encryption",
+            "C. Row-level security (RLS)",
+            "D. Always Encrypted with deterministic encryption"
+          ],
+          "correctAnswer": "B",
+          "explanation": "Randomized encryption produces different ciphertext each time for the same plaintext, preventing pattern analysis. Deterministic encryption always produces the same ciphertext, which leaks repetition patterns. RLS controls row access, not value confidentiality.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q080",
+          "type": "yesno",
+          "originalId": "text-Q34",
+          "question": "You review a GitHub Actions workflow for an SDK-style SQL database project. It triggers on push and pull_request to main. The build step runs 'dotnet build db1.sqlproj --configuration Release'. The deploy step uses SqlPackage /Action:Publish. A unit-tests job has condition: if: github.ref == 'refs/heads/main'.\n\nFor each statement, select Yes if true:",
+          "statements": [
+            "Unit tests run automatically whenever changes are pushed to main.",
+            "Schema validation occurs during the Build step.",
+            "Schema validation occurs during the Deploy step."
+          ],
+          "statementAnswers": [
+            "Yes",
+            "Yes",
+            "No"
+          ],
+          "explanation": "The push trigger + github.ref condition means unit tests run on push to main. dotnet build validates the SQL project schema and produces the dacpac. SqlPackage Publish applies the artifact — it's deployment, not the primary validation stage.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q081",
+          "type": "dropdown",
+          "originalId": "text-Q35",
+          "question": "You use a feature branch workflow. You need to update the local feature branch with the latest changes from main, then create a pull request.\n\nComplete the GitHub CLI script:\n\ngit checkout feature/db1-add-staticdata\n[Step 1]\n[Step 2]\n[Step 3] --title 'Feature Update' --head feature/db1-add-staticdata --base main",
+          "dropdowns": [
+            {
+              "label": "Step 1:",
+              "options": [
+                "gh pr create",
+                "gh pr merge",
+                "gh pr ready",
+                "git checkout main",
+                "git fetch origin",
+                "git merge origin/main",
+                "git pull origin main"
+              ],
+              "correctIndex": 4,
+              "correctAnswer": "git fetch origin"
+            },
+            {
+              "label": "Step 2:",
+              "options": [
+                "gh pr create",
+                "gh pr merge",
+                "gh pr ready",
+                "git checkout main",
+                "git fetch origin",
+                "git merge origin/main",
+                "git pull origin main"
+              ],
+              "correctIndex": 5,
+              "correctAnswer": "git merge origin/main"
+            },
+            {
+              "label": "Step 3:",
+              "options": [
+                "gh pr create",
+                "gh pr merge",
+                "gh pr ready",
+                "git checkout main",
+                "git fetch origin",
+                "git merge origin/main",
+                "git pull origin main"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "gh pr create"
+            }
+          ],
+          "explanation": "First fetch latest remote refs, then merge origin/main into the feature branch, then gh pr create to open the pull request. gh pr merge merges an existing PR. gh pr ready marks a draft PR ready.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q082",
+          "type": "dropdown",
+          "originalId": "text-Q38",
+          "question": "You have an Azure App Service (sales-api) that reads from an Azure SQL database (SalesDB). You need to:\n- Ensure sales-api connects with passwordless authentication\n- Ensure all database traffic remains within the subscription\n- Minimize administrative effort\n\nWhat should you configure?",
+          "dropdowns": [
+            {
+              "label": "Authentication for sales-api:",
+              "options": [
+                "Configure client certificate authentication",
+                "Use a connection string with rotated SQL credentials weekly",
+                "Enable a managed identity and use Microsoft Entra authentication",
+                "Create a SQL login and store credentials in Azure Key Vault"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "Enable a managed identity and use Microsoft Entra authentication"
+            },
+            {
+              "label": "Network access for SalesDB:",
+              "options": [
+                "Allow Azure services and keep the public endpoint enabled",
+                "Create a private endpoint and disable public network access",
+                "Add IP firewall rules for the App Service outbound IP addresses",
+                "Configure a database-level firewall rule for support IP addresses"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "Create a private endpoint and disable public network access"
+            }
+          ],
+          "explanation": "Managed identity provides passwordless auth with no secrets to manage. Private endpoint + disabling public access keeps all traffic within Azure private networking. Other options still use passwords or expose the public endpoint.",
+          "topic": "2.1 Implement Data Security and Compliance",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q083",
+          "type": "mc",
+          "originalId": "text-Q40",
+          "question": "You have an SDK-style SQL database project targeting Azure SQL Database. The CI build fails with unresolved reference errors for system objects.\n\nSolution: Add an artifact reference to the Azure SQL Database master.dacpac file.\n\nDoes this meet the goal?",
+          "options": [
+            "A. Yes",
+            "B. No"
+          ],
+          "correctAnswer": "B",
+          "explanation": "For SDK-style SQL database projects, Microsoft recommends NuGet package references (not direct artifact references to master.dacpac) for system database references. Artifact references are not recommended for new SDK-style development.",
+          "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+          "difficulty": "easy",
+          "source": "company-provided"
+        }
+      ]
+    },
+    {
+      "domainId": "3",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "questions": [
+        {
+          "id": "q047",
+          "originalId": "Q19",
+          "type": "dropdown",
+          "question": "You plan to implement an incremental embedding maintenance method using change data capture (CDC) on dbs.Articles.\n\nYou need to ensure that only the columns required to generate the embeddings are captured. The solution must support querying net changes.\n\nHow should you complete the Transact-SQL script?",
+          "explanation": "Capture ArticleId, Title, Body (columns needed for embedding generation). supports_net_changes = 1 to enable net change queries. Enable CDC at database level first.",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Captured columns:",
+              "options": [
+                "N'ArticleId, Title, Body'",
+                "N'Title, Body, LastModifiedUtc, EmbeddingVector'"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "N'ArticleId, Title, Body'"
+            },
+            {
+              "label": "supports_net_changes:",
+              "options": [
+                "0",
+                "1"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "1"
+            },
+            {
+              "label": "First step (enable CDC):",
+              "options": [
+                "EXEC sys.sp_cdc_disable_db;",
+                "EXEC sys.sp_cdc_enable_db;"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "EXEC sys.sp_cdc_enable_db;"
+            }
+          ]
+        },
+        {
+          "id": "q048",
+          "originalId": "Q23",
+          "type": "multi",
+          "question": "You have a SQL Server 2025 instance with no outbound connectivity. SalesDB supports a RAG pattern.\n\nYou need to generate embeddings inside SQL Server and ensure only AIApplicationUser can run embedding generation.\n\nWhich TWO actions should you perform? (Select 2)",
+          "explanation": "With no outbound connectivity, use ONNX runtime with local paths (D). Grant EXECUTE on the model project to restrict access to AIApplicationUser (C).",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Create an external model project that points to a Microsoft Foundry REST endpoint.",
+            "B. Create a database audit specification on SalesDB owned by AIApplicationUser.",
+            "C. Grant the EXECUTE permission on the external model project to AIApplicationUser.",
+            "D. Create an external model project by using ONNX runtime and local paths.",
+            "E. Grant the CONTROL permission on SalesDB to AIApplicationUser."
+          ],
+          "correctAnswers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "q049",
+          "originalId": "Q25",
+          "type": "mc",
+          "question": "You plan to change the embedding model from text-embedding-ada-002 to text-embedding-3-small. Existing rows already contain embeddings.\n\nYou need to implement the model change. Applications must be able to use VECTOR_SEARCH without runtime errors.\n\nWhat should you do first?",
+          "explanation": "When switching embedding models, you must regenerate existing embeddings first so all vectors are in the same space, preventing runtime errors.",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Normalize the vector lengths before storing new embeddings.",
+            "B. Convert the Embedding column to nvarchar(max).",
+            "C. Regenerate embeddings for the existing rows.",
+            "D. Create a vector index on dbo.Products.Embedding."
+          ],
+          "correctAnswer": "C"
+        },
+        {
+          "id": "q050",
+          "originalId": "Q27",
+          "type": "multi",
+          "question": "Embeddings are generated by text-embedding-ada-002. The AI architect recommends switching to text-embedding-3-small. The security team requires Entra managed identities only (no API keys).\n\nWhich TWO actions should you include? (Select 2)",
+          "explanation": "Change the endpoint (new model requires different deployment endpoint) and regenerate all embeddings (new model produces different vectors).",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Add a firewall rule.",
+            "B. Change the endpoint.",
+            "C. Regenerate all the embeddings.",
+            "D. Change the primary keys for the tickets.",
+            "E. Alter the database tables."
+          ],
+          "correctAnswers": [
+            "B",
+            "C"
+          ]
+        },
+        {
+          "id": "q051",
+          "originalId": "Q28",
+          "type": "mc",
+          "question": "The embedding pipeline runs once per night, but documentation is edited throughout the day.\n\nYou need to ensure that embeddings are updated every time the underlying content changes, without a nightly batch process.\n\nWhat should you include in the solution?",
+          "explanation": "Table triggers fire immediately on data changes, allowing real-time embedding updates without a batch process.",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. change tracking on dbo.ProductDocs",
+            "B. a smaller embedding model",
+            "C. table triggers",
+            "D. fixed-size chunking"
+          ],
+          "correctAnswer": "C"
+        },
+        {
+          "id": "q052",
+          "originalId": "Q60",
+          "type": "mc",
+          "question": "[Case Study - Fabrikam - Q8 of 9]\n\nWhen users consume data through the RAG pattern on ProcedureDocuments, they experience data retrieval delays.\n\nYou need to improve data retrieval performance and reduce the number of tokens per retrieval.\n\nWhat should you implement?",
+          "explanation": "Chunking breaks large documents into smaller pieces, reducing tokens per retrieval and improving RAG performance.",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "casestudy",
+          "options": [
+            "A. a small language model (SLM)",
+            "B. JSON content",
+            "C. embeddings",
+            "D. chunking"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q053",
+          "originalId": "Q15",
+          "type": "dropdown",
+          "question": "You have an Azure AI Search service and an index named hotels that includes a vector field named DescriptionVector.\n\nYou need to implement a hybrid search query that uses DescriptionVector and includes captions.\n\nHow should you complete the REST request body?",
+          "explanation": "Semantic queryType enables semantic ranking. The semanticConfiguration references the index name ('hotels'). Captions of type 'extractive' provide extracted highlights.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "queryType:",
+              "options": [
+                "default",
+                "full",
+                "hybrid",
+                "none",
+                "semantic",
+                "simple"
+              ],
+              "correctIndex": 4,
+              "correctAnswer": "semantic"
+            },
+            {
+              "label": "semanticConfiguration:",
+              "options": [
+                "default",
+                "extractive",
+                "full",
+                "hotels",
+                "none",
+                "semantic"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "hotels"
+            },
+            {
+              "label": "captions:",
+              "options": [
+                "default",
+                "extractive",
+                "full",
+                "generative",
+                "none",
+                "semantic"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "extractive"
+            }
+          ]
+        },
+        {
+          "id": "q054",
+          "originalId": "Q16",
+          "type": "dropdown",
+          "question": "You need to create a stored procedure that performs hybrid search on dbo.Products.\n\nRequirements:\n- Use approximate nearest neighbor (ANN) to retrieve the top 20 candidate products.\n- Re-rank only the candidates that also match a full-text query.\n- Generate the query embedding.\n\nComplete the stored procedure with appropriate functions.",
+          "explanation": "AI_GENERATE_EMBEDDINGS creates the query vector. VECTOR_SEARCH performs ANN retrieval. CONTAINSTABLE does full-text filtering for re-ranking.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Generate the query embedding:",
+              "options": [
+                "AI_GENERATE_EMBEDDINGS",
+                "SEMANTICKEYPHRASETABLE",
+                "VECTOR_NORMALIZE",
+                "VECTOR_SEARCH"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "AI_GENERATE_EMBEDDINGS"
+            },
+            {
+              "label": "ANN retrieval (top 20 candidates):",
+              "options": [
+                "CONTAINSTABLE",
+                "SEMANTICSIMILARITYTABLE",
+                "VECTOR_DISTANCE",
+                "VECTOR_SEARCH"
+              ],
+              "correctIndex": 3,
+              "correctAnswer": "VECTOR_SEARCH"
+            },
+            {
+              "label": "Full-text re-ranking:",
+              "options": [
+                "CONTAINSTABLE",
+                "FREETEXTTABLE",
+                "SEMANTICKEYPHRASETABLE",
+                "SEMANTICSIMILARITYDETAILSTABLE"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "CONTAINSTABLE"
+            }
+          ]
+        },
+        {
+          "id": "q055",
+          "originalId": "Q26",
+          "type": "mc",
+          "question": "Users report slow semantic search during peak usage. VECTOR_DISTANCE('cosine', @query_vector, embedding) is used. CPU spikes during peak times.\n\nYou need to reduce latency and CPU utilization.\n\nWhat should you do?",
+          "explanation": "A vector index with VECTOR_SEARCH using ANN dramatically improves performance compared to brute-force VECTOR_DISTANCE scans.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. Change embedding to VARBINARY(8000).",
+            "B. Use CONTAINSTABLE against description only and remove the vector search.",
+            "C. Create a vector index on products.embedding and change the query to use VECTOR_NORMALIZE and NORM_TYPE = 'norm1'.",
+            "D. Create a vector index on products.embedding and change the query to use VECTOR_SEARCH and METRIC = 'cosine'.",
+            "E. Add a nonclustered index on products.embedding."
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q056",
+          "originalId": "Q29",
+          "type": "dropdown",
+          "question": "You add semantic ranking to a hybrid search query on the hotels index. Some queries return fewer results than expected, and captions and answers are missing.\n\nYou need to complete the hybrid search request to include more documents when ranking and always include captions and answers.",
+          "explanation": "k=50 retrieves more documents. queryType=semantic enables semantic ranking. extractive captions and answers always provide the desired output.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "medium",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "k (vector queries):",
+              "options": [
+                "-50",
+                "10",
+                "50"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "50"
+            },
+            {
+              "label": "queryType:",
+              "options": [
+                "full",
+                "semantic",
+                "simple"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "semantic"
+            },
+            {
+              "label": "captions:",
+              "options": [
+                "extractive",
+                "generative",
+                "none"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "extractive"
+            },
+            {
+              "label": "answers:",
+              "options": [
+                "extractive",
+                "generative",
+                "none"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "extractive"
+            }
+          ]
+        },
+        {
+          "id": "q057",
+          "originalId": "Q17",
+          "type": "dropdown",
+          "question": "You have an Azure SQL managed instance. You plan to implement a Retrieval Augmented Generation (RAG) pattern for a support assistant that answers questions by using data in a table named dbo.KnowledgeBase.\n\nYou need to write a query that:\n- Generates a JSON payload that includes the user question and the retrieved SQL rows\n- Sends the payload to the Azure OpenAI REST endpoint for chat completions\n- Extracts the assistant's generated answer text from the JSON response\n\nDrag the appropriate values to the correct targets.",
+          "explanation": "JSON_OBJECT builds the payload. sp_invoke_external_rest_endpoint calls the REST API. JSON_VALUE extracts the response content from the nested JSON path.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "hard",
+          "source": "company-provided",
+          "section": "standalone",
+          "dropdowns": [
+            {
+              "label": "Build the context JSON from SQL rows:",
+              "options": [
+                "JSON_OBJECT('question': @question, 'context': JSON_QUERY(@contextJson))",
+                "JSON_QUERY(@contextJson)",
+                "JSON_VALUE(@response, '$.choices[0].text')",
+                "JSON_VALUE(@response, '$.result.choices[0].message.content')"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "JSON_OBJECT('question': @question, 'context': JSON_QUERY(@contextJson))"
+            },
+            {
+              "label": "Call the Azure OpenAI endpoint:",
+              "options": [
+                "sp_executesql",
+                "sp_invoke_external_rest_endpoint",
+                "sp_OACreate",
+                "xp_cmdshell"
+              ],
+              "correctIndex": 1,
+              "correctAnswer": "sp_invoke_external_rest_endpoint"
+            },
+            {
+              "label": "Extract the response text:",
+              "options": [
+                "JSON_QUERY(@response, '$.choices')",
+                "JSON_VALUE(@response, '$.choices[0].text')",
+                "JSON_VALUE(@response, '$.result.choices[0].message.content')",
+                "OPENJSON(@response)"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "JSON_VALUE(@response, '$.result.choices[0].message.content')"
+            }
+          ]
+        },
+        {
+          "id": "q058",
+          "originalId": "Q20",
+          "type": "mc",
+          "question": "You plan to implement a RAG pattern that:\n- Formats retrieved relational data for LLM processing\n- Sends the user question and retrieved context to Azure OpenAI for chat completions\n- Extracts the response text from the LLM response\n\nWhich Transact-SQL function should you use to extract the response text?",
+          "explanation": "JSON_VALUE extracts a scalar string value from the JSON path pointing to the chat completion content.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. OPENJSON(@response)",
+            "B. JSON_MODIFY(@response, '$.result')",
+            "C. JSON_QUERY(@response, '$.choices')",
+            "D. JSON_VALUE(@response, '$.choices[0].message.content')"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q059",
+          "originalId": "Q21",
+          "type": "mc",
+          "question": "You write a stored procedure that retrieves chunks and builds a JSON payload for chat completions.\n\nWhat should you insert at line 22?",
+          "explanation": "FOR JSON PATH, WITHOUT_ARRAY_WRAPPER produces a single JSON object (not an array) suitable for the payload.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. FOR JSON AUTO, INCLUDE_NULL_VALUES",
+            "B. FOR XML PATH, INCLUDE_NULL_VALUES",
+            "C. FOR JSON PATH, WITHOUT_ARRAY_WRAPPER",
+            "D. FOR XML AUTO, TYPE, XMLSCHEMA"
+          ],
+          "correctAnswer": "C"
+        },
+        {
+          "id": "q060",
+          "originalId": "Q24",
+          "type": "mc",
+          "question": "You need to design a generative AI solution using a SQL Server 2025 database as a data source. The solution must:\n- Be grounded in the latest transactional/reference data\n- NOT require retraining when data changes\n- Include citations to source data\n\nWhich scenario is the BEST use case for a RAG pattern?",
+          "explanation": "RAG is best for answering questions grounded in company-specific knowledge, pulling latest data without retraining, and providing source citations.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "standalone",
+          "options": [
+            "A. answering user questions based on company-specific knowledge",
+            "B. generating marketing slogans based on user sentiment analysis",
+            "C. training a custom language model on historical database data",
+            "D. summarizing free-form user input text"
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q061",
+          "originalId": "Q57",
+          "type": "mc",
+          "question": "[Case Study - Fabrikam - Q5 of 9]\n\nYou need to use the UsefulPrompts table with prompts that doctors can use to help diagnose patient illness by connecting to an Azure OpenAI endpoint.\n\nWhich stored procedure should you use?",
+          "explanation": "sp_invoke_external_rest_endpoint is the native way to call external REST APIs (like Azure OpenAI) from Azure SQL.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "easy",
+          "source": "company-provided",
+          "section": "casestudy",
+          "options": [
+            "A. sp_addendpoint",
+            "B. sp_OACreate",
+            "C. xp_cmdshell",
+            "D. sp_invoke_external_rest_endpoint"
+          ],
+          "correctAnswer": "D"
+        },
+        {
+          "id": "q084",
+          "type": "mc",
+          "originalId": "text-Q2",
+          "question": "Analysts report difficulty finding similar vehicle incidents based on details such as weather, traffic conditions, and location. You need to generate embeddings to resolve the issue.\n\nWhich column should you use?\n\nColumns available: vehicleLocation, incidentDescription, incidentType, SeverityScore",
+          "options": [
+            "A. vehicleLocation",
+            "B. incidentDescription",
+            "C. incidentType",
+            "D. SeverityScore"
+          ],
+          "correctAnswer": "B",
+          "explanation": "Embeddings represent semantic meaning of rich textual content. incidentDescription is the free-text narrative field that captures weather, traffic, and location context. vehicleLocation is too narrow (geospatial). incidentType is categorical. SeverityScore is numeric — none are suitable primary sources for semantic embeddings.",
+          "topic": "3.1 Design and Implement Models and Embeddings",
+          "difficulty": "easy",
+          "source": "company-provided"
+        },
+        {
+          "id": "q085",
+          "type": "dropdown",
+          "originalId": "text-Q3",
+          "question": "You need to implement a hybrid search query on a stores table (with description and embedding columns) that:\n- Uses full-text search on description for keyword matching\n- Returns top 20 results with a weighted formula: 60% vector distance + 40% full-text rank\n\nHow should you configure the query components?",
+          "dropdowns": [
+            {
+              "label": "Semantic query operator/function:",
+              "options": [
+                "VECTOR_DISTANCE and order by distance ascending",
+                "VECTOR_SEARCH with METRIC cosine and TOP_N",
+                "VECTORPROPERTY to calculate similarity"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "VECTOR_DISTANCE and order by distance ascending"
+            },
+            {
+              "label": "Keyword retrieval operator/function:",
+              "options": [
+                "CONTAINSTABLE on description and return ranked matches",
+                "FREETEXTTABLE on description for keyword scoring",
+                "JSON_VALUE extraction from description"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "CONTAINSTABLE on description and return ranked matches"
+            },
+            {
+              "label": "Final ranking expression:",
+              "options": [
+                "order by (distance*0.6) + ((1.0 - RANK/1000.0)*0.4)",
+                "order by (distance*0.6) + (RANK*0.4)",
+                "order by (distance + RANK), and then apply TOP 20"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "order by (distance*0.6) + ((1.0 - RANK/1000.0)*0.4)"
+            }
+          ],
+          "explanation": "VECTOR_DISTANCE returns exact distance (lower=more similar). CONTAINSTABLE returns RANK 0-1000 (higher=more relevant). The formula normalizes RANK to 0-1 and inverts it so both components are lower-is-better for consistent ascending ordering.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "hard",
+          "source": "company-provided"
+        },
+        {
+          "id": "q086",
+          "type": "mc",
+          "originalId": "text-Q13",
+          "question": "You need to enable similarity search to retrieve the most relevant health summary reports from an Embeddings (vector(1536)) column. The solution must minimize latency.\n\nWhat should you include?",
+          "options": [
+            "A. A computed column that manually compares vector values",
+            "B. A standard nonclustered index on the Embeddings column",
+            "C. A full-text index on the Embeddings column",
+            "D. A vector index on the Embeddings column"
+          ],
+          "correctAnswer": "D",
+          "explanation": "CREATE VECTOR INDEX creates an ANN index specifically for vector similarity search, dramatically reducing latency compared to exact k-NN scans. Standard nonclustered and full-text indexes are not designed for vector similarity operations.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "easy",
+          "source": "company-provided"
+        },
+        {
+          "id": "q087",
+          "type": "dropdown",
+          "originalId": "text-Q30",
+          "question": "You have NotesEmbeddings and DescriptionEmbeddings tables (both vector(1536)) generated with different chunk sizes. You need to perform approximate nearest neighbor (ANN) queries across both. The solution must minimize the impact of different chunk sizes.\n\nWhat should you use?",
+          "dropdowns": [
+            {
+              "label": "Function:",
+              "options": [
+                "VECTOR_DISTANCE",
+                "VECTOR_NORM",
+                "VECTOR_SEARCH"
+              ],
+              "correctIndex": 2,
+              "correctAnswer": "VECTOR_SEARCH"
+            },
+            {
+              "label": "Distance metric:",
+              "options": [
+                "cosine distance",
+                "dot product",
+                "Euclidean distance"
+              ],
+              "correctIndex": 0,
+              "correctAnswer": "cosine distance"
+            }
+          ],
+          "explanation": "VECTOR_SEARCH performs ANN retrieval using a vector index. Cosine distance compares direction/angle rather than magnitude, making it less sensitive to chunk size differences. It's the standard metric for text embeddings per Microsoft and Azure OpenAI guidance.",
+          "topic": "3.2 Design and Implement Intelligent Search",
+          "difficulty": "medium",
+          "source": "company-provided"
+        },
+        {
+          "id": "q088",
+          "type": "mc",
+          "originalId": "text-Q32",
+          "question": "You have an Azure SQL table with FAQ data (FaqId, ProductName, Question, Answer). You need to retrieve data as context for a large language model (LLM). The solution must minimize token usage.\n\nWhich format should you use?",
+          "options": [
+            "A. JSON with ProductName, Question, and Answer fields only (no FaqId).",
+            "B. JSON with Answer field only, renamed as 'Prompt'.",
+            "C. JSON with FaqId, Question, and Answer (no ProductName).",
+            "D. JSON with all four fields: FaqId, ProductName, Question, Answer."
+          ],
+          "correctAnswer": "A",
+          "explanation": "Include semantically meaningful fields (ProductName, Question, Answer) and exclude the technical identifier (FaqId) which adds no value for the LLM. This minimizes tokens while preserving the context needed for accurate grounding.",
+          "topic": "3.3 Design and Implement Retrieval-Augmented Generation (RAG)",
+          "difficulty": "easy",
+          "source": "company-provided"
+        }
+      ]
+    }
+  ]
+}

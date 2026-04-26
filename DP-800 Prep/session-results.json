@@ -1,0 +1,188 @@
+{
+  "timestamp": "2026-04-26T18:24:11.935530",
+  "examCode": "DP-800",
+  "examName": "Developing AI-Enabled Database Solutions",
+  "summary": {
+    "totalQuestions": 11,
+    "correct": 11,
+    "wrong": 0,
+    "skipped": 0,
+    "accuracy": 100.0,
+    "timeSeconds": 78.7
+  },
+  "domainBreakdown": {
+    "Design and Develop Database Solutions": {
+      "total": 11,
+      "correct": 11,
+      "wrong": 0,
+      "skipped": 0
+    }
+  },
+  "topicBreakdown": {
+    "1.1 Design and Implement Database Objects": {
+      "total": 3,
+      "correct": 3,
+      "wrong": 0,
+      "skipped": 0
+    },
+    "1.2 Implement Programmability Objects": {
+      "total": 5,
+      "correct": 5,
+      "wrong": 0,
+      "skipped": 0
+    },
+    "1.3 Write Advanced T-SQL Code": {
+      "total": 3,
+      "correct": 3,
+      "wrong": 0,
+      "skipped": 0
+    }
+  },
+  "wrongQuestions": [],
+  "skippedQuestions": [],
+  "allResults": [
+    {
+      "questionId": "q009",
+      "question": "(Same scenario as Q47)\n\nSolution: Identify the partition number for the oldest month, and then run:\nTRUNCATE TABLE dbo.Orders WITH (PARTITIONS (partition number));\n\nDoes this meet the goal?",
+      "userAnswer": "A",
+      "correctAnswer": "A",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.1 Design and Implement Database Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "easy",
+      "explanation": "TRUNCATE TABLE WITH (PARTITIONS (...)) removes only the specified partition's data—fast, minimally logged, and minimal impact on other queries."
+    },
+    {
+      "questionId": "q010",
+      "question": "You need to create an object that returns products priced above a caller-provided threshold.\n\nRequirements:\n- Support being used in a join\n- Accept one input parameter\n- Return a table result",
+      "userAnswer": "Programmability object: An inline table-valued function (TVF) for reusable rowsets | Parameter and return: @listprice decimal(18,2) and return rows as a table | Object body pattern: RETURNS TABLE AS RETURN followed by a SELECT statement",
+      "correctAnswer": "Programmability object: An inline table-valued function (TVF) for reusable rowsets | Parameter and return: @listprice decimal(18,2) and return rows as a table | Object body pattern: RETURNS TABLE AS RETURN followed by a SELECT statement",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.2 Implement Programmability Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "medium",
+      "explanation": "An inline TVF with RETURNS TABLE AS RETURN (SELECT ...) accepts parameters, returns a table, and supports joins."
+    },
+    {
+      "questionId": "q011",
+      "question": "You need to create a scalar UDF that returns the number of days between @OrderDate and the current date.\n\nComplete the code.",
+      "userAnswer": "Return type: RETURNS INT | Calculation: DATEDIFF(day, @OrderDate, GETDATE())",
+      "correctAnswer": "Return type: RETURNS INT | Calculation: DATEDIFF(day, @OrderDate, GETDATE())",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.2 Implement Programmability Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "easy",
+      "explanation": "RETURNS INT for a scalar UDF. DATEDIFF(day, @OrderDate, GETDATE()) calculates the number of days between the two dates."
+    },
+    {
+      "questionId": "q012",
+      "question": "[Case Study - Fabrikam - Q9 of 9]\n\nYou need to create a solution that retrieves patient transaction data with a running total. The solution must allow database developers to join the resulting data to other tables.\n\nComplete the code.",
+      "userAnswer": "Object type: FUNCTION | SUM(t.Amount) OVER (...): PARTITION BY t.CustomerId | ORDER BY clause in OVER: ORDER BY t.TransactionDate, t.TransactionId",
+      "correctAnswer": "Object type: FUNCTION | SUM(t.Amount) OVER (...): PARTITION BY t.CustomerId | ORDER BY clause in OVER: ORDER BY t.TransactionDate, t.TransactionId",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.2 Implement Programmability Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "hard",
+      "explanation": "A FUNCTION (inline TVF) allows joining. PARTITION BY t.CustomerId creates a running total per customer. ORDER BY t.TransactionDate, t.TransactionId defines the running order."
+    },
+    {
+      "questionId": "q013",
+      "question": "You need to return one JSON document per order that includes the order header fields and an array of related order lines for an LLM.\n\nWhich Transact-SQL commands should you use?",
+      "userAnswer": "Serialize the order-level JSON: FOR JSON PATH | Generate a nested lines array: JSON_QUERY | Extract a single scalar value: JSON_VALUE",
+      "correctAnswer": "Serialize the order-level JSON: FOR JSON PATH | Generate a nested lines array: JSON_QUERY | Extract a single scalar value: JSON_VALUE",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.3 Write Advanced T-SQL Code",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "medium",
+      "explanation": "FOR JSON PATH serializes SQL rows to JSON. JSON_QUERY retrieves the nested JSON array (lines). JSON_VALUE extracts a scalar value."
+    },
+    {
+      "questionId": "q014",
+      "question": "You need to generate a report for the last seven days from dbo.SupportTickets (with JSON column Payload and datetime column CreatedAt).\n\nRequirements:\n- Returns exactly one row per customer per day\n- For each customer and day, returns the earliest ticket\n- Includes the customer ID stored in Payload",
+      "userAnswer": "Extract customer ID: JSON_VALUE | Windowing function: ROW_NUMBER | Filter value: 1",
+      "correctAnswer": "Extract customer ID: JSON_VALUE | Windowing function: ROW_NUMBER | Filter value: 1",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.3 Write Advanced T-SQL Code",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "medium",
+      "explanation": "JSON_VALUE extracts the customer ID. ROW_NUMBER with PARTITION BY customer/day ORDER BY time gives rn=1 for the earliest ticket."
+    },
+    {
+      "questionId": "q062",
+      "question": "You have an Azure SQL database that stores order data. A reporting query aggregates monthly revenue per customer and runs frequently.\n\nYou need to reduce how long it takes to retrieve the calculated values. The solution must NOT alter any underlying table structure.\n\nWhat should you do?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.2 Implement Programmability Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "medium",
+      "explanation": "An indexed view requires WITH SCHEMABINDING, and if it uses GROUP BY, it must also include COUNT_BIG(*). The first index must be a unique clustered index. ORDER BY is not allowed in indexed views. A grouped indexed view without COUNT_BIG(*) is invalid."
+    },
+    {
+      "questionId": "q063",
+      "question": "You have a SQL database in Microsoft Fabric that contains a table named WebSite.Logs. WebSite.Logs stores application telemetry data with an nvarchar(max) column named log that stores JSON documents. You have a daily report that filters by the $.severity JSON property and returns LogId, LogDateTime, and log.\n\nThe report frequently causes full table scans.\n\nYou need to modify WebSite.Logs to support efficient filtering by $.severity and avoid key lookups for the columns returned by the report.\n\nHow should you complete the Transact-SQL code?",
+      "userAnswer": "Computed column definition: AS JSON_VALUE([log], '$.severity') PERSISTED | Index INCLUDE clause: INCLUDE (LogId, LogDateTime, [log])",
+      "correctAnswer": "Computed column definition: AS JSON_VALUE([log], '$.severity') PERSISTED | Index INCLUDE clause: INCLUDE (LogId, LogDateTime, [log])",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.1 Design and Implement Database Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "hard",
+      "explanation": "JSON_VALUE extracts a scalar value (not JSON_QUERY which is for objects/arrays). PERSISTED stores the computed value. The INCLUDE clause must cover all columns the report returns (LogId, LogDateTime, log) to avoid key lookups."
+    },
+    {
+      "questionId": "q064",
+      "question": "You have a SQL database in Microsoft Fabric that contains a table named dbo.Orders. dbo.Orders has a clustered index, contains three years of data, and is partitioned by a column named OrderDate by month.\n\nYou need to remove all the rows for the oldest month. The solution must minimize the impact on other queries.\n\nSolution: Identify the partition scheme for the oldest month, and then run:\nALTER TABLE dbo.Orders DROP PARTITION SCHEME (partition_scheme_name);\n\nDoes this meet the goal?",
+      "userAnswer": "B",
+      "correctAnswer": "B",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.1 Design and Implement Database Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "easy",
+      "explanation": "DROP PARTITION SCHEME removes the partition scheme object itself, not the data. For removing only the oldest month's rows with minimal impact, use partition-level TRUNCATE TABLE ... WITH (PARTITIONS (...))."
+    },
+    {
+      "questionId": "q066",
+      "question": "You have an Azure SQL database that contains SQL graph tables: a NODE table named dbo.Person and an EDGE table named dbo.Knows. Each Person row has PersonId (int) and DisplayName (nvarchar(100)).\n\nYou need to use a MATCH operator and exactly two directed Knows relationships to return the PersonId and DisplayName of people reachable from @StartPersonId.\n\nWhich Transact-SQL query should you use?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.3 Write Advanced T-SQL Code",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "hard",
+      "explanation": "MATCH(p1-(k1)->p2-(k2)->p3) chains two directed hops in a single MATCH pattern. It anchors with p1.PersonId = @StartPersonId and traverses p1->p2->p3. Option C uses separate MATCH predicates instead of a single chained pattern."
+    },
+    {
+      "questionId": "q067",
+      "question": "You have an Azure SQL database that contains database-level DDL triggers, including a trigger named ddl_Audit.\n\nYou need to prevent ddl_Audit from firing during the next deployment. The trigger object must remain in place.\n\nWhich Transact-SQL statement should you use?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "1.2 Implement Programmability Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "easy",
+      "explanation": "DISABLE TRIGGER temporarily prevents a trigger from firing without dropping it. For a database-scoped DDL trigger: DISABLE TRIGGER ddl_Audit ON DATABASE. ALTER TRIGGER changes the definition, not disables it."
+    }
+  ]
+}
