@@ -1,9 +1,9 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 2 / 8
-- **Questions Answered:** 19 / 88
-- **Accuracy:** 100% (19/19)
+- **Sessions Completed:** 3 / 8
+- **Questions Answered:** 28 / 88
+- **Accuracy:** 100% (28/28)
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -23,11 +23,19 @@
 - **Time:** ~1.3 min
 - **Weak areas:** None
 
+### Day 2, Session 1 — Sun Apr 27 (Data Security & Compliance)
+- **Topics:** 2.1 Data Security & Compliance (Always Encrypted, DDM, RLS, Object Permissions, Managed Identity, Auditing)
+- **Questions:** 9 answered, 0 skipped
+- **Result:** 9/9 correct (100%)
+- **Time:** ~8 min
+- **Key questions nailed:** q028 (Ledger + AE ordering), q077 (DDM + RLS interaction), q029 (user-assigned MI for migration)
+- **Weak areas:** None
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
 | 1. Design & Develop | 19 | 19 | 100% |
-| 2. Secure, Optimize, Deploy | 0 | 0 | — |
+| 2. Secure, Optimize, Deploy | 9 | 9 | 100% |
 | 3. AI Capabilities | 0 | 0 | — |
 
 ## Weak Topics (to revisit)

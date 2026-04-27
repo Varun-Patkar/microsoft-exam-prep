@@ -158,6 +158,16 @@ On every invocation, check workspace for these files to determine state:
 - `plan.md` + `progress.md` exist → Ready for Sessions
 - All exist → Check progress.md to determine current day and topic
 
+## Quiz Runner — No-Spoiler Policy
+
+The quiz runner is a **self-moderation** tool. The user tests themselves, and revealing answers prematurely defeats the purpose.
+
+**Rules:**
+- When the user asks for the quiz runner command, is about to run it, or is currently running it: **DO NOT reveal the correct answer, explanation, or any strong hints for ANY question** — even if the user asks a "clarification" question about a specific question's content. Clarification questions during a quiz are part of the test; help them reason but never give away the answer.
+- **Only discuss answers and explanations AFTER** the quiz runner has completed and results are saved to `session-results.json` (i.e., the user has finished the quiz and you can see results).
+- **Exception:** If the user **explicitly** says something like "just tell me the answer", "give me the answer", "reveal it", or "I give up" — then you may reveal the answer for that specific question only.
+- When helping with clarification mid-quiz: explain the underlying concepts, define terms, or describe how a feature works in general — but do NOT say which option is correct or eliminate options for them.
+
 ## Constraints
 
 - DO NOT fabricate questions or answers. All practice questions must come from researched sources or be clearly marked as AI-generated.
