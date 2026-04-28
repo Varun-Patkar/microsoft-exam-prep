@@ -1,9 +1,9 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 3 / 8
-- **Questions Answered:** 28 / 88
-- **Accuracy:** 100% (28/28)
+- **Sessions Completed:** 4 / 8
+- **Questions Answered:** 36 / 88
+- **Accuracy:** 94.4% (34/36)
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -31,12 +31,22 @@
 - **Key questions nailed:** q028 (Ledger + AE ordering), q077 (DDM + RLS interaction), q029 (user-assigned MI for migration)
 - **Weak areas:** None
 
+### Day 3, Session 1 — Tue Apr 28 (Performance Optimization)
+- **Topics:** 2.2 Optimize Database Performance (isolation levels, execution plans, DMVs, Query Store, blocking & deadlocks)
+- **Questions:** 8 answered, 0 skipped
+- **Result:** 6/8 correct (75%)
+- **Time:** ~10 min
+- **Wrong:** q030 (Query Store CPU query — picked `sys.dm_exec_query_stats` instead of `sys.query_store_runtime_stats_interval`), q034 (isolation level — picked REPEATABLE READ instead of SERIALIZABLE)
+- **Key lesson:** "Query Store data" → all joins use `sys.query_store_*` views, not `sys.dm_exec_*` DMVs. SERIALIZABLE = prevents both modifications AND inserts (phantom protection).
+- **Weak areas:** Query Store catalog views, SERIALIZABLE vs REPEATABLE READ distinction
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
-| 1. Design & Develop | 19 | 19 | 100% |
-| 2. Secure, Optimize, Deploy | 9 | 9 | 100% |
+| 1. Design & Develop | 20 | 20 | 100% |
+| 2. Secure, Optimize, Deploy | 16 | 14 | 87.5% |
 | 3. AI Capabilities | 0 | 0 | — |
 
 ## Weak Topics (to revisit)
-None so far.
+- **2.2 Query Store catalog views** — know the difference between `sys.query_store_*` views and `sys.dm_exec_*` DMVs
+- **2.2 Isolation levels** — SERIALIZABLE prevents phantom inserts (key-range locks), REPEATABLE READ only prevents modification of already-read rows

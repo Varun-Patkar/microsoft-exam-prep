@@ -1,150 +1,168 @@
 {
-  "timestamp": "2026-04-27T21:05:36.583898",
+  "timestamp": "2026-04-28T20:28:26.266469",
   "examCode": "DP-800",
   "examName": "Developing AI-Enabled Database Solutions",
   "summary": {
-    "totalQuestions": 9,
-    "correct": 9,
-    "wrong": 0,
+    "totalQuestions": 8,
+    "correct": 6,
+    "wrong": 2,
     "skipped": 0,
-    "accuracy": 100.0,
-    "timeSeconds": 485.0
+    "accuracy": 75.0,
+    "timeSeconds": 598.3
   },
   "domainBreakdown": {
-    "Secure, Optimize, and Deploy Database Solutions": {
-      "total": 9,
-      "correct": 9,
+    "Design and Develop Database Solutions": {
+      "total": 1,
+      "correct": 1,
       "wrong": 0,
+      "skipped": 0
+    },
+    "Secure, Optimize, and Deploy Database Solutions": {
+      "total": 7,
+      "correct": 5,
+      "wrong": 2,
       "skipped": 0
     }
   },
   "topicBreakdown": {
-    "2.1 Implement Data Security and Compliance": {
-      "total": 9,
-      "correct": 9,
+    "1.1 Design and Implement Database Objects": {
+      "total": 1,
+      "correct": 1,
       "wrong": 0,
+      "skipped": 0
+    },
+    "2.2 Optimize Database Performance": {
+      "total": 7,
+      "correct": 5,
+      "wrong": 2,
       "skipped": 0
     }
   },
-  "wrongQuestions": [],
+  "wrongQuestions": [
+    {
+      "questionId": "q030",
+      "question": "You have an Azure SQL database that supports an AI-driven product search API.\n\nYou need to identify the top CPU-consuming queries from the last two hours by using Query Store data. The solution must aggregate CPU consumption across executions and return only the top 15 query hashes.\n\nHow should you complete the Transact-SQL code?",
+      "userAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.dm_exec_query_stats | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
+      "correctAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.query_store_runtime_stats_interval | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
+      "explanation": "Use rs.avg_cpu_time for aggregation, sys.query_store_runtime_stats_interval for the time interval join, and DATEADD(HOUR, -2, GETUTCDATE()) since Query Store uses UTC timestamps.",
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions"
+    },
+    {
+      "questionId": "q034",
+      "question": "[Case Study - Fabrikam - Q2 of 9]\n\nYou plan to implement changes to sp_UpdateProcedureForPatient. Records accessed by the stored procedure must NOT be changed by other transactions while it runs.\n\nYou change the stored procedure to run within a transaction.\n\nWhich transaction isolation level should you use?",
+      "userAnswer": "A",
+      "correctAnswer": "B",
+      "explanation": "SERIALIZABLE prevents other transactions from modifying (or inserting) records that the stored procedure is accessing.",
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions"
+    }
+  ],
   "skippedQuestions": [],
   "allResults": [
     {
-      "questionId": "q023",
-      "question": "You have an Azure SQL database that contains a table named Sales.Customer. Sales.Customer contains columns named CustomerId, FullName, Email, TaxID, and RegionId.\n\nYou have a database role named AppSupport that is used by a support application.\n\nYou need to implement a security solution for AppSupport that meets the following requirements:\n- AppSupport must be prevented from viewing TaxID.\n- AppSupport must be able to query Sales.Customer to troubleshoot issues.\n- AppSupport must be able to run a stored procedure named Sales.usp_GetCustomerByCustomerId.\n\nSelect the appropriate statements.",
-      "userAnswer": "To run Sales.usp_GetCustomerByCustomerId: GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport | To query Sales.Customer: GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport | To prevent viewing TaxID: DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport",
-      "correctAnswer": "To run Sales.usp_GetCustomerByCustomerId: GRANT EXECUTE ON OBJECT::Sales.usp_GetCustomerByCustomerId TO AppSupport | To query Sales.Customer: GRANT SELECT ON OBJECT::Sales.Customer TO AppSupport | To prevent viewing TaxID: DENY SELECT ON OBJECT::Sales.Customer(TaxID) TO AppSupport",
+      "questionId": "q071",
+      "question": "You review a CREATE TABLE statement for dbo.VehicleTelemetry that includes system versioning, a clustered PK on TelemetryId (not partitioned), and a JSON index on LocationJson for '$.location.latitude', '$.location.longitude', '$.location.accuracy'.\n\nRequirements: telemetry must be partitioned, JSON properties must be filterable via index seek.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=No, S2=Yes, S3=No",
+      "correctAnswer": "S1=No, S2=Yes, S3=No",
       "correct": true,
       "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "GRANT EXECUTE for the stored proc, GRANT SELECT for querying, DENY SELECT on the specific column (TaxID) to prevent access."
+      "topic": "1.1 Design and Implement Database Objects",
+      "domainName": "Design and Develop Database Solutions",
+      "domainId": "1",
+      "difficulty": "hard",
+      "explanation": "No partition function/scheme is defined, so the table is not partitioned. The JSON index covers latitude, longitude, and accuracy — so those are seekable. $.location.heading is NOT in the index definition, so it won't use the JSON index."
     },
     {
-      "questionId": "q024",
-      "question": "You have an Azure SQL database with a table named Customer. Customer contains:\n- NationalIDNumber (unique per customer)\n- InvestigationNotes (free-form text)\n\nA stored procedure performs point lookups by NationalIDNumber and returns InvestigationNotes without filtering on it.\n\nYou need to encrypt both columns by using Always Encrypted and the highest security possible.\n\nWhich encryption types should you use?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
-      "correct": true,
+      "questionId": "q030",
+      "question": "You have an Azure SQL database that supports an AI-driven product search API.\n\nYou need to identify the top CPU-consuming queries from the last two hours by using Query Store data. The solution must aggregate CPU consumption across executions and return only the top 15 query hashes.\n\nHow should you complete the Transact-SQL code?",
+      "userAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.dm_exec_query_stats | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
+      "correctAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.query_store_runtime_stats_interval | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
+      "correct": false,
       "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "Deterministic encryption is needed for NationalIDNumber (point lookups require equality comparison). Randomized provides higher security for InvestigationNotes since it's only returned, not filtered."
-    },
-    {
-      "questionId": "q025",
-      "question": "You have an Azure SQL database named sqldb-ai-prod with a table named Tickets (TenantId, TicketId, CustomerEmail, CustomerPhone, Notes) for a multitenant SaaS app.\n\nYou need to configure security so that:\n- Support agents see only the rows of their own TenantId column.\n- Support agents see only the domain name portion of the CustomerEmail column.\n\nWhat should you do for each requirement?",
-      "userAnswer": "See only rows of their own TenantId: Create a row-level security (RLS) predicate that uses the user context | See only the domain name of CustomerEmail: Configure dynamic data masking on selected columns",
-      "correctAnswer": "See only rows of their own TenantId: Create a row-level security (RLS) predicate that uses the user context | See only the domain name of CustomerEmail: Configure dynamic data masking on selected columns",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "RLS predicates filter rows to the user's TenantId. Dynamic data masking obscures part of the email column (showing only the domain)."
-    },
-    {
-      "questionId": "q026",
-      "question": "You have an Azure SQL database named SalesDB and an Azure App Service app named sales-api. SalesDB contains dbo.Customers with columns CreditCardNumber and TenantId.\n\nCurrently sales-api connects to SalesDB with SQL authentication (stored username/password).\n\nYou need to recommend a solution that:\n- Provides a passwordless method for sales-api to access SalesDB\n- Ensures that credit card numbers are NOT stored as plain text\n\nWhat should you include?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "Managed identities provide passwordless auth. Always Encrypted ensures credit card numbers are not stored as plain text (encrypted at rest and in transit)."
-    },
-    {
-      "questionId": "q027",
-      "question": "You have a Microsoft SQL Server 2025 instance with a managed identity enabled.\n\nYou need to call an Azure OpenAI REST endpoint for chat completions. The solution must provide the highest level of security.\n\nWhat should you insert at line 02 of the CREATE DATABASE SCOPED CREDENTIAL statement?",
-      "userAnswer": "D",
-      "correctAnswer": "D",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "Managed Identity with resourceid provides the highest security—no API keys stored, authentication via the managed identity."
-    },
-    {
-      "questionId": "q028",
-      "question": "[Case Study - Fabrikam - Q1 of 9]\n\nYou need to ensure that EmployeesEncrypted meets the security requirements (ledger, Always Encrypted on TaxId and Salary) and contains a copy of the data in the Employees table.\n\nWhich four actions should you perform in sequence?",
-      "userAnswer": "Step 1: Create a column encryption key (CEK) | Step 2: Create the EmployeesEncrypted table with LEDGER enabled | Step 3: Execute sys.sp_copy_data_in_batches | Step 4: Alter EmployeesEncrypted to encrypt TaxId and Salary",
-      "correctAnswer": "Step 1: Create a column encryption key (CEK) | Step 2: Create the EmployeesEncrypted table with LEDGER enabled | Step 3: Execute sys.sp_copy_data_in_batches | Step 4: Alter EmployeesEncrypted to encrypt TaxId and Salary",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
+      "topic": "2.2 Optimize Database Performance",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "hard",
-      "explanation": "1) Create CEK for encryption. 2) Create the EmployeesEncrypted table with LEDGER enabled. 3) Copy data from Employees. 4) Alter the EmployeesEncrypted table to encrypt columns."
+      "explanation": "Use rs.avg_cpu_time for aggregation, sys.query_store_runtime_stats_interval for the time interval join, and DATEADD(HOUR, -2, GETUTCDATE()) since Query Store uses UTC timestamps."
     },
     {
-      "questionId": "q029",
-      "question": "[Case Study - Fabrikam - Q4 of 9]\n\nTransactionProcessing uses a hard-coded username and password. The security requirements mandate a passwordless connection.\n\nYou need to recommend a solution for the TransactionProcessing application.\n\nWhat should you include?",
-      "userAnswer": "D",
-      "correctAnswer": "D",
+      "questionId": "q031",
+      "question": "You have an Azure SQL database named SalesDB with Query Store enabled. SalesDB supports an AI-driven product search API.\n\nUsers report that the latency of the API increased immediately after the API was deployed and remains high.\n\nYou need to identify whether the latency increase was caused by an execution plan regression and, if so, decide which corrective action will restore a previous plan. The solution must prevent any changes to the API code.\n\nWhat should you use?",
+      "userAnswer": "To identify long-running queries: Query Performance Insight | To verify that the query has multiple persisted plans over time: The Query Store plan store | To restore a previous plan without changing the code: Plan forcing in Query Store",
+      "correctAnswer": "To identify long-running queries: Query Performance Insight | To verify that the query has multiple persisted plans over time: The Query Store plan store | To restore a previous plan without changing the code: Plan forcing in Query Store",
       "correct": true,
       "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "A user-assigned managed identity provides passwordless authentication and can be shared across multiple resources. For an on-premises app migrating to Azure, user-assigned is the best fit."
-    },
-    {
-      "questionId": "q077",
-      "question": "You create a CustomerProfiles table with Dynamic Data Masking on FullName, EmailAddress, and PhoneNumber. You also create an RLS filter predicate fn_FilterByRegion that checks SUSER_SNAME() against UserAccess. Support staff never has UNMASK permission.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=Yes, S2=No, S3=No",
-      "correctAnswer": "S1=Yes, S2=No, S3=No",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
+      "topic": "2.2 Optimize Database Performance",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "hard",
-      "explanation": "DDM + RLS together properly protect PII. Admins have UNMASK but RLS still filters rows based on the predicate (they won't see all rows through the app). If RLS filters a row out entirely, masking has nothing to act on — the row isn't returned."
+      "explanation": "Query Performance Insight shows top resource consumers. The Query Store plan store stores multiple plans per query. Plan forcing locks a previous good plan without code changes."
     },
     {
-      "questionId": "q079",
-      "question": "You have an Azure SQL database with a column named Notes containing sensitive data.\n\nYou need to ensure that neither the stored values nor the query inputs reveal information about the actual data. The solution must prevent a user from inferring relationships or repetitions in the data based on the encrypted output.\n\nWhich should you use?",
+      "questionId": "q032",
+      "question": "You have a SQL database in Microsoft Fabric (default settings) with a table named Sales.Orders.\n\nYou discover:\n- sys.dm_exec_requests shows multiple sessions suspended with wait_type = LCK_M_X, all waiting on Sales.Orders with the same blocking_session_id.\n- sys.dm_exec_input_buffer for the blocking session shows: BEGIN TRANSACTION UPDATE Sales.Orders\n- sys.dm_exec_sessions for the blocking session shows status = sleeping AND open_transaction_count = 1.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=Yes, S2=No, S3=Yes",
+      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "hard",
+      "explanation": "The sleeping session with open_transaction_count=1 holds uncommitted locks. Fabric SQL database uses RCSI by default, so SELECT won't be blocked by UPDATE. sys.dm_tran_locks joined with sys.dm_exec_requests reveals the blocking chain."
+    },
+    {
+      "questionId": "q033",
+      "question": "You have an Azure SQL database that supports an AI-enabled product catalog API. The database contains a table named Sales.Orders. Sales.Orders contains 20 million rows and has a nonclustered index on a column named CreateDate.\n\nThe API passes a date parameter named @OrderDate. A stored procedure named get_latest_day_orders filters by:\n  WHERE CAST(CreateDate AS date) = @OrderDate\n\nA review reveals the query causes an index scan.\n\nYou need to modify the predicate to ensure Microsoft SQL Server can use an index seek on CreateDate for a single day.\n\nWhich WHERE clause should you use?",
+      "userAnswer": "C",
+      "correctAnswer": "C",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "medium",
+      "explanation": "A range predicate (>= and <) on the raw column allows SQL Server to use an index seek, unlike wrapping the column in a function."
+    },
+    {
+      "questionId": "q034",
+      "question": "[Case Study - Fabrikam - Q2 of 9]\n\nYou plan to implement changes to sp_UpdateProcedureForPatient. Records accessed by the stored procedure must NOT be changed by other transactions while it runs.\n\nYou change the stored procedure to run within a transaction.\n\nWhich transaction isolation level should you use?",
+      "userAnswer": "A",
+      "correctAnswer": "B",
+      "correct": false,
+      "skipped": false,
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "medium",
+      "explanation": "SERIALIZABLE prevents other transactions from modifying (or inserting) records that the stored procedure is accessing."
+    },
+    {
+      "questionId": "q073",
+      "question": "During a 10-minute incident window, you discover: Session 72 is sleeping with open_transaction_count = 1. Multiple sessions show blocking_session_id = 72. sys.dm_exec_input_buffer shows BEGIN TRANSACTION UPDATE Sales.Orders. Timeouts stop only after manually terminating session 72.\n\nWhat is a possible cause of the blocking?",
       "userAnswer": "B",
       "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.1 Implement Data Security and Compliance",
+      "topic": "2.2 Optimize Database Performance",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "medium",
-      "explanation": "Randomized encryption produces different ciphertext each time for the same plaintext, preventing pattern analysis. Deterministic encryption always produces the same ciphertext, which leaks repetition patterns. RLS controls row access, not value confidentiality."
+      "explanation": "A sleeping session with open_transaction_count=1 holding locks is the classic pattern of an uncommitted explicit transaction. Deadlocks are auto-detected and resolved — they don't persist until manual termination."
+    },
+    {
+      "questionId": "q078",
+      "question": "A stored procedure queries dbo.Orders (120M rows) filtering by CustomerId and ordering by OrderDate DESC with TOP 50. The existing index IX_Orders_OrderDate is on (OrderDate) with no included columns. The execution plan shows an index seek on IX_Orders_OrderDate followed by Key Lookup and an explicit Sort.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=Yes, S2=No, S3=Yes",
+      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.2 Optimize Database Performance",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "hard",
+      "explanation": "An index on (CustomerId, OrderDate DESC) supports both the equality seek and ordering. Included columns are NOT part of the navigational structure — adding CustomerId as INCLUDE doesn't help with seek/sort. The plan shape (seek + lookup + sort) indicates an index/plan problem, not locking."
     }
   ]
 }

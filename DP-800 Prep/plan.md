@@ -55,14 +55,14 @@
 
 ---
 
-### Day 3 — Tuesday, Apr 28 (1 hr) — 2.2 Performance Optimization
+### Day 3 — Tuesday, Apr 28 (1 hr) — 2.2 Performance Optimization ✅
 
-- [ ] Study: Transaction isolation levels (READ UNCOMMITTED → SERIALIZABLE, SNAPSHOT, RCSI)
-- [ ] Study: Execution plans (scans vs seeks, estimated vs actual rows, key lookups)
-- [ ] Study: DMVs (sys.dm_exec_query_stats, sys.dm_exec_requests, sys.dm_tran_locks)
-- [ ] Study: Query Store (plan regression detection, forced plans) + Query Performance Insight
-- [ ] Study: Blocking & deadlocks (identification, head blocker, consistent access ordering, tempdb contention)
-- [ ] Practice: 8 questions (q030–q034 from 2.2, q073, q078 from 2.2 bonus, q071 from 1.1 review)
+- [x] Study: Transaction isolation levels (READ UNCOMMITTED → SERIALIZABLE, SNAPSHOT, RCSI)
+- [x] Study: Execution plans (scans vs seeks, estimated vs actual rows, key lookups)
+- [x] Study: DMVs (sys.dm_exec_query_stats, sys.dm_exec_requests, sys.dm_tran_locks)
+- [x] Study: Query Store (plan regression detection, forced plans) + Query Performance Insight
+- [x] Study: Blocking & deadlocks (identification, head blocker, consistent access ordering, tempdb contention)
+- [x] Practice: 8 questions — 6/8 correct (75%). Missed: q030 (Query Store views), q034 (SERIALIZABLE vs REPEATABLE READ)
 - Estimated time: 1 hr
 
 ---
