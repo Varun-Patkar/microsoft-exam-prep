@@ -45,12 +45,12 @@
 
 ### Day 2 — Monday, Apr 27 (1 hr) — 2.1 Data Security & Compliance
 
-- [ ] Study: Always Encrypted (standard vs with enclaves, deterministic vs randomized)
-- [ ] Study: Dynamic Data Masking (default, partial, email, random masking functions)
-- [ ] Study: Row-Level Security (filter predicates + block predicates)
-- [ ] Study: Object-level permissions (schema-level grants), passwordless access (Managed Identity)
-- [ ] Study: Auditing (Azure SQL Auditing → Log Analytics), securing model/GraphQL/REST/MCP endpoints
-- [ ] Practice: 8 questions (q023–q029 from 2.1, q077 from 2.1 bonus)
+- [x] Study: Always Encrypted (standard vs with enclaves, deterministic vs randomized)
+- [x] Study: Dynamic Data Masking (default, partial, email, random masking functions)
+- [x] Study: Row-Level Security (filter predicates + block predicates)
+- [x] Study: Object-level permissions (schema-level grants), passwordless access (Managed Identity)
+- [x] Study: Auditing (Azure SQL Auditing → Log Analytics), securing model/GraphQL/REST/MCP endpoints
+- [x] Practice: 8 questions (q023–q029 from 2.1, q077 from 2.1 bonus)
 - Estimated time: 1 hr
 
 ---
