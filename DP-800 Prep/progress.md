@@ -1,9 +1,9 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 4 / 8
-- **Questions Answered:** 36 / 88
-- **Accuracy:** 94.4% (34/36)
+- **Sessions Completed:** 5 / 8
+- **Questions Answered:** 44 / 88
+- **Accuracy:** 95.5% (42/44)
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -40,11 +40,19 @@
 - **Key lesson:** "Query Store data" → all joins use `sys.query_store_*` views, not `sys.dm_exec_*` DMVs. SERIALIZABLE = prevents both modifications AND inserts (phantom protection).
 - **Weak areas:** Query Store catalog views, SERIALIZABLE vs REPEATABLE READ distinction
 
+### Day 4, Session 1 — Wed Apr 29 (CI/CD with SQL Database Projects)
+- **Topics:** 2.3 CI/CD — SQL Database Projects (SDK-style, dacpac, sqlpackage, source control, schema drift, pipelines)
+- **Questions:** 8 answered, 0 skipped
+- **Result:** 8/8 correct (100%)
+- **Time:** ~1 session
+- **Key questions nailed:** q035 (GitHub Actions auth vs Release config), q036 (MERGE for idempotent reference data), q039/q040 (Azure.Master vs on-prem Master NuGet package distinction)
+- **Weak areas:** None
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
 | 1. Design & Develop | 20 | 20 | 100% |
-| 2. Secure, Optimize, Deploy | 16 | 14 | 87.5% |
+| 2. Secure, Optimize, Deploy | 24 | 22 | 91.7% |
 | 3. AI Capabilities | 0 | 0 | — |
 
 ## Weak Topics (to revisit)

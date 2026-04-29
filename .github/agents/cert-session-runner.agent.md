@@ -57,6 +57,10 @@ Every session follows this exact sequence. Do NOT skip steps.
 
    ## Related Questions
    [List of question IDs from questions.json that cover this topic]
+
+   ```powershell
+   python quiz_runner.py --ids <q001,q002,...> questions.json
+   ```
    ```
 
 4. This file serves as: (a) your teaching script for the session, (b) a permanent reference the user can revisit later, (c) a study aid for revision days.

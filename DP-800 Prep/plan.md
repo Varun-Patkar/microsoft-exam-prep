@@ -67,14 +67,14 @@
 
 ---
 
-### Day 4 — Wednesday, Apr 29 (1 hr) — 2.3 CI/CD with SQL Database Projects
+### Day 4 — Wednesday, Apr 29 (1 hr) — 2.3 CI/CD with SQL Database Projects ✅
 
-- [ ] Study: SQL Database Projects (SDK-style, .sqlproj, dacpac, dotnet build, sqlpackage)
-- [ ] Study: Testing strategy (tSQLt unit tests, integration tests with ephemeral DBs)
-- [ ] Study: Source control (branching, PRs, merge conflicts, CODEOWNERS, reference data via post-deploy MERGE scripts)
-- [ ] Study: Schema drift detection, secrets management (Key Vault, GitHub Secrets)
-- [ ] Study: Deployment pipelines (multi-stage, approval gates, triggers, environment-specific controls)
-- [ ] Practice: 8 questions (q035–q041 from 2.3, q075 from 2.3 bonus)
+- [x] Study: SQL Database Projects (SDK-style, .sqlproj, dacpac, dotnet build, sqlpackage)
+- [x] Study: Testing strategy (tSQLt unit tests, integration tests with ephemeral DBs)
+- [x] Study: Source control (branching, PRs, merge conflicts, CODEOWNERS, reference data via post-deploy MERGE scripts)
+- [x] Study: Schema drift detection, secrets management (Key Vault, GitHub Secrets)
+- [x] Study: Deployment pipelines (multi-stage, approval gates, triggers, environment-specific controls)
+- [x] Practice: 8 questions (q035–q041 from 2.3, q075 from 2.3 bonus)
 - Estimated time: 1 hr
 
 ---

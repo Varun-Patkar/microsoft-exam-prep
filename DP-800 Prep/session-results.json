@@ -1,168 +1,137 @@
 {
-  "timestamp": "2026-04-28T20:28:26.266469",
+  "timestamp": "2026-04-29T22:32:28.204846",
   "examCode": "DP-800",
   "examName": "Developing AI-Enabled Database Solutions",
   "summary": {
     "totalQuestions": 8,
-    "correct": 6,
-    "wrong": 2,
+    "correct": 8,
+    "wrong": 0,
     "skipped": 0,
-    "accuracy": 75.0,
-    "timeSeconds": 598.3
+    "accuracy": 100.0,
+    "timeSeconds": 141.1
   },
   "domainBreakdown": {
-    "Design and Develop Database Solutions": {
-      "total": 1,
-      "correct": 1,
-      "wrong": 0,
-      "skipped": 0
-    },
     "Secure, Optimize, and Deploy Database Solutions": {
-      "total": 7,
-      "correct": 5,
-      "wrong": 2,
+      "total": 8,
+      "correct": 8,
+      "wrong": 0,
       "skipped": 0
     }
   },
   "topicBreakdown": {
-    "1.1 Design and Implement Database Objects": {
-      "total": 1,
-      "correct": 1,
+    "2.3 Implement CI/CD by Using SQL Database Projects": {
+      "total": 8,
+      "correct": 8,
       "wrong": 0,
-      "skipped": 0
-    },
-    "2.2 Optimize Database Performance": {
-      "total": 7,
-      "correct": 5,
-      "wrong": 2,
       "skipped": 0
     }
   },
-  "wrongQuestions": [
-    {
-      "questionId": "q030",
-      "question": "You have an Azure SQL database that supports an AI-driven product search API.\n\nYou need to identify the top CPU-consuming queries from the last two hours by using Query Store data. The solution must aggregate CPU consumption across executions and return only the top 15 query hashes.\n\nHow should you complete the Transact-SQL code?",
-      "userAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.dm_exec_query_stats | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
-      "correctAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.query_store_runtime_stats_interval | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
-      "explanation": "Use rs.avg_cpu_time for aggregation, sys.query_store_runtime_stats_interval for the time interval join, and DATEADD(HOUR, -2, GETUTCDATE()) since Query Store uses UTC timestamps.",
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions"
-    },
-    {
-      "questionId": "q034",
-      "question": "[Case Study - Fabrikam - Q2 of 9]\n\nYou plan to implement changes to sp_UpdateProcedureForPatient. Records accessed by the stored procedure must NOT be changed by other transactions while it runs.\n\nYou change the stored procedure to run within a transaction.\n\nWhich transaction isolation level should you use?",
-      "userAnswer": "A",
-      "correctAnswer": "B",
-      "explanation": "SERIALIZABLE prevents other transactions from modifying (or inserting) records that the stored procedure is accessing.",
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions"
-    }
-  ],
+  "wrongQuestions": [],
   "skippedQuestions": [],
   "allResults": [
     {
-      "questionId": "q071",
-      "question": "You review a CREATE TABLE statement for dbo.VehicleTelemetry that includes system versioning, a clustered PK on TelemetryId (not partitioned), and a JSON index on LocationJson for '$.location.latitude', '$.location.longitude', '$.location.accuracy'.\n\nRequirements: telemetry must be partitioned, JSON properties must be filterable via index seek.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=No, S2=Yes, S3=No",
-      "correctAnswer": "S1=No, S2=Yes, S3=No",
+      "questionId": "q035",
+      "question": "You have an SDK-style SQL database project named MyDatabaseProject.sqlproj stored in a private GitHub repository with a GitHub Actions workflow.\n\nThe workflow uses azure/sql-action@v2 with a connection string from secrets. The target Azure SQL database allows access to Azure services and supports mixed authentication.\n\nFor each of the following statements, select Yes if the statement is true.",
+      "userAnswer": "S1=No, S2=No, S3=Yes",
+      "correctAnswer": "S1=No, S2=No, S3=Yes",
       "correct": true,
       "skipped": false,
-      "topic": "1.1 Design and Implement Database Objects",
-      "domainName": "Design and Develop Database Solutions",
-      "domainId": "1",
-      "difficulty": "hard",
-      "explanation": "No partition function/scheme is defined, so the table is not partitioned. The JSON index covers latitude, longitude, and accuracy — so those are seekable. $.location.heading is NOT in the index definition, so it won't use the JSON index."
-    },
-    {
-      "questionId": "q030",
-      "question": "You have an Azure SQL database that supports an AI-driven product search API.\n\nYou need to identify the top CPU-consuming queries from the last two hours by using Query Store data. The solution must aggregate CPU consumption across executions and return only the top 15 query hashes.\n\nHow should you complete the Transact-SQL code?",
-      "userAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.dm_exec_query_stats | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
-      "correctAnswer": "Aggregation metric: rs.avg_cpu_time | Join table: sys.query_store_runtime_stats_interval | Time filter: DATEADD(HOUR, -2, GETUTCDATE())",
-      "correct": false,
-      "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "hard",
-      "explanation": "Use rs.avg_cpu_time for aggregation, sys.query_store_runtime_stats_interval for the time interval join, and DATEADD(HOUR, -2, GETUTCDATE()) since Query Store uses UTC timestamps."
+      "explanation": "The workflow uses a connection string (not Entra workload identity). Changing to Release config changes the DACPAC output path which isn't updated in the publish step. The workflow_dispatch trigger allows manual execution."
     },
     {
-      "questionId": "q031",
-      "question": "You have an Azure SQL database named SalesDB with Query Store enabled. SalesDB supports an AI-driven product search API.\n\nUsers report that the latency of the API increased immediately after the API was deployed and remains high.\n\nYou need to identify whether the latency increase was caused by an execution plan regression and, if so, decide which corrective action will restore a previous plan. The solution must prevent any changes to the API code.\n\nWhat should you use?",
-      "userAnswer": "To identify long-running queries: Query Performance Insight | To verify that the query has multiple persisted plans over time: The Query Store plan store | To restore a previous plan without changing the code: Plan forcing in Query Store",
-      "correctAnswer": "To identify long-running queries: Query Performance Insight | To verify that the query has multiple persisted plans over time: The Query Store plan store | To restore a previous plan without changing the code: Plan forcing in Query Store",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "hard",
-      "explanation": "Query Performance Insight shows top resource consumers. The Query Store plan store stores multiple plans per query. Plan forcing locks a previous good plan without code changes."
-    },
-    {
-      "questionId": "q032",
-      "question": "You have a SQL database in Microsoft Fabric (default settings) with a table named Sales.Orders.\n\nYou discover:\n- sys.dm_exec_requests shows multiple sessions suspended with wait_type = LCK_M_X, all waiting on Sales.Orders with the same blocking_session_id.\n- sys.dm_exec_input_buffer for the blocking session shows: BEGIN TRANSACTION UPDATE Sales.Orders\n- sys.dm_exec_sessions for the blocking session shows status = sleeping AND open_transaction_count = 1.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=Yes, S2=No, S3=Yes",
-      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "hard",
-      "explanation": "The sleeping session with open_transaction_count=1 holds uncommitted locks. Fabric SQL database uses RCSI by default, so SELECT won't be blocked by UPDATE. sys.dm_tran_locks joined with sys.dm_exec_requests reveals the blocking chain."
-    },
-    {
-      "questionId": "q033",
-      "question": "You have an Azure SQL database that supports an AI-enabled product catalog API. The database contains a table named Sales.Orders. Sales.Orders contains 20 million rows and has a nonclustered index on a column named CreateDate.\n\nThe API passes a date parameter named @OrderDate. A stored procedure named get_latest_day_orders filters by:\n  WHERE CAST(CreateDate AS date) = @OrderDate\n\nA review reveals the query causes an index scan.\n\nYou need to modify the predicate to ensure Microsoft SQL Server can use an index seek on CreateDate for a single day.\n\nWhich WHERE clause should you use?",
-      "userAnswer": "C",
-      "correctAnswer": "C",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "A range predicate (>= and <) on the raw column allows SQL Server to use an index seek, unlike wrapping the column in a function."
-    },
-    {
-      "questionId": "q034",
-      "question": "[Case Study - Fabrikam - Q2 of 9]\n\nYou plan to implement changes to sp_UpdateProcedureForPatient. Records accessed by the stored procedure must NOT be changed by other transactions while it runs.\n\nYou change the stored procedure to run within a transaction.\n\nWhich transaction isolation level should you use?",
-      "userAnswer": "A",
-      "correctAnswer": "B",
-      "correct": false,
-      "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "SERIALIZABLE prevents other transactions from modifying (or inserting) records that the stored procedure is accessing."
-    },
-    {
-      "questionId": "q073",
-      "question": "During a 10-minute incident window, you discover: Session 72 is sleeping with open_transaction_count = 1. Multiple sessions show blocking_session_id = 72. sys.dm_exec_input_buffer shows BEGIN TRANSACTION UPDATE Sales.Orders. Timeouts stop only after manually terminating session 72.\n\nWhat is a possible cause of the blocking?",
+      "questionId": "q036",
+      "question": "You have a database that contains production data. The schema is stored in a Git repository as an SDK-style SQL database project, and contains reference data with the following table:\n\n| Name | Data type |\n| RefId | int identity |\n| Code | nvarchar(10) |\n| CreateDate | datetime2 |\n| Description | nvarchar(255) |\n\nA deployment pipeline can be rerun automatically when a transient failure occurs.\n\nYou need to deploy the reference data as part of the same CI/CD process. Rerunning the pipeline must produce the same outcome and must NOT create duplicate rows.\n\nWhat should you do?",
       "userAnswer": "B",
       "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "medium",
-      "explanation": "A sleeping session with open_transaction_count=1 holding locks is the classic pattern of an uncommitted explicit transaction. Deadlocks are auto-detected and resolved — they don't persist until manual termination."
+      "explanation": "A post-deployment script with IF NOT EXISTS or MERGE logic ensures idempotent deployments without duplicate rows."
     },
     {
-      "questionId": "q078",
-      "question": "A stored procedure queries dbo.Orders (120M rows) filtering by CustomerId and ordering by OrderDate DESC with TOP 50. The existing index IX_Orders_OrderDate is on (OrderDate) with no included columns. The execution plan shows an index seek on IX_Orders_OrderDate followed by Key Lookup and an explicit Sort.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=Yes, S2=No, S3=Yes",
-      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
+      "questionId": "q037",
+      "question": "You have a GitHub Actions workflow that builds and deploys an Azure SQL database. The schema is stored as an SDK-style SQL database project.\n\nFollowing a code review, you need to generate a report that shows whether the production schema has diverged from the model in source control.\n\nWhich action should you add to the pipeline?",
+      "userAnswer": "B",
+      "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.2 Optimize Database Performance",
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
-      "difficulty": "hard",
-      "explanation": "An index on (CustomerId, OrderDate DESC) supports both the equality seek and ordering. Included columns are NOT part of the navigational structure — adding CustomerId as INCLUDE doesn't help with seek/sort. The plan shape (seek + lookup + sort) indicates an index/plan problem, not locking."
+      "difficulty": "easy",
+      "explanation": "DriftReport generates a report showing schema differences (drift) between the deployed database and source control model."
+    },
+    {
+      "questionId": "q038",
+      "question": "You have an SDK-style SQL database project targeting Azure SQL Database. The CI build fails with unresolved reference errors when referencing system objects.\n\nSolution: Build the project by running dotnet build -bl -flp:vdiag.\n\nDoes this meet the goal?",
+      "userAnswer": "B",
+      "correctAnswer": "B",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "easy",
+      "explanation": "The -bl and -flp:vdiag flags only control logging verbosity—they don't resolve missing system object references."
+    },
+    {
+      "questionId": "q039",
+      "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Azure.Master NuGet package to the project.\n\nDoes this meet the goal?",
+      "userAnswer": "A",
+      "correctAnswer": "A",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "easy",
+      "explanation": "The Azure.Master NuGet package provides the system database references needed for Azure SQL Database targets."
+    },
+    {
+      "questionId": "q040",
+      "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Master NuGet package to the project.\n\nDoes this meet the goal?",
+      "userAnswer": "B",
+      "correctAnswer": "B",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "easy",
+      "explanation": "The Master package is for on-premises SQL Server, not Azure SQL Database. For Azure SQL Database, use Microsoft.SqlServer.Dacpacs.Azure.Master."
+    },
+    {
+      "questionId": "q041",
+      "question": "[Case Study - Fabrikam - Q7 of 9]\n\nYou create an SDK-style SQL database project named Database.sqlproj and add it to a GitHub repository.\n\nYou need to configure a GitHub Actions workflow to support the planned changes for DB1 (validate every pull request before merging).",
+      "userAnswer": "Trigger: pull_request | Build step: dotnet build Database.sqlproj -c Release",
+      "correctAnswer": "Trigger: pull_request | Build step: dotnet build Database.sqlproj -c Release",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "medium",
+      "explanation": "pull_request trigger validates PRs before merge. dotnet build -c Release compiles the SQL project for validation."
+    },
+    {
+      "questionId": "q075",
+      "question": "You have a GitHub Actions workflow that builds an SDK-style SQL database project and produces a dacpac artifact.\n\nYou need to add a deployment step that publishes the dacpac to an Azure SQL database using secrets stored in GitHub repository secrets.\n\nWhich step should you add?",
+      "userAnswer": "C",
+      "correctAnswer": "C",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "medium",
+      "explanation": "azure/sql-action@v2 with action: publish deploys a dacpac to the target database. Connection strings from GitHub Secrets keep credentials secure. Extract creates a dacpac FROM a database, not deploy one. dotnet build is for compilation, not deployment."
     }
   ]
 }
