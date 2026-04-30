@@ -1,137 +1,147 @@
 {
-  "timestamp": "2026-04-29T22:32:28.204846",
+  "timestamp": "2026-04-30T21:55:27.245519",
   "examCode": "DP-800",
   "examName": "Developing AI-Enabled Database Solutions",
   "summary": {
     "totalQuestions": 8,
-    "correct": 8,
-    "wrong": 0,
+    "correct": 7,
+    "wrong": 1,
     "skipped": 0,
-    "accuracy": 100.0,
-    "timeSeconds": 141.1
+    "accuracy": 87.5,
+    "timeSeconds": 49.8
   },
   "domainBreakdown": {
     "Secure, Optimize, and Deploy Database Solutions": {
       "total": 8,
-      "correct": 8,
-      "wrong": 0,
+      "correct": 7,
+      "wrong": 1,
       "skipped": 0
     }
   },
   "topicBreakdown": {
-    "2.3 Implement CI/CD by Using SQL Database Projects": {
+    "2.4 Integrate SQL Solutions with Azure Services": {
       "total": 8,
-      "correct": 8,
-      "wrong": 0,
+      "correct": 7,
+      "wrong": 1,
       "skipped": 0
     }
   },
-  "wrongQuestions": [],
+  "wrongQuestions": [
+    {
+      "questionId": "q046",
+      "question": "[Case Study - Fabrikam - Q3 of 9]\n\nYou are evaluating the DAB configuration.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=No, S2=Yes, S3=No",
+      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
+      "explanation": "Procedures table allows anonymous read (correct). Transactions table allows 'read' and 'create' (not 'update'), so read+update is false. The stored procedure has execute permission for authenticated users.",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions"
+    }
+  ],
   "skippedQuestions": [],
   "allResults": [
     {
-      "questionId": "q035",
-      "question": "You have an SDK-style SQL database project named MyDatabaseProject.sqlproj stored in a private GitHub repository with a GitHub Actions workflow.\n\nThe workflow uses azure/sql-action@v2 with a connection string from secrets. The target Azure SQL database allows access to Azure services and supports mixed authentication.\n\nFor each of the following statements, select Yes if the statement is true.",
-      "userAnswer": "S1=No, S2=No, S3=Yes",
-      "correctAnswer": "S1=No, S2=No, S3=Yes",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "hard",
-      "explanation": "The workflow uses a connection string (not Entra workload identity). Changing to Release config changes the DACPAC output path which isn't updated in the publish step. The workflow_dispatch trigger allows manual execution."
-    },
-    {
-      "questionId": "q036",
-      "question": "You have a database that contains production data. The schema is stored in a Git repository as an SDK-style SQL database project, and contains reference data with the following table:\n\n| Name | Data type |\n| RefId | int identity |\n| Code | nvarchar(10) |\n| CreateDate | datetime2 |\n| Description | nvarchar(255) |\n\nA deployment pipeline can be rerun automatically when a transient failure occurs.\n\nYou need to deploy the reference data as part of the same CI/CD process. Rerunning the pipeline must produce the same outcome and must NOT create duplicate rows.\n\nWhat should you do?",
+      "questionId": "q042",
+      "question": "You have an Azure container app named app1-contoso-001 that hosts a Data API builder (DAB) container in front of an Azure SQL database.\n\nYou add an entity named Todo that uses a source named dbo.todos.\n\nWhich URL pattern should clients use to access the Todo REST endpoint?",
       "userAnswer": "B",
       "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "A post-deployment script with IF NOT EXISTS or MERGE logic ensures idempotent deployments without duplicate rows."
-    },
-    {
-      "questionId": "q037",
-      "question": "You have a GitHub Actions workflow that builds and deploys an Azure SQL database. The schema is stored as an SDK-style SQL database project.\n\nFollowing a code review, you need to generate a report that shows whether the production schema has diverged from the model in source control.\n\nWhich action should you add to the pipeline?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "easy",
-      "explanation": "DriftReport generates a report showing schema differences (drift) between the deployed database and source control model."
+      "explanation": "DAB REST endpoints follow the pattern: /data-api/api/{entity-name}."
     },
     {
-      "questionId": "q038",
-      "question": "You have an SDK-style SQL database project targeting Azure SQL Database. The CI build fails with unresolved reference errors when referencing system objects.\n\nSolution: Build the project by running dotnet build -bl -flp:vdiag.\n\nDoes this meet the goal?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "easy",
-      "explanation": "The -bl and -flp:vdiag flags only control logging verbosity—they don't resolve missing system object references."
-    },
-    {
-      "questionId": "q039",
-      "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Azure.Master NuGet package to the project.\n\nDoes this meet the goal?",
+      "questionId": "q043",
+      "question": "You have an Azure SQL database named ProductsDB. You deploy Data API builder (DAB) to Azure Container Apps.\n\nThe /health endpoint returns healthy but all requests that query an entity named Products fail with a connection error. The SQL login and database are confirmed correct.\n\nYou need to ensure that the container app can connect to the Azure SQL logical server without changing the container app deployment settings or the DAB configuration file.\n\nWhat should you do on the Azure SQL logical server?",
       "userAnswer": "A",
       "correctAnswer": "A",
       "correct": true,
       "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "easy",
-      "explanation": "The Azure.Master NuGet package provides the system database references needed for Azure SQL Database targets."
+      "explanation": "A firewall rule with 0.0.0.0 to 0.0.0.0 allows Azure services to access the SQL logical server."
     },
     {
-      "questionId": "q040",
-      "question": "(Same scenario as Q50)\n\nSolution: Add the Microsoft.SqlServer.Dacpacs.Master NuGet package to the project.\n\nDoes this meet the goal?",
+      "questionId": "q044",
+      "question": "You have an Azure SQL database named ToDo that contains a table named dbo.ToDo.\n\nYour company plans to develop an Azure Functions app to run whenever the rows in dbo.ToDo change. The app will process INSERT, UPDATE, and DELETE events by using the Azure SQL trigger binding.\n\nYou need to configure ToDo to support the planned app.\n\nWhat should you do?",
       "userAnswer": "B",
       "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "easy",
-      "explanation": "The Master package is for on-premises SQL Server, not Azure SQL Database. For Azure SQL Database, use Microsoft.SqlServer.Dacpacs.Azure.Master."
+      "explanation": "Azure SQL trigger binding for Azure Functions relies on change tracking, not CDC or DML triggers."
     },
     {
-      "questionId": "q041",
-      "question": "[Case Study - Fabrikam - Q7 of 9]\n\nYou create an SDK-style SQL database project named Database.sqlproj and add it to a GitHub repository.\n\nYou need to configure a GitHub Actions workflow to support the planned changes for DB1 (validate every pull request before merging).",
-      "userAnswer": "Trigger: pull_request | Build step: dotnet build Database.sqlproj -c Release",
-      "correctAnswer": "Trigger: pull_request | Build step: dotnet build Database.sqlproj -c Release",
+      "questionId": "q045",
+      "question": "You have an Azure SQL database named ProductsDB deployed with DAB on Azure Container Apps.\n\nThe container app cannot connect to ProductsDB and is unreachable from the internet.\n\nYou need to:\n- Ensure that the Azure SQL logical server allows connections from Azure services.\n- Ensure that the Container Apps environment accepts inbound requests from the public internet.",
+      "userAnswer": "Azure SQL firewall rule IP range: 0.0.0.0 to 0.0.0.0 | Container Apps ingress: External on port 80",
+      "correctAnswer": "Azure SQL firewall rule IP range: 0.0.0.0 to 0.0.0.0 | Container Apps ingress: External on port 80",
       "correct": true,
       "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "medium",
-      "explanation": "pull_request trigger validates PRs before merge. dotnet build -c Release compiles the SQL project for validation."
+      "explanation": "0.0.0.0 to 0.0.0.0 allows Azure services. External ingress on port 80 allows internet access."
     },
     {
-      "questionId": "q075",
-      "question": "You have a GitHub Actions workflow that builds an SDK-style SQL database project and produces a dacpac artifact.\n\nYou need to add a deployment step that publishes the dacpac to an Azure SQL database using secrets stored in GitHub repository secrets.\n\nWhich step should you add?",
-      "userAnswer": "C",
-      "correctAnswer": "C",
-      "correct": true,
+      "questionId": "q046",
+      "question": "[Case Study - Fabrikam - Q3 of 9]\n\nYou are evaluating the DAB configuration.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=No, S2=Yes, S3=No",
+      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
+      "correct": false,
       "skipped": false,
-      "topic": "2.3 Implement CI/CD by Using SQL Database Projects",
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
       "domainName": "Secure, Optimize, and Deploy Database Solutions",
       "domainId": "2",
       "difficulty": "medium",
-      "explanation": "azure/sql-action@v2 with action: publish deploys a dacpac to the target database. Connection strings from GitHub Secrets keep credentials secure. Extract creates a dacpac FROM a database, not deploy one. dotnet build is for compilation, not deployment."
+      "explanation": "Procedures table allows anonymous read (correct). Transactions table allows 'read' and 'create' (not 'update'), so read+update is false. The stored procedure has execute permission for authenticated users."
+    },
+    {
+      "questionId": "q072",
+      "question": "You have a DAB instance exposing an Order table entity (read permission for 'authenticated' role) and a FinalizeOrder stored procedure entity (execute permission for 'operations' role with a database policy). The client sends a Microsoft Entra token and x-MS-API-ROLE: operations.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=No, S2=Yes, S3=Yes",
+      "correctAnswer": "S1=No, S2=Yes, S3=Yes",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "hard",
+      "explanation": "The order entity grants read only to 'authenticated', not 'operations', so the GET fails. The FinalizeOrder policy is enforced for the operations role. Without x-MS-API-ROLE, DAB defaults to the built-in 'authenticated' role."
+    },
+    {
+      "questionId": "q074",
+      "question": "You have an Azure SQL database with 2 million articles with embeddings. Users report that semantic search results don't reflect updates until the following day.\n\nYou need to ensure embeddings are updated whenever articles change. The solution must minimize CPU usage on SalesDB.\n\nWhich embedding maintenance method should you implement?",
+      "userAnswer": "B",
+      "correctAnswer": "B",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "medium",
+      "explanation": "CDC identifies only changed rows, and embedding regeneration is offloaded to an external Azure Functions app — minimizing CPU on SalesDB. Hourly full-table regeneration is wasteful. A trigger pushes expensive AI work into the transactional path. Changing the search function doesn't address stale embeddings."
+    },
+    {
+      "questionId": "q076",
+      "question": "You have a Fabric workspace with a SQL database (SalesDB) and a GraphQL API (SalesApi). A Microsoft Entra group (SqlUsers) has the Viewer role and was granted 'View and Edit GraphQL item' permission on SalesApi — but NOT 'Run Queries and Mutations'. The connection uses SSO.\n\nFor each statement, select Yes if true:",
+      "userAnswer": "S1=No, S2=No, S3=Yes",
+      "correctAnswer": "S1=No, S2=No, S3=Yes",
+      "correct": true,
+      "skipped": false,
+      "topic": "2.4 Integrate SQL Solutions with Azure Services",
+      "domainName": "Secure, Optimize, and Deploy Database Solutions",
+      "domainId": "2",
+      "difficulty": "hard",
+      "explanation": "Without 'Run Queries and Mutations', users cannot query or mutate data through the API. 'View and Edit GraphQL item' allows editing the API definition itself, including field mappings."
     }
   ]
 }

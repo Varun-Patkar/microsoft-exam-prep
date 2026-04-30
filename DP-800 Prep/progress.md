@@ -1,9 +1,9 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 5 / 8
-- **Questions Answered:** 44 / 88
-- **Accuracy:** 95.5% (42/44)
+- **Sessions Completed:** 6 / 8
+- **Questions Answered:** 52 / 88
+- **Accuracy:** 94.2% (49/52)
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -48,13 +48,23 @@
 - **Key questions nailed:** q035 (GitHub Actions auth vs Release config), q036 (MERGE for idempotent reference data), q039/q040 (Azure.Master vs on-prem Master NuGet package distinction)
 - **Weak areas:** None
 
+### Day 5, Session 1 — Thu Apr 30 (Azure Service Integration)
+- **Topics:** 2.4 — DAB (config, entities, REST/GraphQL, roles, deployment), Azure Monitor, Change Tracking vs CDC vs CES, Azure Functions SQL trigger binding
+- **Questions:** 8 answered, 0 skipped
+- **Result:** 7/8 correct (87.5%)
+- **Time:** ~1 min
+- **Wrong:** q046 (DAB Fabrikam case study — Procedures table anonymous read = Yes, Transactions table read+update = No, SP execute = Yes; answered S1=No, S2=Yes, S3=No)
+- **Key lesson:** Anonymous role in DAB entity permissions = no auth required → anonymous read IS allowed. `read`+`create` ≠ `update` — must be explicitly listed. SP with `execute` for authenticated = Yes.
+- **Weak areas:** DAB entity permission evaluation (anonymous role, read vs update distinction)
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
 | 1. Design & Develop | 20 | 20 | 100% |
-| 2. Secure, Optimize, Deploy | 24 | 22 | 91.7% |
+| 2. Secure, Optimize, Deploy | 32 | 29 | 90.6% |
 | 3. AI Capabilities | 0 | 0 | — |
 
 ## Weak Topics (to revisit)
 - **2.2 Query Store catalog views** — know the difference between `sys.query_store_*` views and `sys.dm_exec_*` DMVs
 - **2.2 Isolation levels** — SERIALIZABLE prevents phantom inserts (key-range locks), REPEATABLE READ only prevents modification of already-read rows
+- **2.4 DAB entity permissions** — `anonymous` role = no auth required (read IS allowed); `read`+`create` ≠ `update`; SP needs `execute` not `read`

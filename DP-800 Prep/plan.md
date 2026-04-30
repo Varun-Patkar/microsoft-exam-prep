@@ -79,13 +79,13 @@
 
 ---
 
-### Day 5 — Thursday, Apr 30 (1 hr) — 2.4 Azure Service Integration
+### Day 5 — Thursday, Apr 30 (1 hr) — 2.4 Azure Service Integration ✅
 
-- [ ] Study: Data API Builder (DAB) — config files (dab-config.json), entities, REST + GraphQL endpoints
-- [ ] Study: DAB — exposing tables/views/stored procedures, GraphQL relationships, pagination, caching
-- [ ] Study: DAB deployment (Azure Container Apps), Azure Monitor + Application Insights + Log Analytics
-- [ ] Study: Change handling — CDC vs Change Tracking vs CES, Azure Functions SQL trigger binding, Logic Apps
-- [ ] Practice: 8 questions (q042–q046 from 2.4, q072, q074, q076 from 2.4 bonus)
+- [x] Study: Data API Builder (DAB) — config files (dab-config.json), entities, REST + GraphQL endpoints
+- [x] Study: DAB — exposing tables/views/stored procedures, GraphQL relationships, pagination, caching
+- [x] Study: DAB deployment (Azure Container Apps), Azure Monitor + Application Insights + Log Analytics
+- [x] Study: Change handling — CDC vs Change Tracking vs CES, Azure Functions SQL trigger binding, Logic Apps
+- [x] Practice: 8 questions (q042–q046 from 2.4, q072, q074, q076 from 2.4 bonus)
 - Estimated time: 1 hr
 
 ---
