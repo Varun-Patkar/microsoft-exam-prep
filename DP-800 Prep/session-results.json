@@ -1,147 +1,221 @@
 {
-  "timestamp": "2026-04-30T21:55:27.245519",
+  "timestamp": "2026-05-01T14:52:15.750640",
   "examCode": "DP-800",
   "examName": "Developing AI-Enabled Database Solutions",
   "summary": {
-    "totalQuestions": 8,
-    "correct": 7,
-    "wrong": 1,
+    "totalQuestions": 14,
+    "correct": 14,
+    "wrong": 0,
     "skipped": 0,
-    "accuracy": 87.5,
-    "timeSeconds": 49.8
+    "accuracy": 100.0,
+    "timeSeconds": 166.1
   },
   "domainBreakdown": {
-    "Secure, Optimize, and Deploy Database Solutions": {
-      "total": 8,
-      "correct": 7,
-      "wrong": 1,
+    "Implement AI Capabilities in Database Solutions": {
+      "total": 14,
+      "correct": 14,
+      "wrong": 0,
       "skipped": 0
     }
   },
   "topicBreakdown": {
-    "2.4 Integrate SQL Solutions with Azure Services": {
-      "total": 8,
+    "3.1 Design and Implement Models and Embeddings": {
+      "total": 7,
       "correct": 7,
-      "wrong": 1,
+      "wrong": 0,
+      "skipped": 0
+    },
+    "3.2 Design and Implement Intelligent Search": {
+      "total": 7,
+      "correct": 7,
+      "wrong": 0,
       "skipped": 0
     }
   },
-  "wrongQuestions": [
-    {
-      "questionId": "q046",
-      "question": "[Case Study - Fabrikam - Q3 of 9]\n\nYou are evaluating the DAB configuration.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=No, S2=Yes, S3=No",
-      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
-      "explanation": "Procedures table allows anonymous read (correct). Transactions table allows 'read' and 'create' (not 'update'), so read+update is false. The stored procedure has execute permission for authenticated users.",
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions"
-    }
-  ],
+  "wrongQuestions": [],
   "skippedQuestions": [],
   "allResults": [
     {
-      "questionId": "q042",
-      "question": "You have an Azure container app named app1-contoso-001 that hosts a Data API builder (DAB) container in front of an Azure SQL database.\n\nYou add an entity named Todo that uses a source named dbo.todos.\n\nWhich URL pattern should clients use to access the Todo REST endpoint?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
+      "questionId": "q047",
+      "question": "You plan to implement an incremental embedding maintenance method using change data capture (CDC) on dbs.Articles.\n\nYou need to ensure that only the columns required to generate the embeddings are captured. The solution must support querying net changes.\n\nHow should you complete the Transact-SQL script?",
+      "userAnswer": "Captured columns: N'ArticleId, Title, Body' | supports_net_changes: 1 | First step (enable CDC): EXEC sys.sp_cdc_enable_db;",
+      "correctAnswer": "Captured columns: N'ArticleId, Title, Body' | supports_net_changes: 1 | First step (enable CDC): EXEC sys.sp_cdc_enable_db;",
       "correct": true,
       "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "easy",
-      "explanation": "DAB REST endpoints follow the pattern: /data-api/api/{entity-name}."
-    },
-    {
-      "questionId": "q043",
-      "question": "You have an Azure SQL database named ProductsDB. You deploy Data API builder (DAB) to Azure Container Apps.\n\nThe /health endpoint returns healthy but all requests that query an entity named Products fail with a connection error. The SQL login and database are confirmed correct.\n\nYou need to ensure that the container app can connect to the Azure SQL logical server without changing the container app deployment settings or the DAB configuration file.\n\nWhat should you do on the Azure SQL logical server?",
-      "userAnswer": "A",
-      "correctAnswer": "A",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "easy",
-      "explanation": "A firewall rule with 0.0.0.0 to 0.0.0.0 allows Azure services to access the SQL logical server."
-    },
-    {
-      "questionId": "q044",
-      "question": "You have an Azure SQL database named ToDo that contains a table named dbo.ToDo.\n\nYour company plans to develop an Azure Functions app to run whenever the rows in dbo.ToDo change. The app will process INSERT, UPDATE, and DELETE events by using the Azure SQL trigger binding.\n\nYou need to configure ToDo to support the planned app.\n\nWhat should you do?",
-      "userAnswer": "B",
-      "correctAnswer": "B",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "easy",
-      "explanation": "Azure SQL trigger binding for Azure Functions relies on change tracking, not CDC or DML triggers."
-    },
-    {
-      "questionId": "q045",
-      "question": "You have an Azure SQL database named ProductsDB deployed with DAB on Azure Container Apps.\n\nThe container app cannot connect to ProductsDB and is unreachable from the internet.\n\nYou need to:\n- Ensure that the Azure SQL logical server allows connections from Azure services.\n- Ensure that the Container Apps environment accepts inbound requests from the public internet.",
-      "userAnswer": "Azure SQL firewall rule IP range: 0.0.0.0 to 0.0.0.0 | Container Apps ingress: External on port 80",
-      "correctAnswer": "Azure SQL firewall rule IP range: 0.0.0.0 to 0.0.0.0 | Container Apps ingress: External on port 80",
-      "correct": true,
-      "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
       "difficulty": "medium",
-      "explanation": "0.0.0.0 to 0.0.0.0 allows Azure services. External ingress on port 80 allows internet access."
+      "explanation": "Capture ArticleId, Title, Body (columns needed for embedding generation). supports_net_changes = 1 to enable net change queries. Enable CDC at database level first."
     },
     {
-      "questionId": "q046",
-      "question": "[Case Study - Fabrikam - Q3 of 9]\n\nYou are evaluating the DAB configuration.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=No, S2=Yes, S3=No",
-      "correctAnswer": "S1=Yes, S2=No, S3=Yes",
-      "correct": false,
-      "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "Procedures table allows anonymous read (correct). Transactions table allows 'read' and 'create' (not 'update'), so read+update is false. The stored procedure has execute permission for authenticated users."
-    },
-    {
-      "questionId": "q072",
-      "question": "You have a DAB instance exposing an Order table entity (read permission for 'authenticated' role) and a FinalizeOrder stored procedure entity (execute permission for 'operations' role with a database policy). The client sends a Microsoft Entra token and x-MS-API-ROLE: operations.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=No, S2=Yes, S3=Yes",
-      "correctAnswer": "S1=No, S2=Yes, S3=Yes",
+      "questionId": "q048",
+      "question": "You have a SQL Server 2025 instance with no outbound connectivity. SalesDB supports a RAG pattern.\n\nYou need to generate embeddings inside SQL Server and ensure only AIApplicationUser can run embedding generation.\n\nWhich TWO actions should you perform? (Select 2)",
+      "userAnswer": "C, D",
+      "correctAnswer": "C, D",
       "correct": true,
       "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
       "difficulty": "hard",
-      "explanation": "The order entity grants read only to 'authenticated', not 'operations', so the GET fails. The FinalizeOrder policy is enforced for the operations role. Without x-MS-API-ROLE, DAB defaults to the built-in 'authenticated' role."
+      "explanation": "With no outbound connectivity, use ONNX runtime with local paths (D). Grant EXECUTE on the model project to restrict access to AIApplicationUser (C)."
     },
     {
-      "questionId": "q074",
-      "question": "You have an Azure SQL database with 2 million articles with embeddings. Users report that semantic search results don't reflect updates until the following day.\n\nYou need to ensure embeddings are updated whenever articles change. The solution must minimize CPU usage on SalesDB.\n\nWhich embedding maintenance method should you implement?",
+      "questionId": "q049",
+      "question": "You plan to change the embedding model from text-embedding-ada-002 to text-embedding-3-small. Existing rows already contain embeddings.\n\nYou need to implement the model change. Applications must be able to use VECTOR_SEARCH without runtime errors.\n\nWhat should you do first?",
+      "userAnswer": "C",
+      "correctAnswer": "C",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "medium",
+      "explanation": "When switching embedding models, you must regenerate existing embeddings first so all vectors are in the same space, preventing runtime errors."
+    },
+    {
+      "questionId": "q050",
+      "question": "Embeddings are generated by text-embedding-ada-002. The AI architect recommends switching to text-embedding-3-small. The security team requires Entra managed identities only (no API keys).\n\nWhich TWO actions should you include? (Select 2)",
+      "userAnswer": "B, C",
+      "correctAnswer": "B, C",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "medium",
+      "explanation": "Change the endpoint (new model requires different deployment endpoint) and regenerate all embeddings (new model produces different vectors)."
+    },
+    {
+      "questionId": "q051",
+      "question": "The embedding pipeline runs once per night, but documentation is edited throughout the day.\n\nYou need to ensure that embeddings are updated every time the underlying content changes, without a nightly batch process.\n\nWhat should you include in the solution?",
+      "userAnswer": "C",
+      "correctAnswer": "C",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "easy",
+      "explanation": "Table triggers fire immediately on data changes, allowing real-time embedding updates without a batch process."
+    },
+    {
+      "questionId": "q052",
+      "question": "[Case Study - Fabrikam - Q8 of 9]\n\nWhen users consume data through the RAG pattern on ProcedureDocuments, they experience data retrieval delays.\n\nYou need to improve data retrieval performance and reduce the number of tokens per retrieval.\n\nWhat should you implement?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "easy",
+      "explanation": "Chunking breaks large documents into smaller pieces, reducing tokens per retrieval and improving RAG performance."
+    },
+    {
+      "questionId": "q053",
+      "question": "You have an Azure AI Search service and an index named hotels that includes a vector field named DescriptionVector.\n\nYou need to implement a hybrid search query that uses DescriptionVector and includes captions.\n\nHow should you complete the REST request body?",
+      "userAnswer": "queryType: semantic | semanticConfiguration: hotels | captions: extractive",
+      "correctAnswer": "queryType: semantic | semanticConfiguration: hotels | captions: extractive",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "hard",
+      "explanation": "Semantic queryType enables semantic ranking. The semanticConfiguration references the index name ('hotels'). Captions of type 'extractive' provide extracted highlights."
+    },
+    {
+      "questionId": "q054",
+      "question": "You need to create a stored procedure that performs hybrid search on dbo.Products.\n\nRequirements:\n- Use approximate nearest neighbor (ANN) to retrieve the top 20 candidate products.\n- Re-rank only the candidates that also match a full-text query.\n- Generate the query embedding.\n\nComplete the stored procedure with appropriate functions.",
+      "userAnswer": "Generate the query embedding: AI_GENERATE_EMBEDDINGS | ANN retrieval (top 20 candidates): VECTOR_SEARCH | Full-text re-ranking: CONTAINSTABLE",
+      "correctAnswer": "Generate the query embedding: AI_GENERATE_EMBEDDINGS | ANN retrieval (top 20 candidates): VECTOR_SEARCH | Full-text re-ranking: CONTAINSTABLE",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "hard",
+      "explanation": "AI_GENERATE_EMBEDDINGS creates the query vector. VECTOR_SEARCH performs ANN retrieval. CONTAINSTABLE does full-text filtering for re-ranking."
+    },
+    {
+      "questionId": "q055",
+      "question": "Users report slow semantic search during peak usage. VECTOR_DISTANCE('cosine', @query_vector, embedding) is used. CPU spikes during peak times.\n\nYou need to reduce latency and CPU utilization.\n\nWhat should you do?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "medium",
+      "explanation": "A vector index with VECTOR_SEARCH using ANN dramatically improves performance compared to brute-force VECTOR_DISTANCE scans."
+    },
+    {
+      "questionId": "q056",
+      "question": "You add semantic ranking to a hybrid search query on the hotels index. Some queries return fewer results than expected, and captions and answers are missing.\n\nYou need to complete the hybrid search request to include more documents when ranking and always include captions and answers.",
+      "userAnswer": "k (vector queries): 50 | queryType: semantic | captions: extractive | answers: extractive",
+      "correctAnswer": "k (vector queries): 50 | queryType: semantic | captions: extractive | answers: extractive",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "medium",
+      "explanation": "k=50 retrieves more documents. queryType=semantic enables semantic ranking. extractive captions and answers always provide the desired output."
+    },
+    {
+      "questionId": "q084",
+      "question": "Analysts report difficulty finding similar vehicle incidents based on details such as weather, traffic conditions, and location. You need to generate embeddings to resolve the issue.\n\nWhich column should you use?\n\nColumns available: vehicleLocation, incidentDescription, incidentType, SeverityScore",
       "userAnswer": "B",
       "correctAnswer": "B",
       "correct": true,
       "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
-      "difficulty": "medium",
-      "explanation": "CDC identifies only changed rows, and embedding regeneration is offloaded to an external Azure Functions app — minimizing CPU on SalesDB. Hourly full-table regeneration is wasteful. A trigger pushes expensive AI work into the transactional path. Changing the search function doesn't address stale embeddings."
+      "topic": "3.1 Design and Implement Models and Embeddings",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "easy",
+      "explanation": "Embeddings represent semantic meaning of rich textual content. incidentDescription is the free-text narrative field that captures weather, traffic, and location context. vehicleLocation is too narrow (geospatial). incidentType is categorical. SeverityScore is numeric — none are suitable primary sources for semantic embeddings."
     },
     {
-      "questionId": "q076",
-      "question": "You have a Fabric workspace with a SQL database (SalesDB) and a GraphQL API (SalesApi). A Microsoft Entra group (SqlUsers) has the Viewer role and was granted 'View and Edit GraphQL item' permission on SalesApi — but NOT 'Run Queries and Mutations'. The connection uses SSO.\n\nFor each statement, select Yes if true:",
-      "userAnswer": "S1=No, S2=No, S3=Yes",
-      "correctAnswer": "S1=No, S2=No, S3=Yes",
+      "questionId": "q085",
+      "question": "You need to implement a hybrid search query on a stores table (with description and embedding columns) that:\n- Uses full-text search on description for keyword matching\n- Returns top 20 results with a weighted formula: 60% vector distance + 40% full-text rank\n\nHow should you configure the query components?",
+      "userAnswer": "Semantic query operator/function: VECTOR_DISTANCE and order by distance ascending | Keyword retrieval operator/function: CONTAINSTABLE on description and return ranked matches | Final ranking expression: order by (distance*0.6) + ((1.0 - RANK/1000.0)*0.4)",
+      "correctAnswer": "Semantic query operator/function: VECTOR_DISTANCE and order by distance ascending | Keyword retrieval operator/function: CONTAINSTABLE on description and return ranked matches | Final ranking expression: order by (distance*0.6) + ((1.0 - RANK/1000.0)*0.4)",
       "correct": true,
       "skipped": false,
-      "topic": "2.4 Integrate SQL Solutions with Azure Services",
-      "domainName": "Secure, Optimize, and Deploy Database Solutions",
-      "domainId": "2",
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
       "difficulty": "hard",
-      "explanation": "Without 'Run Queries and Mutations', users cannot query or mutate data through the API. 'View and Edit GraphQL item' allows editing the API definition itself, including field mappings."
+      "explanation": "VECTOR_DISTANCE returns exact distance (lower=more similar). CONTAINSTABLE returns RANK 0-1000 (higher=more relevant). The formula normalizes RANK to 0-1 and inverts it so both components are lower-is-better for consistent ascending ordering."
+    },
+    {
+      "questionId": "q086",
+      "question": "You need to enable similarity search to retrieve the most relevant health summary reports from an Embeddings (vector(1536)) column. The solution must minimize latency.\n\nWhat should you include?",
+      "userAnswer": "D",
+      "correctAnswer": "D",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "easy",
+      "explanation": "CREATE VECTOR INDEX creates an ANN index specifically for vector similarity search, dramatically reducing latency compared to exact k-NN scans. Standard nonclustered and full-text indexes are not designed for vector similarity operations."
+    },
+    {
+      "questionId": "q087",
+      "question": "You have NotesEmbeddings and DescriptionEmbeddings tables (both vector(1536)) generated with different chunk sizes. You need to perform approximate nearest neighbor (ANN) queries across both. The solution must minimize the impact of different chunk sizes.\n\nWhat should you use?",
+      "userAnswer": "Function: VECTOR_SEARCH | Distance metric: cosine distance",
+      "correctAnswer": "Function: VECTOR_SEARCH | Distance metric: cosine distance",
+      "correct": true,
+      "skipped": false,
+      "topic": "3.2 Design and Implement Intelligent Search",
+      "domainName": "Implement AI Capabilities in Database Solutions",
+      "domainId": "3",
+      "difficulty": "medium",
+      "explanation": "VECTOR_SEARCH performs ANN retrieval using a vector index. Cosine distance compares direction/angle rather than magnitude, making it less sensitive to chunk size differences. It's the standard metric for text embeddings per Microsoft and Azure OpenAI guidance."
     }
   ]
 }

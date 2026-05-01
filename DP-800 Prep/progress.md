@@ -1,9 +1,9 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 6 / 8
-- **Questions Answered:** 52 / 88
-- **Accuracy:** 94.2% (49/52)
+- **Sessions Completed:** 7 / 8
+- **Questions Answered:** 66 / 88
+- **Accuracy:** 95.5% (63/66)
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -57,12 +57,20 @@
 - **Key lesson:** Anonymous role in DAB entity permissions = no auth required → anonymous read IS allowed. `read`+`create` ≠ `update` — must be explicitly listed. SP with `execute` for authenticated = Yes.
 - **Weak areas:** DAB entity permission evaluation (anonymous role, read vs update distinction)
 
+### Day 6, Session 1 — Fri May 1 (AI Capabilities in SQL)
+- **Topics:** 3.1 Models & Embeddings (CREATE EXTERNAL MODEL, AI_GENERATE_EMBEDDINGS, chunking, maintenance patterns), 3.2 Intelligent Search (VECTOR types/indexes, VECTOR_SEARCH, hybrid search, metrics), quick 3.3 syntax review
+- **Questions:** 14 answered, 0 skipped
+- **Result:** 14/14 correct (100%)
+- **Time:** ~2.8 min
+- **Key questions nailed:** q047 (CDC captured columns + net changes), q049/q050 (model switch requires full re-embedding), q054/q055 (VECTOR_SEARCH + ANN for performance), q087 (cosine metric with different chunk sizes)
+- **Weak areas:** None
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
 | 1. Design & Develop | 20 | 20 | 100% |
 | 2. Secure, Optimize, Deploy | 32 | 29 | 90.6% |
-| 3. AI Capabilities | 0 | 0 | — |
+| 3. AI Capabilities | 14 | 14 | 100% |
 
 ## Weak Topics (to revisit)
 - **2.2 Query Store catalog views** — know the difference between `sys.query_store_*` views and `sys.dm_exec_*` DMVs

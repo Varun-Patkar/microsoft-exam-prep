@@ -92,16 +92,16 @@
 
 ### Day 6 — Friday, May 1 (4 hrs) — Domain 3 AI + Full Review
 
-**Session 1 (2 hrs): AI Capabilities in SQL (3.1 + 3.2 + quick 3.3 review)**
+**Session 1 (2 hrs): AI Capabilities in SQL (3.1 + 3.2 + quick 3.3 review) ✅**
 
-- [ ] Study: 3.1 — CREATE EXTERNAL MODEL, evaluating models (multimodal, multilanguage, sizes)
-- [ ] Study: 3.1 — Embedding maintenance in SQL (Change Tracking, Azure Functions, CDC, triggers), column selection, chunk design
-- [ ] Study: 3.2 — Full-text search (CONTAINS, FREETEXT, FORMSOF) — refresh
-- [ ] Study: 3.2 — VECTOR data type, vector indexes (DiskANN), VECTOR_NORMALIZE, VECTOR_DISTANCE, VECTORPROPERTY, VECTOR_SEARCH
-- [ ] Study: 3.2 — ANN vs ENN, vector index metrics (cosine, dot product, euclidean), hybrid search, RRF
-- [ ] Review: 3.3 — Quick skim of sp_invoke_external_rest_endpoint for RAG, FOR JSON PATH, JSON_VALUE on LLM responses (you know RAG well — just learn the SQL-specific syntax)
-- [ ] Review: 1.4 — Quick skim of GitHub Copilot instruction files + MCP config (you know this — just review exam-specific framing)
-- [ ] Practice: 14 questions (q047–q056 from 3.1/3.2, q084–q087 from 3.x bonus)
+- [x] Study: 3.1 — CREATE EXTERNAL MODEL, evaluating models (multimodal, multilanguage, sizes)
+- [x] Study: 3.1 — Embedding maintenance in SQL (Change Tracking, Azure Functions, CDC, triggers), column selection, chunk design
+- [x] Study: 3.2 — Full-text search (CONTAINS, FREETEXT, FORMSOF) — refresh
+- [x] Study: 3.2 — VECTOR data type, vector indexes (DiskANN), VECTOR_NORMALIZE, VECTOR_DISTANCE, VECTORPROPERTY, VECTOR_SEARCH
+- [x] Study: 3.2 — ANN vs ENN, vector index metrics (cosine, dot product, euclidean), hybrid search, RRF
+- [x] Review: 3.3 — Quick skim of sp_invoke_external_rest_endpoint for RAG, FOR JSON PATH, JSON_VALUE on LLM responses (you know RAG well — just learn the SQL-specific syntax)
+- [x] Review: 1.4 — Quick skim of GitHub Copilot instruction files + MCP config (you know this — just review exam-specific framing)
+- [x] Practice: 14 questions (q047–q056 from 3.1/3.2, q084–q087 from 3.x bonus)
 - Estimated time: 2 hrs
 
 **Session 2 (2 hrs): Weak Area Review + Mock Exam**
