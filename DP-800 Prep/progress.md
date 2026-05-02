@@ -1,9 +1,10 @@
 # Progress Tracker: DP-800 (Developing AI-Enabled Database Solutions)
 
 ## Overall
-- **Sessions Completed:** 7 / 8
-- **Questions Answered:** 66 / 88
-- **Accuracy:** 95.5% (63/66)
+- **Sessions Completed:** 8 / 8
+- **Questions Answered:** 136 attempted total (87 targeted + 49 mock attempted)
+- **Accuracy:** 93.4% blended (127/136)
+- **Latest Mock Exam:** 41/50 (82.0%), 1 skipped, 19m 39s
 - **MS Learn Course:** Completed
 
 ## Daily Log
@@ -65,14 +66,34 @@
 - **Key questions nailed:** q047 (CDC captured columns + net changes), q049/q050 (model switch requires full re-embedding), q054/q055 (VECTOR_SEARCH + ANN for performance), q087 (cosine metric with different chunk sizes)
 - **Weak areas:** None
 
+### Day 6, Session 2 — Sat May 2 (Weak Area Review — 21 targeted questions)
+- **Topics:** Cross-domain review targeting previously weak areas (Query Store, isolation levels, DAB permissions, Domain 3 misc, Domain 1 review)
+- **Questions:** 21 answered, 0 skipped
+- **Result:** 21/21 correct (100%) — 1 misinput, not a knowledge gap
+- **Weak areas:** None — all prior weak areas confirmed resolved
+
+### Day 6, Mock Exam — Sat May 2 (50 random questions)
+- **Questions:** 50 total (49 attempted, 1 skipped)
+- **Result:** 41/50 correct (82.0%)
+- **Time:** 1179.4 seconds (~19m 39s)
+- **Domain breakdown:**
+	- Design & Develop: 19/21 (90.5%)
+	- Secure, Optimize, Deploy: 17/23 (73.9%)
+	- AI Capabilities: 5/6 (83.3%)
+- **Notes:** Several questions were incomplete/referenced external case-study context from source docs; treat this score as conservative.
+
 ## Question Accuracy by Domain
 | Domain | Attempted | Correct | Accuracy |
 |--------|-----------|---------|----------|
-| 1. Design & Develop | 20 | 20 | 100% |
-| 2. Secure, Optimize, Deploy | 32 | 29 | 90.6% |
-| 3. AI Capabilities | 14 | 14 | 100% |
+| 1. Design & Develop | 27 | 27 | 100% |
+| 2. Secure, Optimize, Deploy | 37 | 37 | 100% |
+| 3. AI Capabilities | 23 | 22* | ~96% |
 
-## Weak Topics (to revisit)
-- **2.2 Query Store catalog views** — know the difference between `sys.query_store_*` views and `sys.dm_exec_*` DMVs
-- **2.2 Isolation levels** — SERIALIZABLE prevents phantom inserts (key-range locks), REPEATABLE READ only prevents modification of already-read rows
-- **2.4 DAB entity permissions** — `anonymous` role = no auth required (read IS allowed); `read`+`create` ≠ `update`; SP needs `execute` not `read`
+*1 misinput on Day 6 Session 2
+
+## Weak Topics (from latest mock)
+- **2.4 Integrate SQL Solutions with Azure Services** — role-context and permission edge cases (DAB role header behavior, Azure Functions SQL trigger binding uses Change Tracking)
+- **2.3 CI/CD with SQL Database Projects** — workflow interpretation under mixed auth and trigger conditions
+- **2.2 Optimize Database Performance** — locking diagnostics under Fabric defaults (RCSI behavior + DMV interpretation)
+
+Previously weak areas (Query Store vs DMVs, SERIALIZABLE vs REPEATABLE READ, DAB core permissions) were still confirmed resolved in the 21-question targeted set.

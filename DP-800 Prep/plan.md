@@ -106,18 +106,19 @@
 
 **Session 2 (2 hrs): Weak Area Review + Mock Exam**
 
-- [ ] Practice: 21 remaining questions (q017–q022, q069 from 1.4; q057–q061, q088 from 3.3; q065, q068, q070 from 1.x review; q079–q083 from 2.x review)
-- [ ] Review: Go through ALL questions you got wrong during the week
-- [ ] Review: Re-read notes on your weakest topics
-- [ ] Mock Exam: Run quiz_runner.py in mock exam mode (timed, random, all domains)
-- [ ] Analyze: Review mock exam results, identify final weak spots for weekend
+- [x] Practice: 21 remaining questions (q017–q022, q069 from 1.4; q057–q061, q088 from 3.3; q065, q068, q070 from 1.x review; q079–q083 from 2.x review)
+- [x] Review: Go through ALL questions you got wrong during the week
+- [x] Review: Re-read notes on your weakest topics
+- [x] Mock Exam: Run quiz_runner.py randomized 50-question set (all domains)
+- [x] Analyze: Review mock exam results, identify final weak spots for weekend
+- Mock result recorded: 41/50 (82.0%), 1 skipped
 - Estimated time: 2 hrs
 
 ---
 
 ### Day 7 — Saturday, May 2 (Revision)
 
-- [ ] Review: Re-study topics where mock exam accuracy was below 70%
+- [x] Review: Re-study topics where mock exam accuracy was below 70% (none below 70% in latest mock)
 - [ ] Practice: Run quiz_runner.py filtered to weak domains only
 - [ ] Review: Skim all topic summaries in topics.md
 - [ ] Create: Personal cheat sheet of key facts (functions, syntax, concepts you keep forgetting)

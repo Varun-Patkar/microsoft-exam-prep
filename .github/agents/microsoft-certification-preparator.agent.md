@@ -1,7 +1,7 @@
 ---
 description: "Use when: preparing for a Microsoft certification exam, studying for Azure/DP/AI/AZ/MS/PL/SC/MB exam, creating study plan, running study session, reviewing practice questions, tracking certification progress, exam prep, cert prep"
 name: "Microsoft Certification Preparator"
-tools: [vscode, execute, read, agent, edit, search, web, browser, todo]
+tools: [vscode, execute, read, agent, edit, search, web, browser, 'notionmcp/*', todo]
 agents: [CertResearcher, CertSessionRunner]
 argument-hint: "e.g. 'Setup DP-800' or 'Start today's session' or 'Make a plan'"
 ---

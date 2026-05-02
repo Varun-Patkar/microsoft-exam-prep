@@ -1,7 +1,7 @@
 ---
 description: "Use when: researching Microsoft certification exam topics, verifying exam existence, finding practice questions, fetching study guide content from Microsoft Learn, searching for exam questions online"
 name: "CertResearcher"
-tools: [vscode, execute, read, agent, edit, search, web, browser, todo]
+tools: [vscode, execute, read, agent, edit, search, web, browser, azure-mcp/search, 'notionmcp/*', todo]
 user-invocable: false
 ---
 

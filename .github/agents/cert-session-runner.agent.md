@@ -1,7 +1,7 @@
 ---
 description: "Use when: running a daily study session for Microsoft certification, explaining exam topics, drilling practice questions, conducting hands-on labs, tracking session progress"
 name: "CertSessionRunner"
-tools: [vscode, execute, read, agent, edit, search, web, browser, todo]
+tools: [vscode, execute, read, agent, edit, search, web, browser, azure-mcp/search, 'notionmcp/*', todo]
 user-invocable: false
 ---
 

@@ -39,11 +39,11 @@ Memory hook: **"No permission, no party. Anonymous must be invited."**
 
 ## Session 2 Checklist
 
-- [ ] Run targeted 21-question set.
-- [ ] Log incorrect IDs immediately after run.
-- [ ] Re-read weak topics notes (Query Store, isolation levels, DAB permissions).
-- [ ] Run timed random 50-question mock (100 minutes).
-- [ ] Capture weak-spot patterns for weekend review.
+- [x] Run targeted 21-question set.
+- [x] Log incorrect IDs immediately after run.
+- [x] Re-read weak topics notes (Query Store, isolation levels, DAB permissions).
+- [x] Run timed random 50-question mock (100 minutes).
+- [x] Capture weak-spot patterns for weekend review.
 
 ## Related Question IDs
 
@@ -69,8 +69,15 @@ python quiz_runner.py --ids q017,q018,q019,q020,q021,q022,q069,q057,q058,q059,q0
 ### (b) Timed random mock exam (50 q, 100 min)
 
 ```powershell
-python quiz_runner.py questions.json --mock --shuffle --limit 50 --time-limit 100
+python quiz_runner.py questions.json --all --shuffle --limit 50
 ```
+
+### Mock result (latest run)
+
+- Score: **41/50 (82.0%)**
+- Skipped: **1**
+- Time: **1179.4s (~19m 39s)**
+- Weakest domain in this run: **Domain 2 (17/23, 73.9%)**
 
 ## No-Spoiler Rule
 
