@@ -17,6 +17,7 @@ import os
 import argparse
 import random
 import time
+import re
 from datetime import datetime
 
 # ── ANSI color helpers (works on Windows 10+ and all Unix terminals) ──
@@ -47,11 +48,202 @@ DIM = "\033[2m"
 RESET = "\033[0m"
 UNDERLINE = "\033[4m"
 
+CASE_STUDY_HEADER_RE = re.compile(
+    r"^\[Case Study - (?P<name>.+?) - Q(?P<order>\d+) of (?P<total>\d+)\]\s*",
+    re.IGNORECASE,
+)
+
 
 def load_questions(filepath):
     """Load questions.json and return the parsed dict."""
     with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def _slugify(value):
+    """Create a stable, lowercase slug for ids from free-form text."""
+    cleaned = re.sub(r"[^a-zA-Z0-9]+", "-", str(value)).strip("-").lower()
+    return cleaned or "case-study"
+
+
+def _parse_case_study_header(question_text):
+    """Parse '[Case Study - Name - Qx of y]' metadata from question text."""
+    match = CASE_STUDY_HEADER_RE.match(question_text or "")
+    if not match:
+        return None
+    return {
+        "name": match.group("name").strip(),
+        "order": int(match.group("order")),
+        "total": int(match.group("total")),
+    }
+
+
+def _strip_case_study_header(question_text):
+    """Remove case study header line from question text for cleaner display."""
+    return CASE_STUDY_HEADER_RE.sub("", question_text or "", count=1).strip()
+
+
+def _build_case_study_lookup(data):
+    """Build a lookup map from top-level caseStudies array (if provided)."""
+    lookup = {}
+    for case in data.get("caseStudies", []):
+        case_id = str(case.get("id", "")).strip().lower()
+        case_name = str(case.get("name", "")).strip().lower()
+        if case_id:
+            lookup[case_id] = case
+        if case_name:
+            lookup[case_name] = case
+    return lookup
+
+
+def enrich_case_study_metadata(selected_questions, data):
+    """
+    Enrich selected questions with normalized case-study metadata.
+
+    Supports explicit caseStudyId/caseStudyOrder fields and also derives metadata
+    from existing '[Case Study - ... - Qx of y]' question headers.
+    """
+    enriched = []
+    case_lookup = _build_case_study_lookup(data)
+
+    for q in selected_questions:
+        q_copy = dict(q)
+        header = _parse_case_study_header(q_copy.get("question", ""))
+        is_case = q_copy.get("section") == "casestudy" or header is not None or bool(q_copy.get("caseStudyId"))
+
+        if is_case:
+            explicit_case_id = str(q_copy.get("caseStudyId", "")).strip()
+            case_name = str(q_copy.get("caseStudyName", "")).strip() or (header["name"] if header else "Case Study")
+            normalized_case_id = _slugify(explicit_case_id or case_name)
+
+            if header:
+                q_copy["caseStudyOrder"] = int(q_copy.get("caseStudyOrder") or header["order"])
+                q_copy["caseStudyTotal"] = int(q_copy.get("caseStudyTotal") or header["total"])
+
+            q_copy["caseStudyId"] = normalized_case_id
+            q_copy["caseStudyName"] = case_name
+
+            case_meta = case_lookup.get(normalized_case_id) or case_lookup.get(case_name.lower()) or {}
+            q_copy["caseStudyContext"] = q_copy.get("caseStudyContext") or case_meta.get("context")
+            q_copy["caseStudyContextPlaceholder"] = (
+                q_copy.get("caseStudyContextPlaceholder")
+                or case_meta.get("contextPlaceholder")
+                or f"Use the shared context for '{case_name}' before answering this case-study sequence."
+            )
+
+            q_copy["displayQuestion"] = _strip_case_study_header(q_copy.get("question", ""))
+        else:
+            q_copy["displayQuestion"] = q_copy.get("question", "")
+
+        enriched.append(q_copy)
+
+    return enriched
+
+
+def deduplicate_questions(questions):
+    """Remove duplicate question IDs while preserving first occurrence order."""
+    seen = set()
+    unique = []
+    duplicates = 0
+
+    for q in questions:
+        qid = q.get("id")
+        if qid in seen:
+            duplicates += 1
+            continue
+        seen.add(qid)
+        unique.append(q)
+
+    if duplicates:
+        print(f"{YELLOW}Removed {duplicates} duplicate question(s) by ID before starting quiz.{RESET}")
+
+    return unique
+
+
+def _build_case_study_blocks_for_shuffle(questions):
+    """
+    Build shuffle blocks where each case-study sequence is one block.
+
+    This keeps Q1..Qn for a case study adjacent even when randomizing order.
+    """
+    blocks = []
+    standalone = []
+    case_groups = {}
+
+    for idx, q in enumerate(questions):
+        q["_selectedOrder"] = idx
+        case_id = q.get("caseStudyId")
+        if case_id:
+            case_groups.setdefault(case_id, []).append(q)
+        else:
+            standalone.append([q])
+
+    for case_id, group in case_groups.items():
+        group.sort(key=lambda item: (int(item.get("caseStudyOrder") or 10**9), item.get("_selectedOrder", 10**9)))
+        blocks.append(group)
+
+    blocks.extend(standalone)
+    return blocks
+
+
+def shuffle_preserving_case_studies(questions):
+    """Shuffle by blocks so case-study questions stay together in sequence."""
+    blocks = _build_case_study_blocks_for_shuffle(questions)
+    random.shuffle(blocks)
+
+    shuffled = []
+    for block in blocks:
+        shuffled.extend(block)
+
+    return shuffled
+
+
+def limit_preserving_case_studies(questions, limit):
+    """
+    Apply question limit without splitting case-study sequences.
+
+    If the first block is larger than the limit, include it fully so context
+    is not broken.
+    """
+    if limit is None or limit <= 0:
+        return questions
+
+    blocks = []
+    current_case_id = None
+    current_block = []
+
+    for q in questions:
+        case_id = q.get("caseStudyId")
+
+        if case_id:
+            if current_case_id is None or current_case_id == case_id:
+                current_block.append(q)
+                current_case_id = case_id
+            else:
+                blocks.append(current_block)
+                current_block = [q]
+                current_case_id = case_id
+        else:
+            if current_block:
+                blocks.append(current_block)
+                current_block = []
+                current_case_id = None
+            blocks.append([q])
+
+    if current_block:
+        blocks.append(current_block)
+
+    selected = []
+    for block in blocks:
+        if len(selected) + len(block) <= limit:
+            selected.extend(block)
+            continue
+
+        if not selected and len(block) > limit:
+            selected.extend(block)
+        break
+
+    return selected
 
 
 def filter_questions(data, domain_id=None, topic_prefix=None, question_ids=None, cross_domains=None, all_mode=False):
@@ -106,7 +298,7 @@ def display_question(q, index, total):
     print(f"{CYAN}{BOLD}Question {index}/{total}{RESET}  {DIM}[{q['domainName']}]{RESET}")
     print(f"{DIM}Topic: {q.get('topic', 'N/A')} | Difficulty: {q.get('difficulty', 'N/A')} | ID: {q['id']}{RESET}")
     print(f"{'─' * 60}")
-    print(f"\n{q['question']}\n")
+    print(f"\n{q.get('displayQuestion', q['question'])}\n")
 
     if qtype == "mc":
         for opt in q["options"]:
@@ -505,6 +697,16 @@ def run_quiz(questions, data):
     start_time = time.time()
 
     for i, q in enumerate(questions, 1):
+        if q.get("caseStudyId"):
+            prev_case_id = questions[i - 2].get("caseStudyId") if i > 1 else None
+            if q.get("caseStudyId") != prev_case_id:
+                print(f"\n{BOLD}{CYAN}{'=' * 60}{RESET}")
+                print(f"{BOLD}{CYAN}  CASE STUDY: {q.get('caseStudyName', 'Case Study')}{RESET}")
+                case_context = q.get("caseStudyContext") or q.get("caseStudyContextPlaceholder")
+                if case_context:
+                    print(f"{DIM}  {case_context}{RESET}")
+                print(f"{BOLD}{CYAN}{'=' * 60}{RESET}")
+
         display_question(q, i, total)
 
         user_answer, skipped, quit_early = get_answer_for_question(q)
@@ -574,11 +776,14 @@ def main():
         all_mode=args.all
     )
 
+    questions = enrich_case_study_metadata(questions, data)
+    questions = deduplicate_questions(questions)
+
     if args.shuffle:
-        random.shuffle(questions)
+        questions = shuffle_preserving_case_studies(questions)
 
     if args.limit and args.limit < len(questions):
-        questions = questions[:args.limit]
+        questions = limit_preserving_case_studies(questions, args.limit)
 
     # Run the quiz
     result_path = run_quiz(questions, data)

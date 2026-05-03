@@ -7,6 +7,13 @@
     "Company-provided text-based practice questions"
   ],
   "note": "Questions sourced from company-provided practice materials for DP-800 exam preparation. Includes multiple question types: mc (multiple choice), multi (select multiple), yesno (yes/no per statement), dropdown (fill-in dropdowns).",
+  "caseStudies": [
+    {
+      "id": "fabrikam",
+      "name": "Fabrikam",
+      "contextPlaceholder": "Review the shared Fabrikam case study context before answering Q1-Q9. Keep this context in mind for all Fabrikam case-study questions."
+    }
+  ],
   "domains": [
     {
       "domainId": "1",
