@@ -1,7 +1,7 @@
 {
 	"examCode": "AB-100",
 	"examName": "Agentic AI Business Solutions Architect",
-	"totalQuestions": 210,
+	"totalQuestions": 220,
 	"sources": [
 		"Microsoft-powered practice quiz on learn.mslevelup.com (60 questions, 60-minute timed assessment)",
 		"Microsoft Learn: Copilot Studio analytics overview and conversational-agent effectiveness",
@@ -61,7 +61,7 @@
 		"https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-agent-evaluation-overview",
 		"https://learn.microsoft.com/en-us/azure/foundry/agents/overview"
 	],
-	"note": "Questions q001-q060 were captured from a Microsoft-powered practice quiz attempt on 2026-08-10. Answers reflect the best-effort responses selected during the attempt and should be verified against official explanations before relying on them. Questions q061-q210 are original exam-style questions explicitly labeled as AI-generated and grounded in the cited Microsoft Learn pages. Question types: mc (multiple choice, includes single True/False), multi (select all that apply), dropdown (used here for match-the-item questions). Questions q001-q110 remain in the original practice domain; newly assigned Day 12 questions q111-q120, Day 13 questions q121-q130, Day 14 questions q131-q140, Day 15 questions q141-q150, Day 16 questions q151-q160, Day 17 questions q161-q170, and Day 19 questions q171-q180 are mapped to Domain 3, Deploy AI-powered business solutions. Day 20 questions q181-q190 are mapped to Domain 1, Plan AI-powered business solutions. Day 24 questions q191-q200 and Day 25 questions q201-q210 are mixed-domain checks, each mapped proportionally to Domain 1 (3), Domain 2 (3), and Domain 3 (4).",
+	"note": "Questions q001-q060 were captured from a Microsoft-powered practice quiz attempt on 2026-08-10. Answers reflect the best-effort responses selected during the attempt and should be verified against official explanations before relying on them. Questions q061-q220 are original exam-style questions explicitly labeled as AI-generated and grounded in the cited Microsoft Learn pages. Question types: mc (multiple choice, includes single True/False), multi (select all that apply), dropdown (used here for match-the-item questions). Questions q001-q110 remain in the original practice domain; newly assigned Day 12 questions q111-q120, Day 13 questions q121-q130, Day 14 questions q131-q140, Day 15 questions q141-q150, Day 16 questions q151-q160, Day 17 questions q161-q170, and Day 19 questions q171-q180 are mapped to Domain 3, Deploy AI-powered business solutions. Day 20 questions q181-q190 are mapped to Domain 1, Plan AI-powered business solutions. Day 24 questions q191-q200, Day 25 questions q201-q210, and Day 28 questions q211-q220 are mixed-domain checks, each mapped proportionally to Domain 1 (3), Domain 2 (3), and Domain 3 (4).",
 	"caseStudies": [
 		{
 			"id": "chg",
@@ -3990,6 +3990,196 @@
 					"difficulty": "medium",
 					"source": "AI-generated; grounded in current Microsoft Learn documentation",
 					"sourceUrl": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview",
+					"section": "standalone"
+				},
+				{
+					"id": "q211",
+					"originalId": "DAY28-01",
+					"type": "mc",
+					"question": "A human-resources solution uses one agent to summarize content submitted by external candidates and to approve payroll changes through a privileged system. Which architecture best limits the risk that untrusted content influences a high-impact action?",
+					"options": [
+						"A. Keep one agent and grant its identity payroll administrator access so every step can complete without handoffs",
+						"B. Separate the untrusted-content and payroll responsibilities, pass structured output across the boundary, and revalidate and authorize the payroll action in the privileged component",
+						"C. Use a larger language model because model size removes the need for separate authorization boundaries",
+						"D. Disable audit logging so candidate content can't be retained with payroll operations"
+					],
+					"correctAnswer": "B",
+					"explanation": "The retrieval and payroll stages have materially different trust and authority. Separate identities and controls contain untrusted input, while structured handoff, validation, authorization, and auditing protect the consequential action.",
+					"topic": "D1.2 / Multi-agent trust and authority boundaries",
+					"difficulty": "hard",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns",
+					"section": "standalone"
+				},
+				{
+					"id": "q212",
+					"originalId": "DAY28-02",
+					"type": "mc",
+					"question": "A licensed Microsoft product satisfies a company's standard sales-assistant requirements, but one approved regional process needs data from a supported internal API. What should the architect recommend?",
+					"options": [
+						"A. Replace the product with a fully custom agent because any integration gap requires a new runtime",
+						"B. Adopt the existing product and extend it only for the validated regional API requirement",
+						"C. Train a foundation model from scratch before evaluating the supported extension points",
+						"D. Ignore the regional requirement because purchased products can't be extended"
+					],
+					"correctAnswer": "B",
+					"explanation": "The supported product already covers the commodity requirement. A focused extension addresses the demonstrated integration gap while avoiding the cost and lifecycle burden of replacing a capability that otherwise fits.",
+					"topic": "D1.2 / Build-buy-extend decision",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100",
+					"section": "standalone"
+				},
+				{
+					"id": "q213",
+					"originalId": "DAY28-03",
+					"type": "mc",
+					"question": "A catalog small language model meets a documented accuracy threshold for routing service requests and also satisfies the target device's latency, memory, and cost limits. No persistent quality gap appears in representative evaluation. What should the architect do first?",
+					"options": [
+						"A. Deploy the evaluated small model with monitoring against the acceptance criteria",
+						"B. Fine-tune the model immediately because every production model requires customization",
+						"C. Select the catalog's largest model even if it violates the device constraints",
+						"D. Remove the quality threshold and choose solely by parameter count"
+					],
+					"correctAnswer": "A",
+					"explanation": "Model selection should follow representative quality evidence and nonfunctional constraints. Because the smaller model meets the stated criteria, customization or a larger model would add cost and maintenance without addressing a measured deficit.",
+					"topic": "D1.2 / Evidence-based SLM selection",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/azure/foundry-classic/concepts/foundry-models-overview",
+					"section": "standalone"
+				},
+				{
+					"id": "q214",
+					"originalId": "DAY28-04",
+					"type": "mc",
+					"question": "A Copilot Studio agent uses generative orchestration. Before calling a fulfillment tool, it must collect a warehouse code defined by a custom regular-expression entity. How should the value be obtained?",
+					"options": [
+						"A. Declare the custom entity directly as a tool input and rely on generative orchestration to enforce the regex",
+						"B. Use a Question node in a topic to collect and validate the custom entity, then pass the stored value to the tool",
+						"C. Add several example codes to the agent name and remove validation from the workflow",
+						"D. Convert the warehouse code into a knowledge source so retrieval guarantees its format"
+					],
+					"correctAnswer": "B",
+					"explanation": "Copilot Studio doesn't yet support custom closed-list or regex entities as topic or tool input parameters under generative orchestration. A Question node in a topic provides the documented collection and validation path.",
+					"topic": "D2.1 / Constrained generative inputs",
+					"difficulty": "hard",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions#custom-entity-support-for-topic-and-tool-input-parameters",
+					"section": "standalone"
+				},
+				{
+					"id": "q215",
+					"originalId": "DAY28-05",
+					"type": "mc",
+					"question": "A Copilot Studio agent connects to an MCP server whose team frequently adds tools and updates resource descriptions. The maker wants those published capability changes reflected without manually authoring a topic for each operation. What is required?",
+					"options": [
+						"A. Enable generative orchestration and use the MCP server's published tools and resources",
+						"B. Copy every MCP description into the system prompt and disable generative orchestration",
+						"C. Convert each MCP resource into a static closed-list entity",
+						"D. Grant the MCP server tenant administrator rights so governance controls are bypassed"
+					],
+					"correctAnswer": "A",
+					"explanation": "Copilot Studio supports MCP tools and resources and dynamically reflects server-side additions, updates, and removals. MCP requires generative orchestration; dynamic discovery does not remove authentication, authorization, or governance requirements.",
+					"topic": "D2.1 / MCP and generative orchestration",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp",
+					"section": "standalone"
+				},
+				{
+					"id": "q216",
+					"originalId": "DAY28-06",
+					"type": "mc",
+					"question": "A declarative agent is shared with the entire organization and uses a SharePoint site as knowledge. A user can open the agent but lacks permission to a restricted acquisition folder on that site. What should the architect expect?",
+					"options": [
+						"A. The user can retrieve the folder because organization-wide agent sharing grants source access",
+						"B. The agent respects the user's existing SharePoint permissions and sensitivity labels, so restricted content isn't available to that user",
+						"C. The agent always retrieves content with the builder's permissions regardless of the current user",
+						"D. Publishing the agent removes SharePoint authorization checks but retains only file-name filtering"
+					],
+					"correctAnswer": "B",
+					"explanation": "Access to the agent and authorization to its knowledge are separate gates. Microsoft 365 agents respect existing permissions and sensitivity labels for SharePoint and OneDrive content, so sharing the experience doesn't grant access to restricted files.",
+					"topic": "D2.2 / SharePoint source authorization",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agent-builder-add-knowledge#permissions-and-sensitivity-labels",
+					"section": "standalone"
+				},
+				{
+					"id": "q217",
+					"originalId": "DAY28-07",
+					"type": "mc",
+					"question": "A Kusto query over Copilot Studio Application Insights events reports more conversations than the production dashboard because makers used the test canvas heavily. Which filter should the operations team add for a production-only view?",
+					"options": [
+						"A. Filter customDimensions['designMode'] to the string value 'False'",
+						"B. Filter customDimensions['designMode'] to the string value 'True'",
+						"C. Exclude every event whose channel name contains 'Microsoft'",
+						"D. Keep only events with an empty conversation ID"
+					],
+					"correctAnswer": "A",
+					"explanation": "Application Insights includes test-canvas telemetry. Microsoft documents the `designMode` custom dimension on all events and shows filtering for the string value `False` to exclude test-canvas activity.",
+					"topic": "D3.1 / Application Insights production telemetry filtering",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-bot-framework-composer-capture-telemetry#exclude-telemetry-from-the-test-canvas",
+					"section": "standalone"
+				},
+				{
+					"id": "q218",
+					"originalId": "DAY28-08",
+					"type": "mc",
+					"question": "A managed solution defines an API endpoint environment variable with a publisher default. Production has a customer-supplied current value. The publisher ships an updated default in the next solution version. Which value should the production app resolve?",
+					"options": [
+						"A. The updated publisher default because managed-solution upgrades always overwrite target configuration",
+						"B. The customer current value because a defined current value takes precedence and is serviced separately from the definition and default",
+						"C. Both values concatenated because environment variables merge publisher and customer settings",
+						"D. No value because managed solutions can't use environment-specific configuration"
+					],
+					"correctAnswer": "B",
+					"explanation": "A current value is used when present, even when a default exists. Separating current values from definition/default metadata lets publishers service solution metadata without overwriting customer-owned target configuration.",
+					"topic": "D3.3 / Environment-variable definition, default, and current values",
+					"difficulty": "hard",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/environmentvariables#current-value",
+					"section": "standalone"
+				},
+				{
+					"id": "q219",
+					"originalId": "DAY28-09",
+					"type": "mc",
+					"question": "A Copilot Studio tool reads regulated case records and must enforce each employee's downstream permissions. The same agent also has access to an HTTP connector that policy forbids from receiving business data. Which control combination is appropriate?",
+					"options": [
+						"A. Use user authentication for the regulated tool and enforce a Power Platform data policy that blocks the prohibited connector path",
+						"B. Use agent-author credentials for every tool and remove data policies to simplify connection reuse",
+						"C. Use only a data policy because it grants each employee record-level access",
+						"D. Use only user authentication because delegated credentials prevent all connector-based data movement"
+					],
+					"correctAnswer": "A",
+					"explanation": "User authentication lets the downstream service evaluate the current employee's permissions. Data policies govern allowed connectors and data paths. The controls address different layers and are both needed in this scenario.",
+					"topic": "D3.4 / User tool credentials and DLP",
+					"difficulty": "hard",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-enduser-authentication",
+					"section": "standalone"
+				},
+				{
+					"id": "q220",
+					"originalId": "DAY28-10",
+					"type": "mc",
+					"question": "A workload alternates between blue and green Azure compute hosts. Its principal and narrowly scoped role assignments must remain stable when a host is replaced. Which identity design best meets the requirement?",
+					"options": [
+						"A. Enable a separate system-assigned identity on each host and expect the principal ID to remain unchanged after deletion",
+						"B. Create a user-assigned managed identity independently, attach it to the active hosts, and authorize that identity at the required scopes",
+						"C. Store one client secret in both host images because secrets have an independent Azure lifecycle",
+						"D. Grant anonymous access to the target so host replacement doesn't affect authentication"
+					],
+					"correctAnswer": "B",
+					"explanation": "A user-assigned managed identity has an independent lifecycle and can be attached to multiple supported resources, making it suitable for recycled hosts with stable permissions. It still requires explicit least-privilege authorization on each target.",
+					"topic": "D3.4 / User-assigned managed identity lifecycle",
+					"difficulty": "medium",
+					"source": "AI-generated; grounded in current Microsoft Learn documentation",
+					"sourceUrl": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview#managed-identity-types",
 					"section": "standalone"
 				}
 			]

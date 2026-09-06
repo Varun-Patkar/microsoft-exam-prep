@@ -28,7 +28,8 @@
     24,
     25,
     26,
-    27
+    27,
+    28
   ],
   "results": [
     {
@@ -314,14 +315,24 @@
       "accuracy": 1,
       "weakTopicIds": [],
       "xpAwarded": 275
+    },
+    {
+      "day": 28,
+      "attempt": 1,
+      "completedAt": "2026-09-06T04:43:40.858Z",
+      "questionsAnswered": 10,
+      "correct": 10,
+      "accuracy": 1,
+      "weakTopicIds": [],
+      "xpAwarded": 280
     }
   ],
-  "xp": 1510,
+  "xp": 1790,
   "streak": {
-    "current": 5,
+    "current": 6,
     "longest": 10,
     "freezeTokens": 1,
-    "lastStudyDate": "2026-09-05"
+    "lastStudyDate": "2026-09-06"
   },
   "badges": [],
   "unlockedTiers": [
